@@ -1,0 +1,15 @@
+INFO:QuantumSync:Sovereign Master Host Pulse: 127.0.0.1
+INFO:QuantumSync:QuantumSync: Ledger loaded from disk.
+INFO:QuantumSync:QuantumSync: Media Vault loaded.
+INFO:QuantumSync:MLM: 74 processed TX records loaded.
+INFO:QuantumSync:MLM: Referral map loaded from disk.
+INFO:QuantumSync:MLM: Pending TXs loaded from disk.
+INFO:QuantumSync:MLM: Config loaded from disk.
+INFO:     Started server process [3628]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:59539 - "WebSocket /ws/user" [accepted]
+INFO:     connection open
+INFO:QuantumSync:Quantum Sync [A_113]: Mapped SOV_50154 to Active Socket.
+INFO:QuantumSync:User Action: {"action":"GET_LATEST_MEDIA"}

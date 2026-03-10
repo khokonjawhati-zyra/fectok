@@ -1,0 +1,35 @@
+{
+    "TEST_BANK_1772638514": {
+        "user_id": "SOV_68007",
+        "account": "1234567890",
+        "amount": 5000.0,
+        "currency": "BDT",
+        "gateway": "amarpay",
+        "type": "WITHDRAW",
+        "method": "bank",
+        "stage": "BATCHING",
+        "timestamp": "2026-03-04T21:35:14.007105"
+    },
+    "TEST_BANK_1772638556": {
+        "user_id": "SOV_68007",
+        "account": "1234567890",
+        "amount": 5000.0,
+        "currency": "BDT",
+        "gateway": "amarpay",
+        "type": "WITHDRAW",
+        "method": "bank",
+        "stage": "BATCHING",
+        "timestamp": "2026-03-04T21:35:56.074100"
+    },
+    "TEST_BANK_1772639458": {
+        "user_id": "SOV_68007",
+        "account": "1234567890",
+        "amount": 500.0,
+        "currency": "BDT",
+        "gateway": "amarpay",
+        "type": "WITHDRAW",
+        "method": "bank",
+        "stage": "BATCHING",
+        "timestamp": "2026-03-04T21:50:58.685542"
+    }
+}

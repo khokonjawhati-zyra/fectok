@@ -1,0 +1,30 @@
+{
+    "gateways": {
+        "bkash": {
+            "active": true,
+            "key": "SIMULATED",
+            "secret": "SIMULATED"
+        },
+        "nagad": {
+            "active": false,
+            "key": null,
+            "secret": null
+        },
+        "stripe": {
+            "active": false,
+            "key": null,
+            "secret": null
+        },
+        "amarpay": {
+            "active": true,
+            "key": "SIMULATED",
+            "secret": "SIMULATED"
+        },
+        "sslcommerz": {
+            "active": true,
+            "key": "fectok0live",
+            "secret": "69A54A07E86F172811"
+        }
+    },
+    "payout_mode": "PRODUCTION"
+}

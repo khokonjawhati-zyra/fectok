@@ -1,0 +1,20 @@
+[
+    {
+        "trx_id": "TEST_TX_12345",
+        "amount": 500.0,
+        "method": "bkash",
+        "sender": "01712345678",
+        "status": "CLAIMED",
+        "timestamp": "2026-03-05T14:55:59.224019",
+        "claimed_by": "MESH_USER_777",
+        "claimed_at": "2026-03-05T14:56:01.307150"
+    },
+    {
+        "trx_id": "AUTO_TEST_PULSE_999",
+        "amount": 100.0,
+        "method": "bKash",
+        "sender": "BKASH",
+        "status": "UNCLAIMED",
+        "timestamp": "2026-03-05T21:17:00.794926"
+    }
+]

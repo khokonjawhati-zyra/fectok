@@ -1,0 +1,2 @@
+[2026-03-02T23:53:55.629182] QUEUE_BATCH | User: SANITY_TEST_USER | Amt: 100.0 | Details: Gateway: bkash | Tax: 5.0 (5.0%)
+[2026-03-02T23:57:05.837378] QUEUE_BATCH | User: GOAL_TEST_USER | Amt: 200.0 | Details: Gateway: bkash | Tax: 20.0 (10.0%)

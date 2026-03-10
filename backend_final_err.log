@@ -1,0 +1,764 @@
+INFO:QuantumSync:Sovereign Master Host Pulse: 127.0.0.1
+INFO:QuantumSync:QuantumSync: Ledger loaded from disk.
+INFO:QuantumSync:QuantumSync: Media Vault loaded.
+INFO:QuantumSync:MLM: 66 processed TX records loaded.
+INFO:QuantumSync:MLM: Referral map loaded from disk.
+INFO:QuantumSync:MLM: Pending TXs loaded from disk.
+INFO:QuantumSync:MLM: Config loaded from disk.
+INFO:     Started server process [13804]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60091 - "WebSocket /ws/user" [accepted]
+INFO:     connection open
+INFO:QuantumSync:A_105: User ANON_USER registered as owner of ADM
+WARNING:QuantumSync:A_120: Interaction for unknown content ADM
+INFO:     127.0.0.1:63662 - "WebSocket /ws/user" [accepted]
+INFO:     connection open
+INFO:QuantumSync:Quantum Sync [A_113]: Mapped c179887a to Active Socket.
+INFO:QuantumSync:User Action: {"action":"GET_LATEST_MEDIA"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=ADM&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=ADM "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=ADM "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0033435613944589257 -> Viewer: 0.0033435613944589257, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: ADM","content_id":"ADM","weight":"1.05","timestamp":"2026-02-12T03:15:32.619"}
+INFO:QuantumSync:Quantum Sync [A_113]: Mapped c179887a to Active Socket.
+INFO:QuantumSync:User Action: {"action":"GET_LATEST_MEDIA"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of Viewer Reward [A_111]
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.10","timestamp":"2026-02-12T03:15:33.918"}
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.05","timestamp":"2026-02-12T03:15:33.918"}
+INFO:     127.0.0.1:52443 - "WebSocket /ws/admin" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:55943 - "WebSocket /ws/admin" [accepted]
+INFO:     connection open
+INFO:     connection closed
+INFO:QuantumSync:A_105: User c179887a registered as owner of UNT
+WARNING:QuantumSync:A_120: Interaction for unknown content UNT
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=UNT&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=UNT "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=UNT "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.001770183309723743 -> Viewer: 0.001770183309723743, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: UNT","content_id":"UNT","weight":"1.15","timestamp":"2026-02-12T03:15:47.499"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:     connection closed
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+ERROR:QuantumSync:Processing Error: Cannot call "send" once a close message has been sent.
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.20","timestamp":"2026-02-12T03:15:48.255"}
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py", line 244, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\applications.py", line 1135, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\middleware\errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\middleware\cors.py", line 77, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 364, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 141, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 138, in app
+    await func(session)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 438, in app
+    await dependant.call(**solved_result.values)
+  File "C:\Users\Admin\backup 3\backend\main.py", line 578, in websocket_user_endpoint
+    data = await websocket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\websockets.py", line 118, in receive_text
+    raise RuntimeError('WebSocket is not connected. Need to call "accept" first.')
+RuntimeError: WebSocket is not connected. Need to call "accept" first.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.10","timestamp":"2026-02-12T03:15:48.255"}
+WARNING:QuantumSync:A_120: Interaction for unknown content ADM
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=ADM&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=ADM "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=ADM "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.003433094595658439 -> Viewer: 0.003433094595658439, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: ADM","content_id":"ADM","weight":"1.15","timestamp":"2026-02-12T03:15:50.088"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.20","timestamp":"2026-02-12T03:15:50.968"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of APL
+WARNING:QuantumSync:A_120: Interaction for unknown content APL
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=APL&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=APL "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=APL "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0033549090702933632 -> Viewer: 0.0033549090702933632, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: APL","content_id":"APL","weight":"1.25","timestamp":"2026-02-12T03:16:02.489"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.30","timestamp":"2026-02-12T03:16:03.219"}
+INFO:QuantumSync:Admin Action: {"action": "GATING_TOGGLE", "enabled": false}
+INFO:QuantumSync:A_105: User c179887a registered as owner of Security Gating Pulse
+WARNING:QuantumSync:A_120: Interaction for unknown content Security Gating Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Security+Gating+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Security+Gating+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Security+Gating+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Security Gating Pulse","content_id":"Security Gating Pulse","weight":"1.35","timestamp":"2026-02-12T03:16:09.640"}
+INFO:QuantumSync:Admin Action: {"action": "GATING_TOGGLE", "enabled": true}
+WARNING:QuantumSync:A_120: Interaction for unknown content Security Gating Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Security+Gating+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Security+Gating+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Security+Gating+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Security Gating Pulse","content_id":"Security Gating Pulse","weight":"1.40","timestamp":"2026-02-12T03:16:13.456"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of IRS
+WARNING:QuantumSync:A_120: Interaction for unknown content IRS
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=IRS&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=IRS "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=IRS "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0019988271995581472 -> Viewer: 0.0019988271995581472, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: IRS","content_id":"IRS","weight":"1.45","timestamp":"2026-02-12T03:16:17.849"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.50","timestamp":"2026-02-12T03:16:18.629"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of AUTHORIZED_BY_DOB
+WARNING:QuantumSync:A_120: Interaction for unknown content AUTHORIZED_BY_DOB
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=AUTHORIZED_BY_DOB&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=AUTHORIZED_BY_DOB "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=AUTHORIZED_BY_DOB "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"LEGAL_CONSENT: AUTHORIZED_BY_DOB","content_id":"AUTHORIZED_BY_DOB","weight":"1.55","timestamp":"2026-02-12T03:16:21.747"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of META
+WARNING:QuantumSync:A_120: Interaction for unknown content META
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=META&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=META "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=META "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.002384893474722726 -> Viewer: 0.002384893474722726, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: META","content_id":"META","weight":"1.60","timestamp":"2026-02-12T03:16:32.522"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.65","timestamp":"2026-02-12T03:16:33.361"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of V15_CONTENT_c179887a
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=V15_CONTENT_c179887a&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=V15_CONTENT_c179887a "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=V15_CONTENT_c179887a "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SOVEREIGN_OPTIONS_HUB_v15_OPENED","content_id":"V15_CONTENT_c179887a","weight":"1.70","timestamp":"2026-02-12T03:16:55.650"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of grok_video_2025-12-24-16-08-40_1770842481.mp4
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770842481.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40_1770842481.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40_1770842481.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"MORE_OPTIONS","content_id":"grok_video_2025-12-24-16-08-40_1770842481.mp4","weight":"1.75","timestamp":"2026-02-12T03:16:55.651"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of Mesh Pulse
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"1.80","timestamp":"2026-02-12T03:16:56.333"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"1.85","timestamp":"2026-02-12T03:16:57.199"}
+ERROR:QuantumSync:[A_118] Uplink Purge Failed: All connection attempts failed
+INFO:QuantumSync:CONTENT_PURGED: grok_video_2025-12-24-16-08-40_1770842481.mp4 by c179887a
+INFO:QuantumSync:User Action: {"action":"GET_LATEST_MEDIA"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of GALLERY_ACCESS
+WARNING:QuantumSync:A_120: Interaction for unknown content GALLERY_ACCESS
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=GALLERY_ACCESS&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=GALLERY_ACCESS "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=GALLERY_ACCESS "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SECURE_GUARD_TRIGGER: GALLERY_ACCESS","content_id":"GALLERY_ACCESS","weight":"1.95","timestamp":"2026-02-12T03:18:12.575"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of 1 items
+WARNING:QuantumSync:A_120: Interaction for unknown content 1 items
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=1+items&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=1+items "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=1+items "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"GALLERY_MEDIA_SELECTED: 1 items","content_id":"1 items","weight":"2.00","timestamp":"2026-02-12T03:18:30.252"}
+INFO:QuantumSync:A_118 POST HUB: Video V15_0212_031848_2579864611296 Published by 2579864611296. Desc: goru danch 22...
+INFO:QuantumSync:User Action: {"action":"VIDEO_POST","description":"goru danch 22","filename":"grok_video_2025-12-24-16-08-40.mp4","sound_name":"Add sound","original_volume":1,"added_sound_volume":0.5,"timestamp":"2026-02-12T03:18:48.118"}
+INFO:QuantumSync:A_118 POST HUB: Video V15_0212_031855_2579864611296 Published by 2579864611296. Desc: goru danch 22...
+INFO:QuantumSync:User Action: {"action":"VIDEO_POST","description":"goru danch 22","filename":"grok_video_2025-12-24-16-08-40.mp4","sound_name":"Add sound","original_volume":1,"added_sound_volume":0.5,"timestamp":"2026-02-12T03:18:55.434"}
+INFO:QuantumSync:A_118 POST HUB: Video V15_0212_031855_2579864611296 Published by 2579864611296. Desc: goru danch 22...
+INFO:QuantumSync:User Action: {"action":"VIDEO_POST","description":"goru danch 22","filename":"grok_video_2025-12-24-16-08-40.mp4","sound_name":"Add sound","original_volume":1,"added_sound_volume":0.5,"timestamp":"2026-02-12T03:18:55.650"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of Likes
+WARNING:QuantumSync:A_120: Interaction for unknown content Likes
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Likes&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Likes "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Likes "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Likes","content_id":"Likes","weight":"2.05","timestamp":"2026-02-12T03:19:10.922"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of Comments
+WARNING:QuantumSync:A_120: Interaction for unknown content Comments
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Comments&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Comments "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Comments "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Comments","content_id":"Comments","weight":"2.10","timestamp":"2026-02-12T03:19:12.536"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of Mentions
+WARNING:QuantumSync:A_120: Interaction for unknown content Mentions
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mentions&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mentions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mentions "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Mentions","content_id":"Mentions","weight":"2.15","timestamp":"2026-02-12T03:19:14.425"}
+WARNING:QuantumSync:A_120: Interaction for unknown content APL
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=APL&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=APL "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=APL "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0020801964708127185 -> Viewer: 0.0020801964708127185, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: APL","content_id":"APL","weight":"2.20","timestamp":"2026-02-12T03:19:16.490"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"2.25","timestamp":"2026-02-12T03:19:17.326"}
+WARNING:QuantumSync:A_120: Interaction for unknown content IRS
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=IRS&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=IRS "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=IRS "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.002102430079893856 -> Viewer: 0.002102430079893856, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: IRS","content_id":"IRS","weight":"2.30","timestamp":"2026-02-12T03:19:18.890"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of test.mp4
+INFO:QuantumSync:SOCIAL_NOTIF: c179887a -> AI_TEST [like] on test.mp4
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=test.mp4&act=like&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"VIDEO_LIKED: 0","content_id":"test.mp4","weight":"2.35","timestamp":"2026-02-12T03:19:19.378"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"2.40","timestamp":"2026-02-12T03:19:19.796"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"2.45","timestamp":"2026-02-12T03:19:20.561"}
+WARNING:QuantumSync:A_120: Interaction for unknown content V15_CONTENT_c179887a
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=V15_CONTENT_c179887a&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=V15_CONTENT_c179887a "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=V15_CONTENT_c179887a "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"COMMENT_SECTION_OPENED","content_id":"V15_CONTENT_c179887a","weight":"2.50","timestamp":"2026-02-12T03:19:23.025"}
+INFO:QuantumSync:SOCIAL_NOTIF: c179887a -> AI_TEST [view] on test.mp4
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=test.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=test.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=test.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"COMMENT_OPEN","content_id":"test.mp4","weight":"2.55","timestamp":"2026-02-12T03:19:23.027"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"2.60","timestamp":"2026-02-12T03:19:24.588"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of t5w45
+WARNING:QuantumSync:A_120: Interaction for unknown content t5w45
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=t5w45&act=comment&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"COMMENT_SENT: t5w45","content_id":"t5w45","weight":"2.65","timestamp":"2026-02-12T03:19:29.402"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of Comment Live
+WARNING:QuantumSync:A_120: Interaction for unknown content Comment Live
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Comment+Live&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Comment+Live "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Comment+Live "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Comment Live","content_id":"Comment Live","weight":"2.70","timestamp":"2026-02-12T03:19:29.403"}
+WARNING:QuantumSync:A_120: Interaction for unknown content META
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=META&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=META "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=META "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0017493886013160926 -> Viewer: 0.0017493886013160926, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: META","content_id":"META","weight":"2.75","timestamp":"2026-02-12T03:19:32.523"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"2.80","timestamp":"2026-02-12T03:19:33.316"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Comments
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Comments&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Comments "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Comments "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Comments","content_id":"Comments","weight":"2.85","timestamp":"2026-02-12T03:19:39.301"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mentions
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mentions&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mentions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mentions "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Mentions","content_id":"Mentions","weight":"2.90","timestamp":"2026-02-12T03:19:41.081"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Comments
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Comments&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Comments "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Comments "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Comments","content_id":"Comments","weight":"2.95","timestamp":"2026-02-12T03:19:42.679"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of Followers
+WARNING:QuantumSync:A_120: Interaction for unknown content Followers
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Followers&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Followers "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Followers "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Followers","content_id":"Followers","weight":"3.00","timestamp":"2026-02-12T03:19:44.152"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of MIN
+WARNING:QuantumSync:A_120: Interaction for unknown content MIN
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=MIN&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=MIN "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=MIN "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.002608925981648097 -> Viewer: 0.002608925981648097, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: MIN","content_id":"MIN","weight":"3.05","timestamp":"2026-02-12T03:19:50.496"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"3.10","timestamp":"2026-02-12T03:19:51.382"}
+INFO:     127.0.0.1:53663 - "WebSocket /ws/user" [accepted]
+INFO:     connection open
+WARNING:QuantumSync:A_120: Interaction for unknown content ADM
+INFO:     127.0.0.1:55114 - "WebSocket /ws/user" [accepted]
+INFO:     connection open
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\websockets\legacy\protocol.py", line 945, in transfer_data
+    message = await self.read_message()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\websockets\legacy\protocol.py", line 1015, in read_message
+    frame = await self.read_data_frame(max_size=self.max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\websockets\legacy\protocol.py", line 1090, in read_data_frame
+    frame = await self.read_frame(max_size)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\websockets\legacy\protocol.py", line 1147, in read_frame
+    frame = await Frame.read(
+            ^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\websockets\legacy\framing.py", line 71, in read
+    data = await reader(2)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\streams.py", line 767, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 2 expected bytes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py", line 329, in asgi_send
+    await self.send(data)  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\websockets\legacy\protocol.py", line 620, in send
+    await self.ensure_open()
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\websockets\legacy\protocol.py", line 916, in ensure_open
+    raise self.connection_closed_exc()
+websockets.exceptions.ConnectionClosedError: no close frame received or sent
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\websockets.py", line 86, in send
+    await self._send(message)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\_exception_handler.py", line 39, in sender
+    await send(message)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py", line 342, in asgi_send
+    raise ClientDisconnected from exc
+uvicorn.protocols.utils.ClientDisconnected
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py", line 244, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\applications.py", line 1135, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\middleware\errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\middleware\cors.py", line 77, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\routing.py", line 364, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 141, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 138, in app
+    await func(session)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\fastapi\routing.py", line 438, in app
+    await dependant.call(**solved_result.values)
+  File "C:\Users\Admin\backup 3\backend\main.py", line 574, in websocket_user_endpoint
+    await manager.connect(websocket, "user")
+  File "C:\Users\Admin\backup 3\backend\main.py", line 102, in connect
+    await self.send_personal_message(json.dumps({
+    ...<4 lines>...
+    }), websocket)
+  File "C:\Users\Admin\backup 3\backend\main.py", line 123, in send_personal_message
+    await websocket.send_text(message)
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\websockets.py", line 166, in send_text
+    await self.send({"type": "websocket.send", "text": data})
+  File "C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\starlette\websockets.py", line 89, in send
+    raise WebSocketDisconnect(code=1006)
+starlette.websockets.WebSocketDisconnect
+INFO:     connection closed
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=ADM&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=ADM "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=ADM "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0016835533824581174 -> Viewer: 0.0016835533824581174, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: ADM","content_id":"ADM","weight":"1.05","timestamp":"2026-02-12T03:39:48.686"}
+INFO:QuantumSync:Quantum Sync [A_113]: Mapped c179887a to Active Socket.
+INFO:QuantumSync:User Action: {"action":"GET_LATEST_MEDIA"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.10","timestamp":"2026-02-12T03:39:50.298"}
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"3.15","timestamp":"2026-02-12T03:39:50.324"}
+INFO:     connection closed
+WARNING:QuantumSync:A_120: Interaction for unknown content AUTHORIZED_BY_DOB
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=AUTHORIZED_BY_DOB&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=AUTHORIZED_BY_DOB "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=AUTHORIZED_BY_DOB "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"LEGAL_CONSENT: AUTHORIZED_BY_DOB","content_id":"AUTHORIZED_BY_DOB","weight":"1.15","timestamp":"2026-02-12T03:40:00.809"}
+WARNING:QuantumSync:A_120: Interaction for unknown content UNT
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=UNT&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=UNT "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=UNT "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.002733599925701873 -> Viewer: 0.002733599925701873, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: UNT","content_id":"UNT","weight":"1.20","timestamp":"2026-02-12T03:40:03.354"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.25","timestamp":"2026-02-12T03:40:04.258"}
+WARNING:QuantumSync:A_120: Interaction for unknown content GALLERY_ACCESS
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=GALLERY_ACCESS&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=GALLERY_ACCESS "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=GALLERY_ACCESS "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SECURE_GUARD_TRIGGER: GALLERY_ACCESS","content_id":"GALLERY_ACCESS","weight":"1.30","timestamp":"2026-02-12T03:40:10.437"}
+WARNING:QuantumSync:A_120: Interaction for unknown content 1 items
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=1+items&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=1+items "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=1+items "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"GALLERY_MEDIA_SELECTED: 1 items","content_id":"1 items","weight":"1.35","timestamp":"2026-02-12T03:40:16.560"}
+INFO:QuantumSync:A_118 POST HUB: Video V15_0212_034036_2579865270864 Published by 2579865270864. Desc: goru danch 222...
+INFO:QuantumSync:User Action: {"action":"VIDEO_POST","description":"goru danch 222","filename":"grok_video_2025-12-24-16-08-40.mp4","sound_name":"Add sound","original_volume":1,"added_sound_volume":0.5,"timestamp":"2026-02-12T03:40:36.756"}
+INFO:QuantumSync:REGISTER_MEDIA: grok_video_2025-12-24-16-08-40_1770846036.mp4 | S_NAME: Original Sound - c179887a | VOL: 1.0/0.5
+INFO:QuantumSync:A_105: Linked content grok_video_2025-12-24-16-08-40_1770846036.mp4 to uploader c179887a in ownership map.
+INFO:QuantumSync:A_105: User c179887a registered as owner of New Content Pulse
+WARNING:QuantumSync:A_120: Interaction for unknown content New Content Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=New+Content+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=New+Content+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=New+Content+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: New Content Pulse","content_id":"New Content Pulse","weight":"1.40","timestamp":"2026-02-12T03:40:39.182"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of Content Live
+WARNING:QuantumSync:A_120: Interaction for unknown content Content Live
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Content+Live&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Content+Live "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Content+Live "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Content Live","content_id":"Content Live","weight":"1.45","timestamp":"2026-02-12T03:40:39.210"}
+INFO:QuantumSync:A_105: User c179887a registered as owner of grok_video_2025-12-24-16-08-40.mp4
+WARNING:QuantumSync:A_120: Interaction for unknown content grok_video_2025-12-24-16-08-40.mp4
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"POST_PUBLISHED: grok_video_2025-12-24-16-08-40.mp4","content_id":"grok_video_2025-12-24-16-08-40.mp4","weight":"1.50","timestamp":"2026-02-12T03:40:39.210"}
+INFO:QuantumSync:User Action: {"action":"GET_LATEST_MEDIA"}
+WARNING:QuantumSync:A_120: Interaction for unknown content META
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=META&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=META "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=META "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.002519630151890394 -> Viewer: 0.002519630151890394, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: META","content_id":"META","weight":"1.60","timestamp":"2026-02-12T03:40:50.773"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"VIDEO_VIEW","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"1.65","timestamp":"2026-02-12T03:40:50.973"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"1.70","timestamp":"2026-02-12T03:40:51.686"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"1.75","timestamp":"2026-02-12T03:40:52.489"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"VIDEO_VIEW","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"1.80","timestamp":"2026-02-12T03:41:00.506"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"1.85","timestamp":"2026-02-12T03:41:01.279"}
+WARNING:QuantumSync:A_120: Interaction for unknown content MIN
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=MIN&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=MIN "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=MIN "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.003012098673558339 -> Viewer: 0.003012098673558339, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: MIN","content_id":"MIN","weight":"1.90","timestamp":"2026-02-12T03:41:03.399"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=like&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"VIDEO_LIKED: 0","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"1.95","timestamp":"2026-02-12T03:41:03.864"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"2.00","timestamp":"2026-02-12T03:41:04.141"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"2.05","timestamp":"2026-02-12T03:41:04.972"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"COMMENT_SECTION_OPENED","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"2.10","timestamp":"2026-02-12T03:41:08.185"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"COMMENT_OPEN","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"2.15","timestamp":"2026-02-12T03:41:08.192"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"2.20","timestamp":"2026-02-12T03:41:09.019"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"2.25","timestamp":"2026-02-12T03:41:09.911"}
+WARNING:QuantumSync:A_120: Interaction for unknown content ADM
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=ADM&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=ADM "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=ADM "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.003187690524910707 -> Viewer: 0.003187690524910707, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: ADM","content_id":"ADM","weight":"2.30","timestamp":"2026-02-12T03:41:18.294"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"2.35","timestamp":"2026-02-12T03:41:19.152"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=comment&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"COMMENT_SENT: kire goru ???","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"2.40","timestamp":"2026-02-12T03:41:23.587"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Comment Live
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Comment+Live&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Comment+Live "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Comment+Live "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Comment Live","content_id":"Comment Live","weight":"2.45","timestamp":"2026-02-12T03:41:23.587"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"2.50","timestamp":"2026-02-12T03:41:24.314"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"COMMENT_SECTION_OPENED","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"2.55","timestamp":"2026-02-12T03:41:29.717"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"COMMENT_OPEN","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"2.60","timestamp":"2026-02-12T03:41:29.720"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"2.65","timestamp":"2026-02-12T03:41:30.542"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"2.70","timestamp":"2026-02-12T03:41:31.517"}
+WARNING:QuantumSync:A_120: Interaction for unknown content UNT
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=UNT&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=UNT "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=UNT "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0020851245314409224 -> Viewer: 0.0020851245314409224, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: UNT","content_id":"UNT","weight":"2.75","timestamp":"2026-02-12T03:41:33.382"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"2.80","timestamp":"2026-02-12T03:41:34.169"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Likes
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Likes&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Likes "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Likes "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Likes","content_id":"Likes","weight":"2.85","timestamp":"2026-02-12T03:41:37.746"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Comments
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Comments&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Comments "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Comments "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Comments","content_id":"Comments","weight":"2.90","timestamp":"2026-02-12T03:41:41.042"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"VIDEO_VIEW","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"2.95","timestamp":"2026-02-12T03:41:44.805"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"3.00","timestamp":"2026-02-12T03:41:45.590"}
+WARNING:QuantumSync:A_120: Interaction for unknown content APL
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=APL&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=APL "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=APL "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.003071151615929833 -> Viewer: 0.003071151615929833, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: APL","content_id":"APL","weight":"3.05","timestamp":"2026-02-12T03:41:48.289"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"3.10","timestamp":"2026-02-12T03:41:49.105"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=like&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"VIDEO_LIKED: 0","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"3.15","timestamp":"2026-02-12T03:41:49.456"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"3.20","timestamp":"2026-02-12T03:41:50.736"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=like&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"VIDEO_UNLIKED: 0","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"3.25","timestamp":"2026-02-12T03:41:55.117"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"3.30","timestamp":"2026-02-12T03:41:55.875"}
+WARNING:QuantumSync:A_120: Interaction for unknown content IRS
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=IRS&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=IRS "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=IRS "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.002962484932100691 -> Viewer: 0.002962484932100691, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: IRS","content_id":"IRS","weight":"3.35","timestamp":"2026-02-12T03:42:03.292"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"3.40","timestamp":"2026-02-12T03:42:04.082"}
+WARNING:QuantumSync:A_120: Interaction for unknown content META
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=META&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=META "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=META "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0015649928753557162 -> Viewer: 0.0015649928753557162, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: META","content_id":"META","weight":"3.45","timestamp":"2026-02-12T03:42:18.285"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"3.50","timestamp":"2026-02-12T03:42:19.089"}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=grok_video_2025-12-24-16-08-40_1770846036.mp4&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=grok_video_2025-12-24-16-08-40_1770846036.mp4 "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"VIDEO_VIEW","content_id":"grok_video_2025-12-24-16-08-40_1770846036.mp4","weight":"3.55","timestamp":"2026-02-12T03:42:21.764"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Mesh Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Mesh+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Mesh+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Mesh Pulse","content_id":"Mesh Pulse","weight":"3.60","timestamp":"2026-02-12T03:42:22.589"}
+WARNING:QuantumSync:A_120: Interaction for unknown content MIN
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=MIN&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=MIN "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=MIN "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0018172114409068904 -> Viewer: 0.0018172114409068904, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: MIN","content_id":"MIN","weight":"3.65","timestamp":"2026-02-12T03:42:33.380"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"3.70","timestamp":"2026-02-12T03:42:34.153"}
+WARNING:QuantumSync:A_120: Interaction for unknown content ADM
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=ADM&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=ADM "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=ADM "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0030699112706132547 -> Viewer: 0.0030699112706132547, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: ADM","content_id":"ADM","weight":"3.75","timestamp":"2026-02-12T03:42:48.327"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"3.80","timestamp":"2026-02-12T03:42:49.115"}
+WARNING:QuantumSync:A_120: Interaction for unknown content UNT
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=UNT&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=UNT "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=UNT "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0019281197311290324 -> Viewer: 0.0019281197311290324, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: UNT","content_id":"UNT","weight":"3.85","timestamp":"2026-02-12T03:43:03.401"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"3.90","timestamp":"2026-02-12T03:43:04.201"}
+WARNING:QuantumSync:A_120: Interaction for unknown content APL
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=APL&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=APL "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=APL "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.0021387193766211365 -> Viewer: 0.0021387193766211365, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: APL","content_id":"APL","weight":"3.95","timestamp":"2026-02-12T03:43:18.313"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"4.00","timestamp":"2026-02-12T03:43:19.216"}
+WARNING:QuantumSync:A_120: Interaction for unknown content IRS
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=IRS&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=IRS "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=IRS "HTTP/1.1 200 OK"
+INFO:QuantumSync:A_105 FISCAL: Distributed $0.002360747470658171 -> Viewer: 0.002360747470658171, Admin: 0.0
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"AD_IMPRESSION: IRS","content_id":"IRS","weight":"4.05","timestamp":"2026-02-12T03:43:33.742"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Viewer Reward [A_111]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Viewer+Reward+%5BA_111%5D&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Viewer+Reward+%5BA_111%5D "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: Viewer Reward [A_111]","content_id":"Viewer Reward [A_111]","weight":"4.10","timestamp":"2026-02-12T03:43:34.604"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Comments
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Comments&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Comments "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Comments "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Comments","content_id":"Comments","weight":"4.15","timestamp":"2026-02-12T03:43:43.715"}
+WARNING:QuantumSync:A_120: Interaction for unknown content Likes
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=Likes&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=Likes "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=Likes "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"INBOX_CATEGORY_TAP: Likes","content_id":"Likes","weight":"4.20","timestamp":"2026-02-12T03:43:45.511"}

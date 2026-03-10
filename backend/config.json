@@ -1,0 +1,40 @@
+{
+    "activation_fee": 0.0,
+    "yield_percent": 34.6,
+    "min_withdraw_limit": 13.8,
+    "commission_rate": 5.45,
+    "bdt_rate": 135.51,
+    "platform_share": 0.0,
+    "creator_share": 0.0,
+    "user_share": 0.0,
+    "usd_cpm": 200.0,
+    "bdt_cpm": 5.0,
+    "ad_frequency": 4.0,
+    "sponsor_frequency": 5.0,
+    "rotation_interval": 15.0,
+    "ad_api_keys": {
+        "ADM": "ca-app-pub-3940256099942544/2247696110",
+        "UNT": "ca-app-pub-3940256099942544/2247696110",
+        "APL": "ca-app-pub-3940256099942544/2247696110",
+        "IRS": "ca-app-pub-3940256099942544/2247696110",
+        "META": "ca-app-pub-3940256099942544/2247696110",
+        "VGL": "ca-app-pub-3940256099942544/2247696110",
+        "bkash_key": "SIMULATED",
+        "nagad_key": "null",
+        "stripe_key": "null",
+        "amarpay_key": "SIMULATED",
+        "sslcommerz_key": "fectok0live",
+        "bkash_secret": "SIMULATED",
+        "nagad_secret": "null",
+        "stripe_secret": "null",
+        "amarpay_secret": "SIMULATED",
+        "sslcommerz_secret": "69A54A07E86F172811"
+    },
+    "ad_toggles": {
+        "maintenance": false,
+        "gating": true,
+        "ad_split": true,
+        "ai_injector": true,
+        "ad_randomizer": false
+    }
+}

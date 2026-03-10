@@ -1,0 +1,38 @@
+[
+    {
+        "batch_id": "BCH_1772474035_775",
+        "user_id": "SANITY_TEST_USER",
+        "amount": 100.0,
+        "tax_rate": 5.0,
+        "tax_amount": 5.0,
+        "currency": "BDT",
+        "original_currency": "BDT",
+        "original_amount": 100.0,
+        "original_tax_amount": 5.0,
+        "gateway": "bkash",
+        "method": "bkash",
+        "account": "01700000000",
+        "hw_id": "UNKNOWN",
+        "status": "PENDING_AI_GUARD",
+        "timestamp": "2026-03-02T23:53:55.623651",
+        "signature": "5f64237605811a8b2bb6bdcf9df8681687231eb624b7e86e988ed4f369a68218"
+    },
+    {
+        "batch_id": "BCH_1772474225_314",
+        "user_id": "GOAL_TEST_USER",
+        "amount": 200.0,
+        "tax_rate": 10.0,
+        "tax_amount": 20.0,
+        "currency": "BDT",
+        "original_currency": "BDT",
+        "original_amount": 200.0,
+        "original_tax_amount": 20.0,
+        "gateway": "bkash",
+        "method": "bkash",
+        "account": "01788888888",
+        "hw_id": "UNKNOWN",
+        "status": "PENDING_AI_GUARD",
+        "timestamp": "2026-03-02T23:57:05.833429",
+        "signature": "2c9b9a8ccee1deeff460d752a30791a594b93aadf5863cf443ef0a63abe3dbb5"
+    }
+]

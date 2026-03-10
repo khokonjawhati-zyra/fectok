@@ -1,0 +1,54 @@
+# Sovereign V15: Ultra-Lightweight Ignore Protocol [A_124]
+
+# Flutter / Dart
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+
+# Android
+.gradle/
+captures/
+assets/debug/
+android/app/build/
+
+# iOS
+Pods/
+DerivedData/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Heavy Binaries & Artifacts
+*.zip
+*.rar
+*.7z
+*.tar.gz
+*.exe
+*.apk
+*.ipa
+*.app-release.apk
+
+# Large Object History
+.git/
+sovereign.zip
+sovereign_root.zip
+sovereign_core_only.zip

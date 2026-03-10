@@ -1,0 +1,14 @@
+[
+    {
+        "tx_id": "SOV_1772474225824",
+        "timestamp": "2026-03-02T23:57:05.824078",
+        "type": "DEPOSIT_INIT",
+        "user_id": "GOAL_TEST_USER",
+        "amount": 500.0,
+        "currency": "BDT",
+        "gateway": "sslcommerz",
+        "status": "INITIATED",
+        "details": "Requesting SSLCOMMERZ Link (GENERAL)",
+        "signature": "e810ac955f44afe1b40a54bc3f69aa79788715b556436cebcce8ec2e8e63513b"
+    }
+]

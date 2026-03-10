@@ -1,0 +1,6 @@
+{
+    "admin_reserve": 100000.0,
+    "usd_to_bdt_rate": 115.0,
+    "kill_switch_engaged": false,
+    "spread_guard_enabled": false
+}

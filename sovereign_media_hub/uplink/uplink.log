@@ -1,0 +1,13 @@
+Uplink Master Host Pulse: 10.53.40.252
+[CPM_GUARD] Sovereign Revenue Guard V15 Initialized.
+[A_111 Guard] Revenue Guard Active in Uplink.
+UPLINK_VAULT_PATH ACTIVE: D:\server
+Sovereign Uplink Server: UPLOAD GATEWAY ACTIVE [V15]
+VAULT_HUB: D:\server
+ * Serving Flask app 'uplink_server'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://10.53.40.252:8080
+Press CTRL+C to quit

@@ -1,0 +1,21 @@
+{
+    "title": "Sovereign Media Hub: Video Pipeline & Sharding System",
+    "summary": "Full documentation of the V15 Pro video and sound pipeline, including Uplink Server, Neural Audio Mixing (A_128), Sound Master Hub integration, and the Atomic Overwrite protocol.",
+    "created_at": "2026-02-05T23:22:00",
+    "updated_at": "2026-02-08T03:15:00",
+    "categories": [
+        "media",
+        "audio_mixing",
+        "architecture",
+        "v15_pro",
+        "ffmpeg"
+    ],
+    "related_conversations": [
+        "d6553103-8ba3-4ecb-8706-f60fa31f034d",
+        "conversation_id_placeholder_for_current"
+    ],
+    "artifacts": [
+        "architecture_overview.md",
+        "audio_mixing_protocol.md"
+    ]
+}

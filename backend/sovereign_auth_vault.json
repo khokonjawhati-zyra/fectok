@@ -1,0 +1,52 @@
+{
+    "SOV_89173": {
+        "email_phone": "voboguraexpress@gmail.com",
+        "password": "24dfbeb5e62ad4ea4b257eec3a5bea8774eeff6ab5e1176adfac2c3d61f75baf",
+        "pin": "1234",
+        "reset_token": null,
+        "token_expiry": null,
+        "token_version": 1
+    },
+    "SOV_36044": {
+        "email_phone": "myvazosud@gmail.com",
+        "password": "7b4590bd484cf5e1f50897810619c27d1bd65f8495635d023f182dc4f755e22a",
+        "pin": "1234",
+        "reset_token": null,
+        "token_expiry": null,
+        "token_version": 1
+    },
+    "SOV_93558": {
+        "email_phone": "voboguraexpress2 4@gmail.com ",
+        "password": "6b8ae3329753d46a4af298ff5b30508b0697a279de761189985bfc7b879e25f2",
+        "pin": "1234",
+        "reset_token": null
+    },
+    "SOV_14748": {
+        "email_phone": "voboguraexpress24@gmail.com",
+        "password": "9e3d0878ea3513d11ef47e7ee19166573af2425b6954f99bf253220e7cc09633",
+        "pin": "1234",
+        "reset_token": null
+    },
+    "SOV_68007": {
+        "email_phone": "vazovaisudkor@gmail.com",
+        "password": "c48ead6546bc0d75fd67dbc0ad6d8cc17a7d60fe22fe9244087f57f2ec685c37",
+        "pin": "123456",
+        "token_version": 1,
+        "reset_token": null,
+        "token_expiry": null
+    },
+    "SOV_48593": {
+        "email_phone": "mdfazlerabbikhokon@gmail.com",
+        "password": "be3dbe34e831c64cd627b8dd9d4e6a6f8978ce18b2f78e8d7d5da7cf83babee8",
+        "pin": "123456",
+        "token_version": 0
+    },
+    "SOV_35866": {
+        "email_phone": "n19001562@gmail.com",
+        "password": "0107e751e257da479cf9042a6778036b2284529c6805df8a685dafe5fb54ba48",
+        "pin": "123456",
+        "token_version": 1,
+        "reset_token": null,
+        "token_expiry": null
+    }
+}

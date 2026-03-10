@@ -1,0 +1,70 @@
+{
+    "DEP_1772538744_141": {
+        "user_id": "SOV_68007",
+        "amount": 3700.0,
+        "currency": "BDT",
+        "gateway": "sslcommerz",
+        "type": "DEPOSIT",
+        "timestamp": "2026-03-03T17:52:26.251387"
+    },
+    "DEP_1772643674_311": {
+        "user_id": "SOV_96583",
+        "amount": 1000.0,
+        "currency": "BDT",
+        "gateway": "sslcommerz",
+        "type": "DEPOSIT",
+        "timestamp": "2026-03-04T23:01:15.987279"
+    },
+    "DEP_1772661473_182": {
+        "user_id": "SOV_68007",
+        "amount": 5000.0,
+        "currency": "USD",
+        "gateway": "sslcommerz",
+        "type": "DEPOSIT",
+        "timestamp": "2026-03-05T03:57:53.857095"
+    },
+    "DEP_1772661621_490": {
+        "user_id": "SOV_68007",
+        "amount": 50000.0,
+        "currency": "USD",
+        "gateway": "sslcommerz",
+        "type": "DEPOSIT",
+        "timestamp": "2026-03-05T04:00:22.249563"
+    },
+    "DEP_1772661937_244": {
+        "user_id": "SOV_68007",
+        "amount": 50000.0,
+        "currency": "BDT",
+        "gateway": "sslcommerz",
+        "type": "DEPOSIT",
+        "timestamp": "2026-03-05T04:05:39.153952"
+    },
+    "TXN_1772834717059_1000": {
+        "user_id": "SOV_68007",
+        "account": "5038901006769",
+        "amount": 60.0,
+        "currency": "USD",
+        "gateway": "amarpay",
+        "type": "WITHDRAW",
+        "payout_method": "bank",
+        "tax_rate": 1.9,
+        "bdt_rate": 135.51,
+        "stage": "BATCHING",
+        "hw_id": "CLIENT_V15_STABLE",
+        "timestamp": "2026-03-07T04:05:17.105810"
+    },
+    "TXN_1772986883371_1000": {
+        "user_id": "SOV_68007",
+        "account": "5038901006769",
+        "amount": 1000.0,
+        "currency": "BDT",
+        "gateway": "amarpay",
+        "type": "WITHDRAW",
+        "payout_method": "bank",
+        "tax_rate": 34.6,
+        "bdt_rate": 135.51,
+        "stage": "BATCHING",
+        "hw_id": "CLIENT_V15_STABLE",
+        "timestamp": "2026-03-08T22:21:23.414394"
+    }
+}

@@ -1,0 +1,11 @@
+Starting MLM Test
+Listening for responses...
+Admin Msg: {"status": "ADMIN_CONTROL_ESTABLISHED"}
+User Msg: {"status": "QUANTUM_SYNC_CONNECTED", "engine": "V15_CHAIN_REACTION", "temp_id": "2532530322000", "latency": "sub-50ms"}
+Admin Msg: {"action": "A_113_TRANSACTION_DECISION", "tx_id": "TXN_SOV_GHOST_1_123", "vault": "WITHDRAW", "decision": "APPROVED", "amount": 100.0, "currency": "USD", "details": "REQUEST: 100.0 USD (USER: SOV_GHOST_1)"}
+User Msg: {"action": "A_113_WALLET_SYNC", "usd": 100.0, "bdt": 5000.0, "coins": 1000, "mesh_id": "SOV_GHOST_1", "min_withdraw": 10.0, "platform_commission": 10.0, "bdt_rate": 115.0, "mlm_yield": 5.0}
+User Msg: {"action": "MLM_REFERRAL_LINKED", "status": "V15_NODE_NOT_FOUND", "reason": "Node ID SOV_MASTER_1 is not recognized by Quantum Sync."}
+Admin Msg: {"status": "IMPRESSION_VERIFIED", "yield": 0.0020854442902466237, "splits": {"admin": 0.0014598110031726365, "uploader": 0.00041708885804932476, "viewer": 0.00020854442902466238}, "weight": "3.00", "type": "AD_IMPRESSION: META"}
+User Msg: {"action": "A_113_WALLET_SYNC", "usd": 0.0, "bdt": 5000.0, "coins": 1000, "mesh_id": "SOV_GHOST_1", "min_withdraw": 10.0, "platform_commission": 10.0, "bdt_rate": 115.0, "mlm_yield": 5.0}
+User Msg: {"action":"A_113_TRANSACTION_DECISION","tx_id":"TXN_SOV_GHOST_1_123","vault":"WITHDRAW","decision":"APPROVED","currency":"USD","amount":100,"details":"REQUEST: 100.0 USD (USER: SOV_GHOST_1)","timestamp":"2026-01-30T21:53:35.627"}
+User Msg: {"status": "IMPRESSION_VERIFIED", "yield": 0.0020854442902466237, "splits": {"admin": 0.0014598110031726365, "uploader": 0.00041708885804932476, "viewer": 0.00020854442902466238}, "weight": "3.00", "type": "AD_IMPRESSION: META"}

@@ -1,0 +1,23 @@
+INFO:QuantumSync:Sovereign Master Host Pulse: 127.0.0.1
+INFO:QuantumSync:QuantumSync: Ledger loaded from disk.
+INFO:QuantumSync:QuantumSync: Media Vault loaded.
+INFO:QuantumSync:MLM: 84 processed TX records loaded.
+INFO:QuantumSync:MLM: Referral map loaded from disk.
+INFO:QuantumSync:MLM: Pending TXs loaded from disk.
+INFO:QuantumSync:MLM: Config loaded from disk.
+INFO:     Started server process [6808]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:49833 - "WebSocket /ws/user" [accepted]
+INFO:     connection open
+INFO:QuantumSync:Quantum Sync [A_113]: Mapped SOV_68722 to Active Socket.
+INFO:QuantumSync:User Action: {"action":"GET_LATEST_MEDIA"}
+INFO:QuantumSync:REGISTER_MEDIA: test_video_local_1771061715.mp4 | S_NAME: Original Sound - TEST_BOT | VOL: 1.0/0.5
+INFO:QuantumSync:A_105: Linked content test_video_local_1771061715.mp4 to uploader TEST_BOT in ownership map.
+INFO:QuantumSync:A_105: User SOV_68722 registered as owner of New Content Pulse
+WARNING:QuantumSync:A_120: Interaction for unknown content New Content Pulse
+INFO:httpx:HTTP Request: POST http://127.0.0.1:6000/track?c_id=New+Content+Pulse&act=view&ip=127.0.0.1 "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9000/view_check?v_id=New+Content+Pulse "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:9900/track_usage?s_id=V15_DEFAULT_SOUND&v_id=New+Content+Pulse "HTTP/1.1 200 OK"
+INFO:QuantumSync:User Action: {"action":"USER_INTERACTION","type":"SYSTEM_NOTIF_RECEIVED: New Content Pulse","content_id":"New Content Pulse","target_id":null,"weight":"1.65","timestamp":"2026-02-14T15:35:15.948"}
