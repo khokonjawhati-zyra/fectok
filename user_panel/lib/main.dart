@@ -518,7 +518,8 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
   void _connect() {
     try {
       final String host = globalSovereignHost;
-      final String wsUrl = "ws://$host/ws/user";
+      final String protocol = Uri.base.scheme == 'https' ? 'wss' : 'ws';
+      final String wsUrl = "$protocol://$host/ws/user";
       channel = WebSocketChannel.connect(Uri.parse(wsUrl));
       broadcastStream = channel.stream.asBroadcastStream();
       setState(() => isConnected = true);
@@ -2255,14 +2256,13 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
   Future<void> _loadGlobalSoundRegistry() async {
     try {
       // V15 Gap Fix S3: Dynamic host sensing [A_128]
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
-      final String endpoint = 'http://$host:9900/all';
+      final String endpoint = '/sound_engine/all';
       final res = await http.get(Uri.parse(endpoint));
       if (res.statusCode == 200) {
         final List sounds = json.decode(res.body);
         final Map<String, String> reg = {};
         for (var s in sounds) {
-          reg[s['title']] = 'http://$host:9900${s['url']}';
+          reg[s['title']] = '/sound_engine${s['url']}';
         }
         setState(() => _globalSoundRegistry = reg);
         debugPrint("[A_108] Global Sound Registry: ${reg.length} sounds loaded");
@@ -3409,8 +3409,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
     if (_selectedSoundUrl != null) {
       String finalUrl = _selectedSoundUrl!;
       if (finalUrl.startsWith('/stream')) {
-        final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
-        finalUrl = 'http://$host:9900$finalUrl';
+        finalUrl = '/sound_engine$finalUrl';
       }
       _recordingAudioController?.dispose();
       _recordingAudioController = VideoPlayerController.networkUrl(Uri.parse(finalUrl))
@@ -4744,13 +4743,12 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
 
   Future<void> _loadDynamicSounds() async {
     try {
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost; // Standard Emulator Fallback
-      final response = await http.get(Uri.parse('http://$host:9900/all'));
+      final response = await http.get(Uri.parse('/sound_engine/all'));
       if (response.statusCode == 200) {
         final List sounds = json.decode(response.body);
         final Map<String, String> newRegistry = {};
         for (var s in sounds) {
-          newRegistry[s['title']] = 'http://$host:9900${s['url']}';
+          newRegistry[s['title']] = '/sound_engine${s['url']}';
         }
         setState(() {
           _soundRegistry = newRegistry;
@@ -4814,7 +4812,7 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
       
       if (fullUrl.startsWith('/stream') && !fullUrl.startsWith('http')) {
         // Resolve to Sound Master [A_128]
-        fullUrl = 'http://$host:9900$fullUrl';
+        fullUrl = '/sound_engine$fullUrl';
       } else if (fullUrl.contains('localhost')) {
         fullUrl = fullUrl.replaceFirst('localhost', host);
       }
@@ -4899,7 +4897,7 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
       // A_128 V15: Resolve Sound URL to absolute for server-side mixing
       String resolvedSoundUrl = snapshotSoundUrl ?? "";
       if (resolvedSoundUrl.isNotEmpty && !resolvedSoundUrl.startsWith('http')) {
-        resolvedSoundUrl = 'http://$host:9900$resolvedSoundUrl';
+        resolvedSoundUrl = '/sound_engine$resolvedSoundUrl';
       }
       request.fields['sound_url'] = resolvedSoundUrl;
 
@@ -9388,8 +9386,7 @@ class _SovereignSoundDetailState extends State<SovereignSoundDetail> with Single
     if (widget.soundUrl != null && widget.soundUrl!.isNotEmpty) {
       String fullUrl = widget.soundUrl!;
       if (fullUrl.startsWith('/stream')) {
-        final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
-        fullUrl = 'http://$host:9900$fullUrl';
+        fullUrl = '/sound_engine$fullUrl';
       }
       
       _previewController = VideoPlayerController.networkUrl(Uri.parse(fullUrl))
@@ -11422,7 +11419,8 @@ class _SovereignDMViewState extends State<SovereignDMView> {
       });
       // Sync to Sovereign Mesh Interaction Engine
       final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
-      WebSocketChannel.connect(Uri.parse('ws://$host/ws/interaction')).sink.add(json.encode({
+      final String interactionProtocol = Uri.base.scheme == 'https' ? 'wss' : 'ws';
+      WebSocketChannel.connect(Uri.parse('$interactionProtocol://$host/ws/interaction')).sink.add(json.encode({
         "action": "DM_MESSAGE_SENT",
         "recipient": widget.user,
         "message": text,
@@ -11578,8 +11576,7 @@ class _SovereignSoundHubState extends State<SovereignSoundHub> {
     
     setState(() => _isSearchLoading = true);
     try {
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
-      final res = await http.get(Uri.parse('http://$host:9900/search?query=$query'));
+      final res = await http.get(Uri.parse('/sound_engine/search?query=$query'));
       if (res.statusCode == 200) {
         setState(() => _searchResults = json.decode(res.body));
       }
@@ -12204,8 +12201,7 @@ class _SovereignSoundLibraryState extends State<SovereignSoundLibrary> {
 
   Future<void> _fetchCategories() async {
     try {
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
-      final res = await http.get(Uri.parse('http://$host:9900/categories'));
+      final res = await http.get(Uri.parse('/sound_engine/categories'));
       if (res.statusCode == 200) {
         setState(() => categories = List<String>.from(json.decode(res.body)));
       }
@@ -12216,8 +12212,7 @@ class _SovereignSoundLibraryState extends State<SovereignSoundLibrary> {
     if (!mounted) return;
     setState(() => isLoading = true);
     try {
-      final String host = globalSovereignHost;
-      final res = await http.get(Uri.parse('http://$host:9900/explore/$selectedCategory'));
+      final res = await http.get(Uri.parse('/sound_engine/explore/$selectedCategory'));
       if (res.statusCode == 200) {
         if (mounted) setState(() => sounds = json.decode(res.body));
       }
