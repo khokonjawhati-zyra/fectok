@@ -58,7 +58,7 @@ String getSovereignUrl(int index, List<Map<String, dynamic>> mediaLedger) {
     final String currentHost = globalSovereignHost;
     
     if (url.startsWith('/stream') && !url.startsWith('http')) {
-        url = 'http://$currentHost:8080$url';
+        url = '/video_stream$url';
     } else {
         // V15 DNA Healing: Scan and replace ANY legacy IP with the current host
         // Matches any IPv4 pattern (e.g., 10.x.x.x, 192.x.x.x, etc.)
@@ -97,7 +97,7 @@ String getSovereignThumb(int index, List<Map<String, dynamic>> mediaLedger) {
   final String currentHost = globalSovereignHost;
   
   if (url.startsWith('/stream') && !url.startsWith('http')) {
-     url = 'http://$currentHost:8080$url';
+     url = '/video_stream$url';
   } else {
      final RegExp ipRegex = RegExp(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}');
      url = url.replaceAll(ipRegex, currentHost).replaceAll('localhost', currentHost);
@@ -4868,7 +4868,7 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
     // A_118: Sovereign Real-Time Upload [Multi-Media Orchestration]
     try {
       final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
-      final uri = Uri.parse("http://$host:8080/upload");
+      final uri = Uri.parse("/video_stream/upload");
       final request = http.MultipartRequest("POST", uri);
       
       // A_118: Multi-File Injection Loop (Uplink V15 supports single-file primary + multiple markers)
@@ -5426,7 +5426,7 @@ class _EditProfileViewState extends State<EditProfileView> {
 
       final bytes = await video.readAsBytes();
       final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
-      final uri = Uri.parse("http://$host:8080/upload");
+      final uri = Uri.parse("/video_stream/upload");
       final request = http.MultipartRequest("POST", uri);
       
       request.files.add(http.MultipartFile.fromBytes(
@@ -5554,7 +5554,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                     try {
                       final bytes = await _imageFile!.readAsBytes();
                       final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
-                      final uri = Uri.parse("http://$host:8080/upload");
+                      final uri = Uri.parse("/video_stream/upload");
                       final request = http.MultipartRequest("POST", uri);
                       request.fields['uploader'] = widget.userMeshID;
                       request.files.add(http.MultipartFile.fromBytes(
@@ -5569,7 +5569,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                         final respJson = json.decode(respStr);
                         final filename = respJson['file'];
                         final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
-                        uploadedPicPath = "http://$host:8080/stream/$filename";
+                        uploadedPicPath = "/video_stream/stream/$filename";
                       }
                     } catch (e) {
                       debugPrint("PIC_UPLOAD_ERR: $e");
@@ -7618,7 +7618,7 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
       final RegExp ipRegex = RegExp(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}');
       
       if (resolvedUrl.startsWith('/stream') && !resolvedUrl.startsWith('http')) {
-        resolvedUrl = 'http://$host:8080$resolvedUrl';
+        resolvedUrl = '/video_stream$resolvedUrl';
       } else {
         resolvedUrl = resolvedUrl.replaceAll(ipRegex, host).replaceAll('localhost', host);
       }

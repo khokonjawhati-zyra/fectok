@@ -160,11 +160,10 @@ class SovereignAdEngine {
   }
 
   String? getAdSource(String network) {
-    String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : '10.93.205.252';
     String id = networkApiKeys[network] ?? "";
     if (_isValidRealId(id)) return id;
     String vod = simulationVods[network] ?? "grok_video_default.mp4";
-    return 'http://$host:8080/stream/$vod';
+    return '/video_stream/stream/$vod';
   }
 
   void _preLoadNextNetworkSlot() {
