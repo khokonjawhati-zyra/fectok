@@ -29,7 +29,7 @@ class EliteSovereignDNA:
         if IS_DOCKER:
             self.storage = "/app/vault/data"
         elif IS_LINUX:
-            self.storage = "/mnt/sovereign_media"
+            self.storage = "/var/www/html/media/videos" # Native R2 Mount Path
         else:
             self.storage = r"D:\server"
             

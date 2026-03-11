@@ -102,7 +102,8 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
   Future<void> _checkReferrerPulse() async {
     try {
       final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : '10.93.205.252';
-      final response = await http.post(Uri.parse("http://$host:5000/check_referral"), headers: {"Content-Type": "application/json"}, body: jsonEncode({"referral_id": _referralController.text}));
+      final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.')) ? 'http' : 'https';
+      final response = await http.post(Uri.parse("$protocol://$host/check_referral"), headers: {"Content-Type": "application/json"}, body: jsonEncode({"referral_id": _referralController.text}));
       final result = jsonDecode(response.body);
       if (!mounted) return;
       if (result['status'] == 'SUCCESS') {
@@ -129,7 +130,8 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
     if (token != null) {
       try {
         final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : '10.93.205.252';
-        final response = await http.post(Uri.parse("http://$host:5000/verify_token"), headers: {"Content-Type": "application/json"}, body: jsonEncode({"token": token}));
+        final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.')) ? 'http' : 'https';
+        final response = await http.post(Uri.parse("$protocol://$host/verify_token"), headers: {"Content-Type": "application/json"}, body: jsonEncode({"token": token}));
         final result = jsonDecode(response.body);
         if (!mounted) return;
         if (result['status'] == 'SUCCESS') {
@@ -253,7 +255,8 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
           : {"name": _nameController.text, "profession": _professionController.text, "email_phone": normalizedEmail, "dob": _selectedDOB!.toIso8601String(), "password": _passwordController.text, "pin": _pinController.text, "referral_id": _referralController.text, "legal_consent": _termsAccepted};
       }
 
-      final response = await http.post(Uri.parse("http://$host:5000$endpoint"), headers: {"Content-Type": "application/json"}, body: jsonEncode(body));
+      final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.')) ? 'http' : 'https';
+      final response = await http.post(Uri.parse("$protocol://$host$endpoint"), headers: {"Content-Type": "application/json"}, body: jsonEncode(body));
       final result = jsonDecode(response.body);
 
       if (!mounted) return;
@@ -486,6 +489,8 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
         fit: BoxFit.scaleDown,
         child: Text(title, style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w900, letterSpacing: 3)),
       ),
+      const SizedBox(height: 5),
+      const Text("V15-NET-SYNC [PRO] v1.5.3", style: TextStyle(color: Colors.greenAccent, fontSize: 9, fontWeight: FontWeight.bold, letterSpacing: 2)),
       const SizedBox(height: 10),
       Text(sub, style: const TextStyle(color: Colors.white38, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1.5)),
     ]);

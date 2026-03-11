@@ -128,6 +128,17 @@ except ImportError:
         def calculate_split(self, r): return {"admin": r*0.7, "uploader": r*0.2, "viewer": r*0.1}
     class LiveMonitor:
         def track_realtime(self, r, s): pass
+    watchdog = None
+    class DummyGovernor:
+        def __init__(self):
+            self.payout_mode = "ERROR"
+            self.gateways = {}
+            self.ledger_file = "/tmp/error_ledger.json"
+            self.processed_pg_ids = set()
+        async def close(self): pass
+    governor = DummyGovernor()
+    
+from gmail_engine import gmail_engine # Sovereign V15: Gmail API Pulse
 
 app = FastAPI()
 
@@ -142,7 +153,8 @@ app.add_middleware(
 )
 
 # Sovereign V15: Phase 3 - Activate Atomic Switch [WATCHDOG_SHIELD]
-app.add_middleware(watchdog)
+if watchdog:
+    app.add_middleware(watchdog)
 
 # Sovereign V15: Web UI Deployment Paths [A_124]
 user_ui_path = os.path.join(os.path.dirname(__file__), "..", "user_panel", "build", "web")
@@ -1876,15 +1888,10 @@ class user_manager:
             logger.error(f"AuthVault Save Error: {e}")
 
     def send_reset_email(self, target_email: str, code: str, name: str):
-        import smtplib
-        from email.mime.text import MIMEText
-        from email.mime.multipart import MIMEMultipart
-
         try:
-            msg = MIMEMultipart()
-            msg['From'] = f"Sovereign V15 Guard <{self.SENDER_EMAIL}>"
-            msg['To'] = target_email
-            msg['Subject'] = f"RESET PULSE REQUIRED: {code}"
+            # Sovereign V15: Dynamic Identity Pulse via Gmail Engine [A_128]
+            target_email = target_email.replace("\n", "").replace("\r", "").strip()
+            subject = f"RESET PULSE REQUIRED: {code}"
 
             html = f"""
             <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0d0d0d; color: #ffffff; padding: 40px; border-radius: 20px; border: 2px solid #00f2fe;">
@@ -1900,17 +1907,9 @@ class user_manager:
                 </div>
             </div>
             """
-            msg.attach(MIMEText(html, 'html'))
-
-            server = smtplib.SMTP(self.SMTP_SERVER, self.SMTP_PORT)
-            server.starttls()
-            server.login(self.SENDER_EMAIL, self.SENDER_PASSWORD)
-            server.send_message(msg)
-            server.quit()
-            logger.info(f"MAILER: Reset Pulse Sent to {target_email}")
-            return True
+            return gmail_engine.send_email(self.SENDER_EMAIL, target_email, subject, html)
         except Exception as e:
-            logger.error(f"MAILER_ERR: Failed to send email to {target_email} - {e}")
+            logger.error(f"MAILER_ERR: Failed to send reset pulse to {target_email} - {e}")
             return False
 
     def hash_password(self, password: str):
@@ -1968,16 +1967,8 @@ class user_manager:
 
     def send_master_alert(self, subject: str, body: str):
         """Sovereign V15: High-Priority Emergency Signal to Admin Node"""
-        import smtplib
-        from email.mime.text import MIMEText
-        from email.mime.multipart import MIMEMultipart
-        
         try:
-            msg = MIMEMultipart()
-            msg['From'] = f"Sovereign Guard <{self.SENDER_EMAIL}>"
-            msg['To'] = self.SENDER_EMAIL # Send to yourself or admin email
-            msg['Subject'] = f"CRITICAL: {subject}"
-            
+            subject_pulse = f"CRITICAL: {subject}"
             html_content = f"""
             <div style="background: #0d0d0d; color: #ff0055; padding: 30px; border: 3px solid #ff0055; border-radius: 10px; font-family: monospace;">
                 <h1 style="border-bottom: 2px solid #ff0055; padding-bottom: 10px;">EMERGENCY PULSE DETECTED</h1>
@@ -1987,14 +1978,11 @@ class user_manager:
                 </div>
             </div>
             """
-            msg.attach(MIMEText(html_content, 'html'))
-            
-            server = smtplib.SMTP(self.SMTP_SERVER, self.SMTP_PORT)
-            server.starttls()
-            server.login(self.SENDER_EMAIL, self.SENDER_PASSWORD)
-            server.send_message(msg)
-            server.quit()
-            logger.info("MASTER_ALERT: Emergency Signal Broadcasted Successfully.")
+            success = gmail_engine.send_email(self.SENDER_EMAIL, self.SENDER_EMAIL, subject_pulse, html_content)
+            if success:
+                logger.info("MASTER_ALERT: Emergency Signal Broadcasted Successfully via Gmail API.")
+            else:
+                logger.error("MASTER_ALERT: Failed to broadcast via Gmail API.")
         except Exception as e:
             logger.error(f"MASTER_ALERT_FAIL: {e}")
 
@@ -2006,17 +1994,10 @@ class user_manager:
         return clean.strip()[:200] # Limit length for profile fields
 
     def send_auth_otp(self, email: str, code: str, name: str):
-        import smtplib
-        from email.mime.text import MIMEText
-        from email.mime.multipart import MIMEMultipart
-
         try:
-            msg = MIMEMultipart()
-            msg['From'] = f"Sovereign V15 Network <{self.SENDER_EMAIL}>"
             # Sovereign V15: Email Header Injection Shield
             email = email.replace("\n", "").replace("\r", "").strip()
-            msg['To'] = email
-            msg['Subject'] = f"Identity Verification Pulse: {code}"
+            subject_pulse = f"Identity Verification Pulse: {code}"
 
             html = f"""
             <div style="font-family: sans-serif; background: #050505; color: #fff; padding: 40px; border-radius: 15px; border: 1px solid #7000ff;">
@@ -2026,26 +2007,14 @@ class user_manager:
                 <p style="font-size: 10px; color: #444;">This pulse is valid for 10 minutes.</p>
             </div>
             """
-            msg.attach(MIMEText(html, 'html'))
-            server = smtplib.SMTP(self.SMTP_SERVER, self.SMTP_PORT)
-            server.starttls()
-            server.login(self.SENDER_EMAIL, self.SENDER_PASSWORD)
-            server.send_message(msg)
-            server.quit()
-            return True
+            return gmail_engine.send_email(self.SENDER_EMAIL, email, subject_pulse, html)
         except Exception as e:
             logger.error(f"OTP_MAIL_ERR: {e}")
             return False
 
     def send_admin_otp(self, email: str, code: str):
-        import smtplib
-        from email.mime.text import MIMEText
-        from email.mime.multipart import MIMEMultipart
         try:
-            msg = MIMEMultipart()
-            msg['From'] = f"Sovereign Master Gate <{self.SENDER_EMAIL}>"
-            msg['To'] = email
-            msg['Subject'] = f"MASTER PULSE AUTHORIZATION: {code}"
+            subject_pulse = f"MASTER PULSE AUTHORIZATION: {code}"
             html = f"""
             <div style="font-family: sans-serif; background: #1a0033; color: #fff; padding: 40px; border-radius: 15px; border: 2px solid #ff00ff;">
                 <h1 style="color: #ff00ff; text-align: center;">MASTER GATE ACCESS</h1>
@@ -2054,13 +2023,7 @@ class user_manager:
                 <p style="font-size: 10px; color: #888; text-align: center;">SOVEREIGN V15 OMEGA PROTOCOL - HIGH COMMAND ONLY</p>
             </div>
             """
-            msg.attach(MIMEText(html, 'html'))
-            server = smtplib.SMTP(self.SMTP_SERVER, self.SMTP_PORT)
-            server.starttls()
-            server.login(self.SENDER_EMAIL, self.SENDER_PASSWORD)
-            server.send_message(msg)
-            server.quit()
-            return True
+            return gmail_engine.send_email(self.SENDER_EMAIL, email, subject_pulse, html)
         except Exception as e:
             logger.error(f"ADMIN_OTP_ERR: {e}")
             return False

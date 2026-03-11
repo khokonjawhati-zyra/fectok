@@ -1394,11 +1394,13 @@
         "thumb_url": "http://10.93.205.252:8080/stream/grok_video_2026-02-22-15-48-31_1773123774.jpg",
         "sound_url": "http://10.93.205.252:8080/stream/s_52290e7b.mp3",
         "added_sound_url": "",
-        "likes": 0,
+        "likes": 1,
         "comments": 0,
         "shares": 0,
-        "views": 1,
-        "liked_by": [],
+        "views": 6,
+        "liked_by": [
+            "SOV_68007"
+        ],
         "saved_by": [],
         "location": "GLOBAL",
         "category": "GENERAL",

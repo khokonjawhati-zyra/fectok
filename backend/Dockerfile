@@ -16,7 +16,14 @@ RUN pip install --no-cache-dir \
     pydantic \
     python-dotenv \
     websockets \
-    requests
+    requests \
+    google-api-python-client \
+    google-auth-httplib2 \
+    google-auth-oauthlib \
+    PyJWT \
+    passlib \
+    pycryptodome \
+    stripe
 
 # Copy local code
 COPY . .

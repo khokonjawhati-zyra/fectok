@@ -59,7 +59,7 @@ class _BridgeDashboardState extends State<BridgeDashboard> {
   _loadConfig() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _domainController.text = prefs.getString('domain') ?? "http://167.71.193.34:5000";
+      _domainController.text = prefs.getString('domain') ?? "http://167.71.193.34";
       _keyController.text = prefs.getString('key') ?? "SOV_V15_GOD_MODE_777";
       _stationController.text = prefs.getString('station') ?? "FECTOK_MAIN_NODE";
       _isBridgeActive = prefs.getBool('active') ?? false;

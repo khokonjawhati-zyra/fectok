@@ -62,8 +62,9 @@ class _AdminAuthPageState extends State<AdminAuthPage> with TickerProviderStateM
 
     try {
       final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       final response = await http.post(
-        Uri.parse('http://$host:5000/admin_auth_init'),
+        Uri.parse('$protocol://$host/admin_auth_init'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'master_key': _masterPassController.text,
@@ -100,8 +101,9 @@ class _AdminAuthPageState extends State<AdminAuthPage> with TickerProviderStateM
 
     try {
       final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       final response = await http.post(
-        Uri.parse('http://$host:5000/admin_auth_verify'),
+        Uri.parse('$protocol://$host/admin_auth_verify'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'otp': _otpController.text,
@@ -227,9 +229,10 @@ class _AdminAuthPageState extends State<AdminAuthPage> with TickerProviderStateM
         const Icon(Icons.security, color: Color(0xFFFF00FF), size: 50),
         const SizedBox(height: 10),
         const Text(
-          "CORE GOVERNANCE",
+          "CORE GOVERNANCE v1.5.3",
           style: TextStyle(color: Color(0xFFFF00FF), fontSize: 24, fontWeight: FontWeight.bold, letterSpacing: 4),
         ),
+        const Text("V15-GATEWAY-SYNC [MIRROR]", style: TextStyle(color: Colors.greenAccent, fontSize: 8, fontWeight: FontWeight.bold)),
         Text(
           "SOVEREIGN V15 MASTER ACCESS",
           style: TextStyle(color: Colors.blueAccent.withValues(alpha: 0.7), fontSize: 10, letterSpacing: 2),

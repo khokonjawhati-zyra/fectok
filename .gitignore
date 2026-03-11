@@ -1,54 +1,68 @@
-# Sovereign V15: Ultra-Lightweight Ignore Protocol [A_124]
+# Sovereign V15 GitIgnore Protocol
 
-# Flutter / Dart
-build/
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
+# Build Artifacts
+**/build/
+**/.dart_tool/
+**/.pub-cache/
+**/.idea/
+**/.vscode/
+**/*.iml
+**/*.apk
+**/*.aab
 
-# Android
-.gradle/
-captures/
-assets/debug/
-android/app/build/
 
-# iOS
-Pods/
-DerivedData/
-
-# IDE
-.idea/
-.vscode/
-*.iml
-*.ipr
-*.iws
-
-# Python
+# Python Environment
+.venv/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
 
-# Heavy Binaries & Artifacts
-*.zip
-*.rar
-*.7z
-*.tar.gz
-*.exe
-*.apk
-*.ipa
-*.app-release.apk
+# Local Data (The Godown takes care of this)
+**/vault/data/
+**/sound_vault/
+**/registry/data/
+*.db
+*.log
+*.err.txt
+*_log.txt
+*_err.txt
 
-# Large Object History
-.git/
-sovereign.zip
-sovereign_root.zip
-sovereign_core_only.zip
+# Sovereign V15: Secure Data Isolation
+**/*.json
+!package.json
+!composer.json
+!deno.json
+!tsconfig.json
+!pubspec.yaml
+!pubspec_overrides.yaml
+!pubspec.lock
+!env_template.json
+!docker-compose.yml
+!manifest.json
+!AssetManifest.json
+!FontManifest.json
+!NOTICES.json
+!canvaskit.js
+!skwasm.js
+
+# Environment Secrets & Large Files
+**/.env
+**/*.env.*
+**/*.zip
+**/*.tar.gz
+**/*.key
+**/*.pem
+**/token.json
+**/client_secret.json
+deploy_*.py
+master_deploy.py
+server_deploy.py
+backend/deploy_remote.py
+ignite_*.py
+sovereign_master_sync.py
+nuclear_sync.py
+
+# OS Files
+.DS_Store
+Thumbs.db

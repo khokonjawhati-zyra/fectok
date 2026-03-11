@@ -518,7 +518,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
   void _connect() {
     try {
       final String host = globalSovereignHost;
-      final String wsUrl = "ws://$host:5000/ws/user";
+      final String wsUrl = "ws://$host/ws/user";
       channel = WebSocketChannel.connect(Uri.parse(wsUrl));
       broadcastStream = channel.stream.asBroadcastStream();
       setState(() => isConnected = true);
@@ -10447,7 +10447,7 @@ class QuantumWalletView extends StatelessWidget {
     Future<void> prefillBank() async {
       try {
         final String currentHost = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
-        final resp = await http.get(Uri.parse('http://$currentHost:5000/api/v15/finance/bank/get?user_id=$meshID'));
+        final resp = await http.get(Uri.parse('http://$currentHost/api/v15/finance/bank/get?user_id=$meshID'));
         if (resp.statusCode == 200) {
            final data = json.decode(resp.body);
            if (data['status'] == 'SUCCESS' && data['profile'] != null) {
@@ -10829,7 +10829,7 @@ class QuantumWalletView extends StatelessWidget {
                     setDialogState(() => loadingBridge = true);
                     try {
                       final String currentHost = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
-                      final resp = await http.get(Uri.parse('http://$currentHost:5000/api/v15/finance/bridge/config'));
+                      final resp = await http.get(Uri.parse('http://$currentHost/api/v15/finance/bridge/config'));
                       if (resp.statusCode == 200) {
                         bridgeConfigsListenable.value = json.decode(resp.body);
                       }
@@ -10860,7 +10860,7 @@ class QuantumWalletView extends StatelessWidget {
                     // V15 GAP FIX 4: Use dynamic globalSovereignHost instead of hardcoded IP
                     final String currentHost = globalSovereignHost;
                     final response = await http.post(
-                      Uri.parse('http://$currentHost:5000/api/v15/finance/deposit/verify_tx'),
+                      Uri.parse('http://$currentHost/api/v15/finance/deposit/verify_tx'),
                       headers: {'Content-Type': 'application/json'},
                       body: json.encode({
                         "user_id": meshID,
@@ -11073,7 +11073,7 @@ class QuantumWalletView extends StatelessWidget {
     Future<void> loadProfile() async {
       try {
         final String currentHost = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
-        final resp = await http.get(Uri.parse('http://$currentHost:5000/api/v15/finance/bank/get?user_id=$meshID'));
+        final resp = await http.get(Uri.parse('http://$currentHost/api/v15/finance/bank/get?user_id=$meshID'));
         if (resp.statusCode == 200) {
            final data = json.decode(resp.body);
            if (data['status'] == 'SUCCESS' && data['profile'] != null) {
@@ -11133,7 +11133,7 @@ class QuantumWalletView extends StatelessWidget {
               
               final String currentHost = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
               final resp = await http.post(
-                Uri.parse('http://$currentHost:5000/api/v15/finance/bank/update'),
+                Uri.parse('http://$currentHost/api/v15/finance/bank/update'),
                 headers: {'Content-Type': 'application/json'},
                 body: json.encode({
                   "user_id": meshID,
@@ -11422,7 +11422,7 @@ class _SovereignDMViewState extends State<SovereignDMView> {
       });
       // Sync to Sovereign Mesh Interaction Engine
       final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
-      WebSocketChannel.connect(Uri.parse('ws://$host:5000/ws/interaction')).sink.add(json.encode({
+      WebSocketChannel.connect(Uri.parse('ws://$host/ws/interaction')).sink.add(json.encode({
         "action": "DM_MESSAGE_SENT",
         "recipient": widget.user,
         "message": text,
@@ -12394,7 +12394,7 @@ class _AdTargetTemplatesViewState extends State<AdTargetTemplatesView> {
                       final m = userMedia[index];
                       final String? thumbName = m['thumbnail'];
                       final String thumbUrl = thumbName != null && thumbName.isNotEmpty
-                          ? 'http://${kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost}:5000/vault/$thumbName' 
+                          ? 'http://${kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost}/vault/$thumbName' 
                           : "";
 
                       return GestureDetector(
@@ -12513,7 +12513,7 @@ class _AdTargetTemplatesViewState extends State<AdTargetTemplatesView> {
                         border: Border.all(color: Colors.white10),
                         image: _selectedVideo != null && _selectedVideo!['thumbnail'] != null
                           ? DecorationImage(
-                              image: NetworkImage('http://${kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : "localhost") : globalSovereignHost}:5000/vault/${_selectedVideo!['thumbnail']}'),
+                              image: NetworkImage('http://${kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : "localhost") : globalSovereignHost}/vault/${_selectedVideo!['thumbnail']}'),
                               fit: BoxFit.cover
                             )
                           : null

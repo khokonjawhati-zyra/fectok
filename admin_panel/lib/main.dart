@@ -35,9 +35,10 @@ class _SovereignAdminAppState extends State<SovereignAdminApp> {
     if (token != null) {
       // Verify token against backend before trusting it
       try {
-        final host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+        final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+        final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
         final response = await http.post(
-          Uri.parse('http://$host:5000/verify_token'),
+          Uri.parse('$protocol://$host/verify_token'),
           headers: {'Content-Type': 'application/json'},
           body: json.encode({'token': token}),
         ).timeout(const Duration(seconds: 5));
@@ -120,8 +121,9 @@ class _AdminScaffoldState extends State<AdminScaffold> {
   Future<void> _updateBridgeNumbers() async {
     try {
       final String host = Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost';
+      final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       await http.post(
-        Uri.parse('http://$host:5000/api/v15/finance/bridge/update_numbers'),
+        Uri.parse('$protocol://$host/api/v15/finance/bridge/update_numbers'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           "master_key": "SOV_V15_GOD_MODE_777",
@@ -138,7 +140,8 @@ class _AdminScaffoldState extends State<AdminScaffold> {
   Future<void> _fetchBridgeConfig() async {
     try {
       final String host = Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost';
-      final resp = await http.get(Uri.parse('http://$host:5000/api/v15/finance/bridge/config'));
+      final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
+      final resp = await http.get(Uri.parse('$protocol://$host/api/v15/finance/bridge/config'));
       if (resp.statusCode == 200) {
         final data = json.decode(resp.body);
         setState(() {
@@ -223,11 +226,11 @@ class _AdminScaffoldState extends State<AdminScaffold> {
   @override
   void initState() {
     super.initState();
-    _fetchSponsorStats(); // A_111: Pulse Check
     _fetchBridgeConfig(); // V15: High-Fidelity Bridge State Sync
     final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+    final String wsProtocol = Uri.base.scheme == 'https' ? 'wss' : 'ws';
     channel = WebSocketChannel.connect(
-      Uri.parse('ws://$host:5000/ws/admin?token=${widget.token}'),
+      Uri.parse('$wsProtocol://$host/ws/admin?token=${widget.token}'),
     );
     channel.stream.listen((message) {
       setState(() {
@@ -618,8 +621,9 @@ class _AdminScaffoldState extends State<AdminScaffold> {
     });
     try {
       final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       await http.post(
-        Uri.parse('http://$host:6000/update_weights?l=${l.toInt()}&c=${c.toInt()}&s=${s.toInt()}'),
+        Uri.parse('$protocol://$host/api/v15/finance/impression/update_weights?l=${l.toInt()}&c=${c.toInt()}&s=${s.toInt()}'),
       );
     } catch (e) {
       debugPrint('A_120 Sync Error: $e');
@@ -707,13 +711,11 @@ class _AdminScaffoldState extends State<AdminScaffold> {
     }));
     try {
       final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
-      // Logic: A_111 Distributed Config Sync (Port 9000)
+      final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
+      
+      // Combined API endpoint for Sponsor Config
       await http.post(
-        Uri.parse('http://$host:9000/update_config?rate=$rate&bdt=$bdt&sponsor_freq=$sFreq'),
-      );
-      // Legacy HTTP fallback for older mesh nodes
-      await http.post(
-        Uri.parse('http://$host:5000/admin_config?rate=${rate.toInt()}&bdt=${bdt.toInt()}&sponsor_freq=${sFreq.toInt()}'),
+        Uri.parse('$protocol://$host/api/v15/sponsor/update_config?rate=$rate&bdt=$bdt&sponsor_freq=$sFreq'),
       );
     } catch (e) {
       debugPrint('Sponsor Sync Error: $e');
@@ -721,18 +723,7 @@ class _AdminScaffoldState extends State<AdminScaffold> {
   }
 
   void _fetchSponsorStats() async {
-    try {
-       final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
-       final res = await http.get(Uri.parse('http://$host:9000/stats'));
-       if (res.statusCode == 200) {
-         final data = json.decode(res.body);
-         setState(() {
-           _adminCoins = (data['admin_coins'] ?? 12450).toInt();
-         });
-       }
-    } catch (e) {
-       debugPrint("A_111 Fetch Error: $e");
-    }
+    // Stat retrieval via established WebSocket or Unified API
   }
 
   void _updateSoundConfig(double boost, double limit) async {
@@ -742,8 +733,9 @@ class _AdminScaffoldState extends State<AdminScaffold> {
     });
     try {
       final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       await http.post(
-        Uri.parse('http://$host:9900/admin_logic?viral_boost=${boost.toInt()}&rec_limit=${limit.toInt()}'),
+        Uri.parse('$protocol://$host/api/v15/sound/admin_logic?viral_boost=${boost.toInt()}&rec_limit=${limit.toInt()}'),
       );
     } catch (e) {
       debugPrint('Sound Sync Error: $e');
@@ -1539,7 +1531,7 @@ class _AdminScaffoldState extends State<AdminScaffold> {
                        ElevatedButton.icon(
                         onPressed: () {
                            final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
-                           String url = 'http://$host:5000/api/v15/finance/admin/bank/export';
+                           String url = 'http://$host/api/v15/finance/admin/bank/export';
                            html.window.open(url, '_blank');
                         },
                         icon: const Icon(Icons.download, size: 14),
@@ -1596,8 +1588,9 @@ class _AdminScaffoldState extends State<AdminScaffold> {
   Future<void> _markBankAsPaid(List<String> txIds) async {
     try {
       final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       final resp = await http.post(
-        Uri.parse('http://$host:5000/api/v15/finance/admin/bank/mark_paid'),
+        Uri.parse('$protocol://$host/api/v15/finance/admin/bank/mark_paid'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({"tx_ids": txIds})
       );
