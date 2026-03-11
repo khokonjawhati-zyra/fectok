@@ -33,77 +33,73 @@ String get globalSovereignHost {
 }
 
 // Sovereign Connector for Flutter Injection [A_124]
-String getSovereignUrl(int index, List<Map<String, dynamic>> mediaLedger) {
-  // Sovereign V15 Mesh Priority Logic [A_118]
-  if (mediaLedger.isNotEmpty && index < mediaLedger.length) {
-    final media = mediaLedger[index];
-    String url = media['url'] ?? "";
-    
-    // Phase 2: HLS Sharding Activation [V15 Reality Patch]
-    // If HLS is ready and it's not a photo, prioritize the .m3u8 Master Playlist
-    final bool isHlsReady = media['hls_ready'] == true || media['hls_ready'] == "true" || media['hls_ready'] == 1;
-    final bool isPhoto = url.toLowerCase().contains('.jpg') || url.toLowerCase().contains('.jpeg') || 
-                        url.toLowerCase().contains('.png') || url.toLowerCase().contains('.webp');
-    
-    if (isHlsReady && !isPhoto) {
-      final String? file = media['file'];
-      if (file != null && file.isNotEmpty) {
-        final String fileBase = file.split('.').first;
-        url = "/stream/$fileBase/index.m3u8";
-        debugPrint("[Phase 2] HLS Master Pulse Active for $fileBase");
-      }
-    }
-    
-    // A_124: Sovereign V15 Universal Dynamic Host Detection
-    final String currentHost = globalSovereignHost;
-    
-    if (url.startsWith('/stream') && !url.startsWith('http')) {
-        url = '/video_stream$url';
-    } else {
-        // V15 DNA Healing: Scan and replace ANY legacy IP with the current host
-        // Matches any IPv4 pattern (e.g., 10.x.x.x, 192.x.x.x, etc.)
-        final RegExp ipRegex = RegExp(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}');
-        url = url.replaceAll(ipRegex, currentHost).replaceAll('localhost', currentHost);
-    }
-    return url;
+// 1. Core Security Shield [SSL-READY]
+String _resolveSecureUrl(String? url) {
+  if (url == null || url.isEmpty) return "";
+  String resolved = url;
+  
+  // Legacy Port Hardening
+  resolved = resolved.replaceAll(':8080', '/video_stream');
+  resolved = resolved.replaceAll(':9900', '/sound_engine');
+  
+  // IP Neutralization
+  final RegExp ipRegex = RegExp(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}');
+  resolved = resolved.replaceAll(ipRegex, globalSovereignHost);
+  resolved = resolved.replaceAll('localhost', globalSovereignHost);
+  
+  // Protocol Flattening (Relative is best for Web)
+  if (resolved.startsWith('http://') || resolved.startsWith('https://')) {
+     final uri = Uri.parse(resolved);
+     if (uri.host == globalSovereignHost || uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host == 'fectok.com') {
+       resolved = uri.path;
+       if (uri.query.isNotEmpty) resolved += '?${uri.query}';
+     }
   }
   
-  // Priority 2: Legacy Test Pool (If Mesh is empty or out of bounds)
-  if (testVideos.isNotEmpty) {
-    return testVideos[index % testVideos.length];
+  // Ensure it starts with / for proxy matching if not external
+  if (!resolved.startsWith('http') && !resolved.startsWith('/')) {
+     resolved = '/$resolved';
   }
-  return "";
+  
+  return resolved;
 }
 
-String getSovereignThumb(int index, List<Map<String, dynamic>> mediaLedger) {
-  if (mediaLedger.isEmpty || index >= mediaLedger.length) return "";
+// 2. Mesh Connector [A_124]
+String getSovereignUrl(int index, List mediaLedger) {
+  if (mediaLedger.isEmpty || index >= mediaLedger.length) {
+    if (testVideos.isNotEmpty) return testVideos[index % testVideos.length];
+    return "";
+  }
   
-  final item = mediaLedger[index];
-  String url = item['thumb_url'] ?? item['thumbnail'] ?? "";
+  final media = mediaLedger[index];
+  String url = media['url'] ?? "";
   
-  // A_118: Photo Post Fallback - If thumb is missing but main URL is an image, use it!
-  if (url.isEmpty) {
-    String mainUrl = item['url'] ?? "";
-    if (mainUrl.toLowerCase().contains('.jpg') || 
-        mainUrl.toLowerCase().contains('.png') || 
-        mainUrl.toLowerCase().contains('.jpeg') || 
-        mainUrl.toLowerCase().contains('.webp')) {
-      url = mainUrl;
+  // Phase 2: HLS Sharding Activation
+  final bool isHlsReady = media['hls_ready'] == true || media['hls_ready'] == "true" || media['hls_ready'] == 1;
+  final bool isPhoto = url.toLowerCase().contains('.jpg') || url.toLowerCase().contains('.jpeg') || 
+                      url.toLowerCase().contains('.png') || url.toLowerCase().contains('.webp');
+  
+  if (isHlsReady && !isPhoto) {
+    final String? file = media['file'];
+    if (file != null && file.isNotEmpty) {
+      final String fileBase = file.split('.').first;
+      url = "/stream/$fileBase/index.m3u8";
     }
   }
   
-  if (url.isEmpty) return "";
- 
-  final String currentHost = globalSovereignHost;
-  
-  if (url.startsWith('/stream') && !url.startsWith('http')) {
-     url = '/video_stream$url';
-  } else {
-     final RegExp ipRegex = RegExp(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}');
-     url = url.replaceAll(ipRegex, currentHost).replaceAll('localhost', currentHost);
-  }
-  
-  return url;
+  return _resolveSecureUrl(url);
+}
+
+// 3. Thumbnail Resolver
+String getSovereignThumb(int index, List ledger) {
+  if (index < 0 || index >= ledger.length) return "";
+  // In Sovereign V15, most videos serve as their own thumbs or use /thumb path
+  String url = ledger[index]['thumb_url'] ?? ledger[index]['thumbnail'] ?? ledger[index]['url'] ?? "";
+  return _resolveSecureUrl(url);
+}
+
+String getSovereignThumbGlobal(String url) {
+  return _resolveSecureUrl(url);
 }
 
 // Sovereign V15: Global Route Intelligence [A_117 Sync]
@@ -2380,7 +2376,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                 builder: (context, sFreq, _) {
                   return VideoFeedItem(
                     index: index,
-                    videoUrl: customUrl,
+                    videoUrl: _resolveSecureUrl(customUrl),
                     uploaderName: uploader,
                     uploaderHandle: (index < sovereignMedia.length) ? sovereignMedia[index]['uploader'] : uploader,
                     description: description, // A_118: Pass real desc
@@ -4867,7 +4863,6 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
     
     // A_118: Sovereign Real-Time Upload [Multi-Media Orchestration]
     try {
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
       final uri = Uri.parse("/video_stream/upload");
       final request = http.MultipartRequest("POST", uri);
       
@@ -5425,7 +5420,6 @@ class _EditProfileViewState extends State<EditProfileView> {
       if (video == null) return;
 
       final bytes = await video.readAsBytes();
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
       final uri = Uri.parse("/video_stream/upload");
       final request = http.MultipartRequest("POST", uri);
       
@@ -5553,7 +5547,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                   if (_imageFile != null) {
                     try {
                       final bytes = await _imageFile!.readAsBytes();
-                      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
                       final uri = Uri.parse("/video_stream/upload");
                       final request = http.MultipartRequest("POST", uri);
                       request.fields['uploader'] = widget.userMeshID;
@@ -5568,7 +5561,6 @@ class _EditProfileViewState extends State<EditProfileView> {
                         final respStr = await response.stream.bytesToString();
                         final respJson = json.decode(respStr);
                         final filename = respJson['file'];
-                        final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
                         uploadedPicPath = "/video_stream/stream/$filename";
                       }
                     } catch (e) {
