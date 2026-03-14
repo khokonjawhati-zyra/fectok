@@ -11,6 +11,11 @@ logger = logging.getLogger("SovereignAI")
 IS_DOCKER = os.path.exists('/.dockerenv')
 AUTH_DATA_DIR = "/app/auth_data" if IS_DOCKER else "."
 
+class NoLock:
+    """Sovereign V15: Emergency Transparent Lock Fallback"""
+    async def __aenter__(self): return self
+    async def __aexit__(self, *args): pass
+
 class AIEngine:
     def __init__(self):
         # Phase 6: Auth Path Normalization [AI Intelligence Protection]
@@ -43,7 +48,16 @@ class AIEngine:
             # Bengali Context Slurs (Simulated for Shield)
             "gali", "khanki", "magi", "sala", "shala", "haramjada"
         ]
-        self.lock = asyncio.Lock()
+        self._lock = None
+
+    @property
+    def lock(self):
+        if self._lock is None:
+            try:
+                self._lock = asyncio.Lock()
+            except:
+                return NoLock()
+        return self._lock
 
     def _load_json(self, file_path):
         if os.path.exists(file_path):

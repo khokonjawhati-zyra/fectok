@@ -170,7 +170,6 @@ class _AdminScaffoldState extends State<AdminScaffold> {
   double _viralSoundBoost = 100.0;
   double _soundRecLimit = 10.0;
 
-  String _mlmActivationFee = "10.00";
   double _mlmRecurringYield = 5.0;
   double _mlmNetworkDepth = 15.0;
 
@@ -216,6 +215,7 @@ class _AdminScaffoldState extends State<AdminScaffold> {
   // A_107 Verification States
   final List<Map<String, dynamic>> _verificationRequests = [];
   bool _autoApproveVerification = false;
+  bool _requireWithdrawVerification = true; // Sovereign V15: Identity Gate
   double _verificationRiskThreshold = 15.0; // Max risk allowed for auto-approve (15% = 85% confidence)
 
   // A_111: Live Revenue Charting States
@@ -468,6 +468,11 @@ class _AdminScaffoldState extends State<AdminScaffold> {
                 backgroundColor: const Color(0xFFFF00FF),
               ));
               _fetchUsers(); // Refresh the list
+            } else if (action == 'A_107_CONFIG_SYNC') {
+              setState(() {
+                _autoApproveVerification = data['auto_approve'] ?? _autoApproveVerification;
+                _requireWithdrawVerification = data['require_withdrawal_verification'] ?? _requireWithdrawVerification;
+              });
             } else if (action == 'AD_SYNC_HYPER_LOGIC') {
                // A_111 Master Sync Pulse
                setState(() {
@@ -646,7 +651,6 @@ class _AdminScaffoldState extends State<AdminScaffold> {
 
   void _saveMLMSetting(String action, dynamic value) {
     setState(() {
-      if (action == 'MLM_FEE_UPDATE') _mlmActivationFee = value.toString();
       if (action == 'MLM_YIELD_UPDATE') {
         _mlmRecurringYield = double.parse((value is double ? value : double.parse(value.toString())).toStringAsFixed(2));
       }
@@ -671,15 +675,17 @@ class _AdminScaffoldState extends State<AdminScaffold> {
     }));
   }
 
-  void _updateVerificationConfig(bool auto, double threshold) {
+  void _updateVerificationConfig(bool auto, double threshold, {bool? requireWithdrawal}) {
     setState(() {
       _autoApproveVerification = auto;
       _verificationRiskThreshold = threshold;
+      if (requireWithdrawal != null) _requireWithdrawVerification = requireWithdrawal;
     });
     channel.sink.add(json.encode({
       "action": "A_107_AUTO_CONFIG",
       "auto_approve": auto,
-      "risk_threshold": 100.0 - threshold
+      "risk_threshold": 100.0 - threshold,
+      "require_withdrawal_verification": _requireWithdrawVerification
     }));
   }
 
@@ -1179,9 +1185,8 @@ class _AdminScaffoldState extends State<AdminScaffold> {
       padding: const EdgeInsets.all(20),
       children: [
         const Text('SOVEREIGN MLM NETWORK [A_107]', style: TextStyle(color: Color(0xFFFF00FF), fontSize: 10, letterSpacing: 1.5, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 20),
-        _buildEditableTile('Onetime Activation Fee', '\$$_mlmActivationFee USD', (v) => _saveMLMSetting('MLM_FEE_UPDATE', v)),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
+        // Activation Fee Tile Removed (Now FREE by Admin Request)
         _buildWeightSliderFullRange('Lifetime Recurring Yield (%)', _mlmRecurringYield, 0, 100, (v) => _saveMLMSetting('MLM_YIELD_UPDATE', v)),
         const SizedBox(height: 10),
         _buildWeightSliderFullRange('Network Depth (Levels)', _mlmNetworkDepth, 1, 50, (v) => _saveMLMSetting('MLM_DEPTH_UPDATE', v)),
@@ -1200,6 +1205,15 @@ class _AdminScaffoldState extends State<AdminScaffold> {
             value: _autoApproveVerification,
             onChanged: (v) => _updateVerificationConfig(v, _verificationRiskThreshold),
             activeThumbColor: const Color(0xFF00FFFF),
+          ),
+        ),
+        ListTile(
+          title: const Text('WITHDRAWAL VERIFICATION GATE', style: TextStyle(color: Colors.white70, fontSize: 12)),
+          subtitle: const Text('Block withdrawals for unverified users', style: TextStyle(color: Colors.white24, fontSize: 10)),
+          trailing: Switch(
+            value: _requireWithdrawVerification,
+            onChanged: (v) => _updateVerificationConfig(_autoApproveVerification, _verificationRiskThreshold, requireWithdrawal: v),
+            activeThumbColor: const Color(0xFFFF00FF),
           ),
         ),
         _buildWeightSliderFullRange('RISK TOLERANCE (%)', _verificationRiskThreshold, 0, 100, (v) => _updateVerificationConfig(_autoApproveVerification, v)),

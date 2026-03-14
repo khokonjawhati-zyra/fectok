@@ -231,31 +231,87 @@ def process_video(file_path, vault_path):
     # Step 2: HLS Sharding & Sovereign Transformation (3:4 Map)
     file_name = os.path.basename(file_path).replace('.mp4', '')
     log_event(f"[A_125] Starting Universal Map Transformation (3:4) for {file_name}...")
-    output_template = os.path.join(vault_path, f"{file_name}_%03d.ts")
-    playlist_path = os.path.join(vault_path, f"{file_name}_master.m3u8")
+    # Sovereign V15: High-Speed Zero-Latency Pulse (2s Chunks)
+    v_dir = os.path.join(vault_path, file_name)
+    if not os.path.exists(v_dir): os.makedirs(v_dir, exist_ok=True)
     
-    # Sovereign V15: The Universal Map Logic
-    # 1. Scale to 1440 height (keeping aspect)
-    # 2. Crop from center to 1080 width
-    # 3. Final Output: 1080x1440 (3:4 Ratio)
-    video_filter = (
-        "scale='if(gt(a,3/4),-1,1080)':'if(gt(a,3/4),1440,-1)'," # Scale to fit 3:4 container
-        "crop=1080:1440" # Force crop to 1080x1440 from center
-    )
-
-    cmd = [
-        ffmpeg_path, '-y', '-i', input_file,
-        '-vf', video_filter,
-        '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '23',
-        '-c:a', 'aac', '-b:a', '128k', 
-        '-f', 'hls', '-hls_time', '5', '-hls_list_size', '0',
-        '-hls_segment_filename', output_template,
-        playlist_path
+    # A_121: ABR Multi-Quality Map (Adaptive Bitrate)
+    # 1. 360p (Low - 480x640)
+    # 2. 720p (Medium - 720x960)
+    # 3. 1080p (High - 1080x1440)
+    
+    qualities = [
+        {"name": "360p", "width": 480, "height": 640, "bitrate": "400k", "audio": "48k"},
+        {"name": "720p", "width": 720, "height": 960, "bitrate": "1200k", "audio": "96k"},
+        {"name": "1080p", "width": 1080, "height": 1440, "bitrate": "2500k", "audio": "128k"}
     ]
     
+    variant_playlists = []
+    
+    for q in qualities:
+        q_name = q["name"]
+        q_dir = os.path.join(v_dir, q_name)
+        if not os.path.exists(q_dir): os.makedirs(q_dir, exist_ok=True)
+        
+        playlist_path = os.path.join(q_dir, "playlist.m3u8")
+        segment_template = os.path.join(q_dir, "segment_%03d.ts")
+        
+        video_filter = (
+            f"scale='if(gt(a,3/4),-1,{q['width']})':'if(gt(a,3/4),{q['height']},-1)'," 
+            f"crop={q['width']}:{q['height']}" 
+        )
+
+        cmd = [
+            ffmpeg_path, '-y', '-i', input_file,
+            '-vf', video_filter,
+            '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '25',
+            '-g', '12', '-keyint_min', '12', '-sc_threshold', '0', # Ultra-Fast GOP (0.5s)
+            '-force_key_frames', 'expr:gte(t,n_forced*0.5)',
+            '-maxrate', q['bitrate'], '-bufsize', q['bitrate'],
+            '-c:a', 'aac', '-b:a', q['audio'], 
+            '-f', 'hls', '-hls_time', '1', '-hls_list_size', '0', # 1.0s Segments for instant start
+            '-hls_segment_filename', segment_template,
+            '-hls_flags', 'independent_segments',
+            '-movflags', '+faststart', # TikTok Strategy: Metadata at start
+            playlist_path
+        ]
+        
+        try:
+            subprocess.run(cmd, check=True, capture_output=True)
+            variant_playlists.append({
+                "name": q_name,
+                "resolution": f"{q['width']}x{q['height']}",
+                "bandwidth": int(q['bitrate'].replace('k', '000')) + int(q['audio'].replace('k', '000')),
+                "path": f"{q_name}/playlist.m3u8"
+            })
+            log_event(f"[ABR] Sharded {q_name} for {file_name}")
+        except Exception as e:
+            log_event(f"[ABR Error] Failed {q_name}: {e}")
+
+    # Generate HLS Master Playlist (index.m3u8)
+    master_playlist_path = os.path.join(v_dir, "index.m3u8")
+    with open(master_playlist_path, "w") as f:
+        f.write("#EXTM3U\n")
+        f.write("#EXT-X-VERSION:3\n")
+        for v in variant_playlists:
+            f.write(f'#EXT-X-STREAM-INF:BANDWIDTH={v["bandwidth"]},RESOLUTION={v["resolution"]},NAME="{v["name"]}"\n')
+            f.write(f'{v["path"]}\n')
+    
     try:
-        subprocess.run(cmd, check=True, capture_output=True)
-        log_event(f"DONE: Video sharded at {playlist_path}")
+        log_event(f"DONE: Multi-Quality ABR Master Playlist generated at {master_playlist_path}")
+        
+        # Phase 2: Notify Backend (Atomic Pulse)
+        try:
+            # We assume backend is reachable via sovereign_v15_backend:5000 in Docker
+            # or localhost:5000 in local dev
+            backend_target = "http://sovereign_v15_backend:5000" if IS_DOCKER else "http://localhost:5000"
+            notify_url = f"{backend_target}/api/v15/media/hls_ready"
+            payload = json.dumps({"file": os.path.basename(file_path)}).encode('utf-8')
+            req = urllib.request.Request(notify_url, data=payload, headers={'Content-Type': 'application/json'})
+            with urllib.request.urlopen(req, timeout=5) as response:
+                log_event(f"[A_125] Backend Notified: HLS Ready for {file_name}")
+        except Exception as notify_err:
+            log_event(f"[A_125 Warning] Backend Notification Failed: {notify_err}")
         
         # Sovereign V15: Atomic Overwrite
         # Replace the original .mp4 with the audio-mixed version so raw playback works
@@ -298,6 +354,19 @@ if __name__ == "__main__":
                     except:
                         continue
                         
+                    # Sovereign V15: ABR Redundancy Guard
+                    file_base = f.rsplit('.', 1)[0]
+                    hls_dir = os.path.join(vault, file_base)
+                    if os.path.exists(os.path.join(hls_dir, "index.m3u8")):
+                         # If already sharded, just register to processed and notify backend (for healing)
+                         processed_files.add(f_path)
+                         # Trigger backend pulse just in case it missed it before restart
+                         try:
+                             backend_ip = "backend_node" if IS_DOCKER else "127.0.0.1"
+                             requests.post(f"http://{backend_ip}:5000/api/v15/media/hls_ready", json={"file": f}, timeout=5)
+                         except: pass
+                         continue
+
                     process_video(f_path, vault)
                     processed_files.add(f_path)
         except Exception as scan_err:

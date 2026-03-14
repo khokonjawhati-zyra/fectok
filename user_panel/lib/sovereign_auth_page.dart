@@ -101,7 +101,7 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
 
   Future<void> _checkReferrerPulse() async {
     try {
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : '10.93.205.252';
+      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : 'fectok.com';
       final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.')) ? 'http' : 'https';
       final response = await http.post(Uri.parse("$protocol://$host/check_referral"), headers: {"Content-Type": "application/json"}, body: jsonEncode({"referral_id": _referralController.text}));
       final result = jsonDecode(response.body);
@@ -129,7 +129,7 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
     final token = prefs.getString('auth_token');
     if (token != null) {
       try {
-        final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : '10.93.205.252';
+        final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : 'fectok.com';
         final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.')) ? 'http' : 'https';
         final response = await http.post(Uri.parse("$protocol://$host/verify_token"), headers: {"Content-Type": "application/json"}, body: jsonEncode({"token": token}));
         final result = jsonDecode(response.body);
@@ -234,7 +234,7 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
     setState(() => _isLoading = true);
 
     try {
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : '10.93.205.252';
+      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : 'fectok.com';
       String endpoint = isLogin ? '/login' : '/register';
       Map<String, dynamic> body = {};
 

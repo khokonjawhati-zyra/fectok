@@ -217,35 +217,9 @@ def upload_video():
         sound_status = "NO_AUDIO"
 
     # ═══════════════════════════════════════════════════════════════
-    # SOVEREIGN V15: HLS SHARDING ENGINE [PHASE 2]
+    # SOVEREIGN V15: HLS SHARDING TRIGGER [DELEGATED TO AI_PROCESSOR]
     # ═══════════════════════════════════════════════════════════════
-    hls_base = filename.rsplit('.', 1)[0]
-    hls_dir = os.path.join(vault_path, hls_base)
-    os.makedirs(hls_dir, exist_ok=True)
-    m3u8_path = os.path.join(hls_dir, "index.m3u8")
-    
-    hls_ready = False
-    try:
-        print(f"[Phase 2] Launching HLS Sharding for {filename}...")
-        # Sovereign V15: High-Precision 3:4 Map Transformation for HLS
-        video_filter = "scale='if(gt(a,3/4),-1,1080)':'if(gt(a,3/4),1440,-1)',crop=1080:1440"
-        
-        subprocess.run([
-            'ffmpeg', '-y', '-i', save_path,
-            '-vf', video_filter,
-            '-profile:v', 'baseline', '-level', '3.0',
-            '-start_number', '0',
-            '-hls_time', '5', # Roadmap Requirement: 5s Segments
-            '-hls_list_size', '0',
-            '-f', 'hls',
-            m3u8_path
-        ], capture_output=True, check=True, timeout=180)
-        
-        if os.path.exists(m3u8_path):
-            hls_ready = True
-            print(f"[Phase 2] HLS Sharding SUCCESS: {hls_base}/index.m3u8")
-    except Exception as e:
-        print(f"[Phase 2 Error] HLS Sharding FAILED: {e}")
+    hls_ready = False # AI Processor will notify backend when pulsed.
     # ═══════════════════════════════════════════════════════════════
 
     # Notify QuantumSync Backend [A_118 SYNC]

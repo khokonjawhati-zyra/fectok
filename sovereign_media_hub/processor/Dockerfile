@@ -18,5 +18,6 @@ COPY . .
 
 # Environment sensing
 ENV IS_DOCKER=True
+ENV PYTHONUNBUFFERED=1
 
-CMD ["python", "processor_engine.py"]
+CMD ["python", "-u", "processor_engine.py"]
