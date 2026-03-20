@@ -1,7 +1,7 @@
 {
     "activation_fee": 0.0,
-    "yield_percent": 34.6,
-    "min_withdraw_limit": 13.8,
+    "yield_percent": 1.9,
+    "min_withdraw_limit": 1.0999999999999999,
     "commission_rate": 5.45,
     "bdt_rate": 135.51,
     "platform_share": 0.0,

@@ -30,7 +30,7 @@
         "last_active": ""
     },
     "SOV_36044": {
-        "actions": 54,
+        "actions": 83,
         "status": "CITIZEN",
         "streak": 0,
         "last_active": ""
@@ -103,6 +103,18 @@
     },
     "SOV_66152": {
         "actions": 66,
+        "status": "CITIZEN",
+        "streak": 0,
+        "last_active": ""
+    },
+    "SOV_89173": {
+        "actions": 5,
+        "status": "CITIZEN",
+        "streak": 0,
+        "last_active": ""
+    },
+    "SOV_10385": {
+        "actions": 6,
         "status": "CITIZEN",
         "streak": 0,
         "last_active": ""

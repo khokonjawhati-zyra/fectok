@@ -28,11 +28,11 @@
         "score": 0.0
     },
     "SOV_36044": {
-        "likes_given": 3,
-        "comments_given": 0,
+        "likes_given": 6,
+        "comments_given": 1,
         "shares_given": 0,
         "minutes_watched": 0.0,
-        "score": 3.0
+        "score": 8.0
     },
     "SOV_99550": {
         "likes_given": 1,
@@ -117,5 +117,19 @@
         "shares_given": 0,
         "minutes_watched": 0.0,
         "score": 3.0
+    },
+    "SOV_89173": {
+        "likes_given": 0,
+        "comments_given": 0,
+        "shares_given": 0,
+        "minutes_watched": 0.0,
+        "score": 0.0
+    },
+    "SOV_10385": {
+        "likes_given": 1,
+        "comments_given": 0,
+        "shares_given": 0,
+        "minutes_watched": 0.0,
+        "score": 1.0
     }
 }

@@ -1,0 +1,23 @@
+﻿=== STEP 1: Restart backend container ===
+sovereign_v15_backend
+
+
+=== STEP 2: Check uplink container vault path ===
+LAST_UPLOAD.txt
+REC881578334156003920_1773432138
+REC881578334156003920_1773432138.jpg
+REC881578334156003920_1773432138.mp4
+grok_video_2026-02-22-15-06-12_1773314149
+grok_video_2026-02-22-15-06-12_1773314149.jpg
+grok_video_2026-02-22-15-06-12_1773314149.mp4
+grok_video_2026-02-22-15-06-12_1773314149_000.ts
+grok_video_2026-02-22-15-06-12_1773314149_master.m3u8
+grok_video_2026-02-22-15-07-33_1773415811
+
+
+=== STEP 3: Uplink container config ===
+sovereign-uplink_hub | Binds: ["/var/www/html/media/videos:/app/vault/data:rw"]
+
+Uplink Image: sovereign-uplink_hub
+Current Binds: ["/var/www/html/media/videos:/app/vault/data:rw"]
+Env: ["PILLAR=REAL_TIME_UPLINK","SYSTEM_MODE=PRODUCTION","PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin","LANG=C.UTF-8","GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D","PYTHON_VERSION=3.11.15","PYTHON_SHA256=272179ddd9a2e41a0fc8e42e33dfbdca0b3711aa5abf372d3f2d51543d09b625"]

@@ -22,7 +22,7 @@ This workflow performs a surgical cleanup and fresh launch of the entire Soverei
 
 ## 4. UI PANEL IGNITE (Stable HTTP Serving)
 
-`Start-Process python -ArgumentList "-m http.server 9090" -WorkingDirectory "c:/Users/Admin/23226/admin_panel/build/web" -WindowStyle Minimized; Start-Process python -ArgumentList "-m http.server 8181" -WorkingDirectory "c:/Users/Admin/23226/user_panel/build/web" -WindowStyle Minimized;` (Cwd: `c:/Users/Admin/23226`)
+`Start-Process python -ArgumentList "-m http.server 9090" -WorkingDirectory "c:/Users/Admin/23226/webadmin_panel" -WindowStyle Minimized; Start-Process python -ArgumentList "-m http.server 8181" -WorkingDirectory "c:/Users/Admin/23226/webuser_panel" -WindowStyle Minimized;` (Cwd: `c:/Users/Admin/23226`)
 
 ---
 **[Sovereign Ignition: ULTIMATE OMNI-SYNC LIVE | DOCKER + ENGINES + UI]**

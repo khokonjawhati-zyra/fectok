@@ -18,13 +18,9 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter/services.dart';
 import 'sovereign_auth_page.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:path_provider/path_provider.dart';
 
 
 final List<String> testVideos = []; // Sovereign Master Standard: No legacy bloat. Only mesh content.
-
-// A_295 GLOBAL: TikTok Cache Buster Version Anchor
-String _globalProfilePicVersion = DateTime.now().millisecondsSinceEpoch.toString();
 
 // Sovereign V15: Global Dynamic Host Core [A_124 DNA]
 // Automatically detects browsing origin. Fallback to localhost if used as file.
@@ -32,27 +28,8 @@ String get globalSovereignHost {
   if (kIsWeb) {
     return Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost';
   }
-  // Fallback for Mobile/Desktop builds if necessary
-  return '167.71.193.34'; 
-}
-
-// Sovereign V15: Internal Mesh Protocol Resolver [A_124]
-String get _sovereignProtocol {
-  final host = globalSovereignHost;
-  // If it's an IP or localhost, use http. Otherwise, use https for fectok.com/SSL.
-  if (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.') || 
-      RegExp(r'^\d+\.\d+\.\d+\.\d+$').hasMatch(host)) {
-    return 'http';
-  }
-  return 'https';
-}
-
-Uri _getMeshUri(String path) {
-  if (kIsWeb) return Uri.parse(path);
-  final host = globalSovereignHost;
-  final protocol = _sovereignProtocol;
-  final String cleanPath = path.startsWith('/') ? path : '/$path';
-  return Uri.parse('$protocol://$host$cleanPath');
+  // Sovereign V15: Final Production Endpoint
+  return 'fectok.com'; 
 }
 
 // 1. Core Security Shield [SSL-READY]
@@ -60,82 +37,81 @@ String _resolveSecureUrl(String? url) {
   if (url == null || url.isEmpty) return "";
   String resolved = url;
   
-  // Legacy Port Hardening
-  resolved = resolved.replaceAll(':8080', '/stream');
-  resolved = resolved.replaceAll(':9900', '/sound_engine');
-  
-  // IP Neutralization
+  // Handlers for absolute IPs (Legacy)
+  final String currentHost = globalSovereignHost;
   final RegExp ipRegex = RegExp(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}');
-  resolved = resolved.replaceAll(ipRegex, globalSovereignHost);
-  resolved = resolved.replaceAll('localhost', globalSovereignHost);
-  
-  // Protocol Flattening (Relative is best for Web)
-  if (kIsWeb && (resolved.startsWith('http://') || resolved.startsWith('https://'))) {
-     final uri = Uri.parse(resolved);
-     if (uri.host == globalSovereignHost || uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host == 'fectok.com') {
-       resolved = uri.path;
-       if (uri.query.isNotEmpty) resolved += '?${uri.query}';
-     }
+  resolved = resolved.replaceAll(ipRegex, currentHost).replaceAll('localhost', currentHost);
+
+  // V15 Security Injection: Auto-Upgrade to HTTPS
+  if (kIsWeb) {
+    if (Uri.base.scheme == 'https') {
+      resolved = resolved.replaceFirst('http://', 'https://');
+      resolved = resolved.replaceFirst('ws://', 'wss://');
+    }
+  } else {
+    // Mobile/Android: Force secure connections for Production Pulse
+    resolved = resolved.replaceFirst('http://', 'https://');
+    resolved = resolved.replaceFirst('ws://', 'wss://');
   }
-  
-  // Mobile Reality Patch: Ensure Absolute Connectivity [V15 Master]
-  if (!kIsWeb && !resolved.startsWith('http')) {
-     final String cleanPath = resolved.startsWith('/') ? resolved : '/$resolved';
-     resolved = '$_sovereignProtocol://$globalSovereignHost$cleanPath';
+
+  // Sovereign V15: Mesh Interface Proxying (Always apply port stripping on mobile)
+  if (!kIsWeb || (kIsWeb && Uri.base.scheme == 'https')) {
+    // We remove the ports because Nginx handles the routing via paths
+    if (resolved.contains(':5000')) {
+       resolved = resolved.replaceFirst(':5000', '');
+    }
+    if (resolved.contains(':9900')) {
+       // Nginx maps /sound_engine/ to port 9900 internally
+       if (!resolved.contains('/sound_engine')) {
+          resolved = resolved.replaceFirst(':9900', '/sound_engine');
+       } else {
+          resolved = resolved.replaceFirst(':9900', '');
+       }
+    }
+
+    if (resolved.contains(':8080')) {
+      // Sovereign V15: Map port 8080 to correct Nginx paths
+      if (resolved.contains('/upload')) {
+        resolved = resolved.replaceFirst(':8080/upload', '/stream/upload');
+      } else {
+        resolved = resolved.replaceFirst(':8080/', '/video_stream/');
+      }
+    }
+
+    // Standard port cleanup for fectok.com
+    if (resolved.contains('fectok.com')) {
+       resolved = resolved.replaceFirst(RegExp(r':(8000)'), '');
+       // Remove 8080 if lingering
+       resolved = resolved.replaceFirst(':8080', '');
+    }
   }
-  
-  
-  // TikTok-Style Cache Busting (A_295)
-  if (resolved.contains('/stream/') || resolved.contains('profile')) {
-    final separator = resolved.contains('?') ? '&' : '?';
-    resolved = '$resolved${separator}v=$_globalProfilePicVersion';
-  }
-  
+
+  debugPrint("SOVEREIGN_RESOLVE: $url -> $resolved");
   return resolved;
 }
 
-// 2. Mesh Connector [A_124]
-String getSovereignUrl(int index, List mediaLedger) {
-  if (mediaLedger.isEmpty || index >= mediaLedger.length) {
-    if (testVideos.isNotEmpty) return testVideos[index % testVideos.length];
-    return "";
+// Sovereign Connector for Flutter Injection [A_124]
+String getSovereignUrl(int index, List<Map<String, dynamic>> mediaLedger) {
+  if (mediaLedger.isNotEmpty && index < mediaLedger.length) {
+    String url = mediaLedger[index]['url'] ?? "";
+    return _resolveSecureUrl(url);
   }
-  
-  final media = mediaLedger[index];
-  String url = media['url'] ?? "";
-  
-  // Phase 2: HLS Sharding Activation
-  final bool isHlsReady = media['hls_ready'] == true || media['hls_ready'] == "true" || media['hls_ready'] == 1;
-  final bool isPhoto = url.toLowerCase().contains('.jpg') || url.toLowerCase().contains('.jpeg') || 
-                      url.toLowerCase().contains('.png') || url.toLowerCase().contains('.webp');
-  
-  // Sovereign Hybrid Logic [V15_FAST_TRACK]
-  // Rule: If video is short (< 15s) or HLS is still cold, fallback to Fast-Start MP4
-  final int duration = media['duration'] is int ? media['duration'] : int.tryParse(media['duration']?.toString() ?? '0') ?? 0;
-  
-  if (isHlsReady && !isPhoto && duration > 15) {
-    final String? file = media['file'];
-    if (file != null && file.isNotEmpty) {
-      final String fileBase = file.split('.').first;
-      url = "/stream/$fileBase/index.m3u8";
+  return testVideos.isNotEmpty ? testVideos[index % testVideos.length] : "";
+}
+
+String getSovereignThumb(int index, List<Map<String, dynamic>> mediaLedger) {
+  if (mediaLedger.isEmpty || index >= mediaLedger.length) return "";
+  final item = mediaLedger[index];
+  String url = item['thumb_url'] ?? item['thumbnail'] ?? "";
+  if (url.isEmpty) {
+    String mainUrl = item['url'] ?? "";
+    if (mainUrl.toLowerCase().contains('.jpg') || 
+        mainUrl.toLowerCase().contains('.png') || 
+        mainUrl.toLowerCase().contains('.jpeg') || 
+        mainUrl.toLowerCase().contains('.webp')) {
+      url = mainUrl;
     }
-  } else {
-    // Fast-track for Short Clips: Metadata at front MP4
-    url = media['url'] ?? "";
   }
-  
-  return _resolveSecureUrl(url);
-}
-
-// 3. Thumbnail Resolver
-String getSovereignThumb(int index, List ledger) {
-  if (index < 0 || index >= ledger.length) return "";
-  // In Sovereign V15, most videos serve as their own thumbs or use /thumb path
-  String url = ledger[index]['thumb_url'] ?? ledger[index]['thumbnail'] ?? ledger[index]['url'] ?? "";
-  return _resolveSecureUrl(url);
-}
-
-String getSovereignThumbGlobal(String url) {
   return _resolveSecureUrl(url);
 }
 
@@ -195,7 +171,6 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
   DateTime? userDOB;
   bool isVerified = false; 
   String? _profileImagePath;
-  final ValueNotifier<String?> _profilePicPulse = ValueNotifier<String?>(null); // A_290 Global Pulse
   bool _isAuthenticated = false;
   String userName = "Sovereign User";
   String userProfession = "User";
@@ -222,7 +197,6 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
   String _inboxView = 'Main'; // Main, Followers, Likes, Comments, Mentions, DMs
   final Set<String> _followedUsers = {};
   final TextEditingController _inboxReplyController = TextEditingController();
-  int _activeFeedIndex = 0; // A_121 Synchronization [Focus Anchor]
   
   // Navigation Methods
   // void _liveFeedOpen() {
@@ -403,7 +377,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
     }
 
     final nextController = VideoPlayerController.networkUrl(
-      Uri.parse(url),
+      Uri.parse(_resolveSecureUrl(url)),
       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
     );
     
@@ -489,7 +463,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
     }
 
     final controller = VideoPlayerController.networkUrl(
-      Uri.parse(url),
+      Uri.parse(_resolveSecureUrl(url)),
       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
     );
     _adVideoController = controller;
@@ -553,9 +527,15 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
   void _connect() {
     try {
       final String host = globalSovereignHost;
-      final String protocol = _sovereignProtocol == 'https' ? 'wss' : 'ws';
-      final String wsUrl = "$protocol://$host/ws/user";
-      channel = WebSocketChannel.connect(Uri.parse(wsUrl));
+      String wsUrl = "ws://$host:5000/ws/user"; 
+      // Sovereign Standard: Secure Handshake Injection
+
+      if (kIsWeb) {
+        wsUrl = "ws://$host:5000/ws/user";
+        debugPrint("QUANTUM_SYNC: Handshake Request -> $wsUrl");
+      }
+
+      channel = WebSocketChannel.connect(Uri.parse(_resolveSecureUrl(wsUrl)));
       broadcastStream = channel.stream.asBroadcastStream();
       setState(() => isConnected = true);
       
@@ -577,31 +557,10 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                 final newID = decoded['mesh_id']?.toString() ?? meshID;
                 if (newID != meshID && newID != "CALIBRATING...") {
                    setState(() => meshID = newID);
-                   _saveMeshIdentity(newID, userName, bio: userBio, profilePic: serverProfilePic);
+                   _saveMeshIdentity(newID, userName, bio: userBio);
                 }
                 
                 if (mounted) {
-                  // A_295: Auth-Sync Identity Pulse (Syncing Picture as Account Data)
-                  final String? sPic = decoded['profile_pic']?.toString() ?? 
-                                       decoded['profilePic']?.toString() ?? 
-                                       decoded['profile_pic_path']?.toString() ??
-                                       decoded['server_pic']?.toString();
-
-                  if (sPic != null && sPic.isNotEmpty) {
-                    serverProfilePic = sPic;
-                    _globalProfilePicVersion = DateTime.now().millisecondsSinceEpoch.toString(); // Force Global Refresh
-                  } else if (serverProfilePic == null || serverProfilePic!.isEmpty) {
-                    // A_295 FIX: Deterministic Anchor if server omits it in pulse
-                    serverProfilePic = "/stream/profile_${meshID.toLowerCase().replaceAll('@', '')}.jpg";
-                  }
-
-                  if (serverProfilePic != null) {
-                    if (_profileImagePath == null) {
-                      _profilePicPulse.value = serverProfilePic;
-                    }
-                    _saveMeshIdentity(meshID, userName, profilePic: serverProfilePic);
-                  }
-
                   // A_113: Atomic Balance Sync (Only if explicitly provided)
                   if (decoded['usd'] != null) usdNotifier.value = (decoded['usd']).toDouble();
                   if (decoded['USD'] != null) usdNotifier.value = (decoded['USD']).toDouble();
@@ -685,16 +644,9 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                     setState(() {
                       if (decoded['name'] != null) userName = decoded['name'];
                       if (decoded['bio'] != null) userBio = decoded['bio'];
-                      if (decoded['profile_pic'] != null) {
-                        _globalProfilePicVersion = DateTime.now().millisecondsSinceEpoch.toString(); // A_295: Global Reset
-                        serverProfilePic = decoded['profile_pic']; // Store raw, resolver will handle the rest
-                        _profileImagePath = null; // A_295: Clear local staleness
-                        _profilePicPulse.value = serverProfilePic; // Trust the Mesh update
-                      }
+                      if (decoded['profile_pic'] != null) serverProfilePic = decoded['profile_pic'];
                     });
                     _saveMeshIdentity(meshID, userName, bio: userBio, profilePic: serverProfilePic);
-                    // Explicitly purge local path to prevent future staleness (Backgrounded)
-                    SharedPreferences.getInstance().then((p) => p.remove('sov_profile_path'));
                   }
                 }
                 
@@ -719,17 +671,6 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                  setState(() {
                    final rawMedia = List<Map<String, dynamic>>.from(decoded['media']);
                    sovereignMedia = _rankMediaByAIWeights(rawMedia);
-                   
-                   // V15 OMNI-SYNC: Recalculate local interaction sets from server authority
-                   _savedVideosSet.clear();
-                   _likedVideosSet.clear();
-                   for (int i = 0; i < sovereignMedia.length; i++) {
-                     final m = sovereignMedia[i];
-                     final List savedBy = m['saved_by'] ?? [];
-                     final List likedBy = m['liked_by'] ?? [];
-                     if (savedBy.any((u) => u.toString().toUpperCase() == meshID.toUpperCase())) _savedVideosSet.add(i);
-                     if (likedBy.any((u) => u.toString().toUpperCase() == meshID.toUpperCase())) _likedVideosSet.add(i);
-                   }
                  });
                  debugPrint("A_111: Media Ledger Synced & AI Ranked (${sovereignMedia.length} videos)");
              } else if (decoded['action'] == 'A_113_BRIDGE_SYNC') {
@@ -881,6 +822,9 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                   usdNotifier.value = usdBal;
                   bdtNotifier.value = bdtBal;
                   
+                  if (decoded['is_verified'] != null) {
+                    isVerified = decoded['is_verified'] == true;
+                  }
                   if (decoded['bank_history'] != null) {
                     bankHistoryNotifier.value = List<Map<String, dynamic>>.from(decoded['bank_history']);
                   }
@@ -1147,13 +1091,6 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                   SnackBar(backgroundColor: SovereignColors.cyan, content: Text('GIFT RECEIVED: +${amount.toInt()} Coins from $sender', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold))),
                 );
               }
-            } else if (decoded['status'] == 'REPORT_SUBMITTED' || decoded['status'] == 'USER_REPORT_SUBMITTED' || decoded['status'] == 'AD_REPORT_SUBMITTED') {
-              if (mounted) {
-                _addSystemMessage('Moderation Pulse', decoded['message'] ?? 'Report safely transmitted to mesh admins.', 'verified_user');
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(backgroundColor: SovereignColors.cyan, content: Text('MESH AUDIT: ${decoded['status']}', style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)))
-                );
-              }
             } else if (decoded['status'] == 'PURGE_SUCCESS') {
               _fetchSovereignMedia();
               if (mounted) {
@@ -1203,23 +1140,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                       } else if (type.contains('VIEW')) {
                         m['views'] = count;
                       }
-                      
-                      // V15 OMNI-UPGRADE: Unconditionally update analytics if present in sync packet
-                      if (decoded['analytics'] != null) {
-                        m['analytics'] = Map<String, dynamic>.from(decoded['analytics']);
-                      }
                     }
-                  }
-                  
-                  // Pulse Re-Sync: Ensure local sets reflect the updated media item
-                  _savedVideosSet.clear();
-                  _likedVideosSet.clear();
-                  for (int i = 0; i < sovereignMedia.length; i++) {
-                    final m = sovereignMedia[i];
-                    final List sBy = m['saved_by'] ?? [];
-                    final List lBy = m['liked_by'] ?? [];
-                    if (sBy.any((u) => u.toString().toUpperCase() == meshID.toUpperCase())) _savedVideosSet.add(i);
-                    if (lBy.any((u) => u.toString().toUpperCase() == meshID.toUpperCase())) _likedVideosSet.add(i);
                   }
                 });
                 _addSystemMessage('Mesh Pulse', 'Node $cId updated: $pulse ($count)', 'hub');
@@ -1306,12 +1227,6 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
           userProfession = prefs.getString('sovereign_user_profession') ?? "User";
           userBio = prefs.getString('sovereign_user_bio') ?? "Transforming Reality within the Mesh.";
           serverProfilePic = prefs.getString('sovereign_server_pic');
-          if (serverProfilePic == null || serverProfilePic!.isEmpty) {
-            serverProfilePic = "/stream/profile_${meshID.toLowerCase().replaceAll('@', '')}.jpg";
-          }
-          serverProfilePic = _resolveSecureUrl(serverProfilePic);
-          
-          _profilePicPulse.value = _profileImagePath ?? serverProfilePic; // Initial Pulse
           _isAuthenticated = true;
           isLegallyAuthorized = true; // Auth implies legal consent in V15
         });
@@ -1353,20 +1268,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
 
   Future<void> _loadProfileImage() async {
     final prefs = await SharedPreferences.getInstance();
-    final path = prefs.getString('sov_profile_path');
-    
-    // A_295 Fix: Only trust local path if it actually exists on disk [Hardened]
-    if (path != null && path.isNotEmpty && File(path).existsSync()) {
-      _profileImagePath = path;
-    } else {
-      _profileImagePath = null;
-    }
-    
-    setState(() {});
-    
-    // A_295 Persistence Logic: Local Path > Server Pulse (Auth Sync)
-    _profilePicPulse.value = _profileImagePath ?? serverProfilePic;
-    debugPrint("A_295 RECOVERY: LocalPath=$_profileImagePath | ServerPic=$serverProfilePic");
+    setState(() => _profileImagePath = prefs.getString('sov_profile_path'));
   }
 
   Future<void> _pickProfilePicture() async {
@@ -1376,7 +1278,6 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('sov_profile_path', image.path);
       setState(() => _profileImagePath = image.path);
-      _profilePicPulse.value = image.path; // Update Pulse instantly
       _onInteraction('PROFILE_PIC_UPDATED');
     }
   }
@@ -1441,7 +1342,6 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
   }
 
   void _onInteraction(String type, {String? contentId}) {
-    debugPrint("WS_INT: type=$type | contentId=$contentId");
     // A_121 Sovereign Stealth Patch: Boost Visibility Weight
     setState(() {
       visibilityWeight += 0.05;
@@ -1458,19 +1358,11 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
         _saveSavedSounds();
       } else if (type.startsWith('VIDEO_SAVED: ') || type.startsWith('VIDEO_SAVE: ') || type.startsWith('OPTIONS_FAV: ')) {
         final idxStr = type.contains(': ') ? type.split(': ')[1] : '';
-        int? idx = int.tryParse(idxStr);
-        if (idx == null) {
-          idx = sovereignMedia.indexWhere((m) => m['file'] == idxStr);
-          if (idx == -1) idx = null;
-        }
+        final idx = int.tryParse(idxStr);
         if (idx != null) _savedVideosSet.add(idx);
       } else if (type.startsWith('VIDEO_UNSAVED: ') || type.startsWith('VIDEO_UNSAVE: ')) {
         final idxStr = type.contains(': ') ? type.split(': ')[1] : '';
-        int? idx = int.tryParse(idxStr);
-        if (idx == null) {
-          idx = sovereignMedia.indexWhere((m) => m['file'] == idxStr);
-          if (idx == -1) idx = null;
-        }
+        final idx = int.tryParse(idxStr);
         if (idx != null) _savedVideosSet.remove(idx);
       } else if (type.startsWith('VIDEO_LIKED: ') || type.startsWith('VIDEO_LIKE: ')) {
         final idxStr = type.contains(': ') ? type.split(': ')[1] : '';
@@ -1491,11 +1383,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
         if (idx != null) _likedVideosSet.remove(idx);
       } else if (type.startsWith('VIDEO_REPOST: ') || type.startsWith('OPTIONS_REPOST: ')) {
         final idxStr = type.contains(': ') ? type.split(': ')[1] : '';
-        int? idx = int.tryParse(idxStr);
-        if (idx == null) {
-          idx = sovereignMedia.indexWhere((m) => m['file'] == idxStr);
-          if (idx == -1) idx = null;
-        }
+        final idx = int.tryParse(idxStr);
         if (idx != null) _repostedVideosSet.add(idx);
       } else if (type.startsWith('CREATOR_BLOCK: ')) {
         final handle = type.replaceFirst('CREATOR_BLOCK: ', '');
@@ -1547,32 +1435,6 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
         channel.sink.add(json.encode({
           "action": "REPORT_CONTENT",
           "content_id": cid,
-          "reason": reason,
-          "mesh_id": meshID
-        }));
-        return;
-      }
-      if (type.startsWith('REPORT_USER: ')) {
-        final payload = type.replaceFirst('REPORT_USER: ', '').split('|');
-        final handle = payload[0];
-        final reason = payload.length > 1 ? payload[1] : "Policy Violation";
-        channel.sink.add(json.encode({
-          "action": "REPORT_USER",
-          "handle": handle,
-          "reason": reason,
-          "mesh_id": meshID
-        }));
-        return;
-      }
-      if (type.startsWith('REPORT_AD: ')) {
-        final payload = type.replaceFirst('REPORT_AD: ', '').split('|');
-        final adId = payload[0];
-        final network = payload.length > 1 ? payload[1] : "Unknown";
-        final reason = payload.length > 2 ? payload[2] : "Policy Violation";
-        channel.sink.add(json.encode({
-          "action": "REPORT_AD",
-          "ad_id": adId,
-          "network": network,
           "reason": reason,
           "mesh_id": meshID
         }));
@@ -1809,9 +1671,15 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
       body: Stack(
         children: [
           pages[_currentIndex],
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _buildSovereignNavBar(),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Material(
+              color: Colors.black.withValues(alpha: 0.01), // A_117: Physical hit-test boundary
+              elevation: 20,
+              child: _buildSovereignNavBar(),
+            ),
           ),
         ],
       ),
@@ -2294,20 +2162,13 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                                         Row(
                                           children: [
                                             const SizedBox(width: 4),
-                                            GestureDetector(
-                                              onTap: () {
-                                                _onInteraction('REPORT_AD: AD_UNIT_${_adEngine.currentNetwork}|$_activeNetworkCode|Manual User Flag');
-                                                _addSystemMessage('Ad Flagged', 'Sponsored content node flagged for policy audit.', 'report');
-                                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Sponsored node flagged for audit')));
-                                              },
-                                              child: Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.red.withValues(alpha: 0.15),
-                                                  borderRadius: BorderRadius.circular(3),
-                                               ),
-                                                child: const Text('REPORT', style: TextStyle(color: Colors.redAccent, fontSize: 6, fontWeight: FontWeight.bold)),
-                                              ),
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1.5),
+                                              decoration: BoxDecoration(
+                                                color: Colors.red.withValues(alpha: 0.15),
+                                                borderRadius: BorderRadius.circular(3),
+                                             ),
+                                              child: const Text('REPORT', style: TextStyle(color: Colors.redAccent, fontSize: 6, fontWeight: FontWeight.bold)),
                                             ),
                                             const SizedBox(width: 10),
                                             const Text('SPONSORED', style: TextStyle(color: Colors.white38, fontSize: 8, letterSpacing: 1.5, fontWeight: FontWeight.w400)),
@@ -2346,10 +2207,10 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
             ),
           ),
         ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 
   void _openCreatorProfile(String handle) {
     _onInteraction('OPEN_CREATOR_PROFILE: $handle');
@@ -2419,13 +2280,14 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
   Future<void> _loadGlobalSoundRegistry() async {
     try {
       // V15 Gap Fix S3: Dynamic host sensing [A_128]
-      final String endpoint = '/sound_engine/all';
+      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
+      final String endpoint = _resolveSecureUrl('http://$host:9900/all');
       final res = await http.get(Uri.parse(endpoint));
       if (res.statusCode == 200) {
         final List sounds = json.decode(res.body);
         final Map<String, String> reg = {};
         for (var s in sounds) {
-          reg[s['title']] = '/sound_engine${s['url']}';
+          reg[s['title']] = _resolveSecureUrl('http://$host:9900${s['url']}');
         }
         setState(() => _globalSoundRegistry = reg);
         debugPrint("[A_108] Global Sound Registry: ${reg.length} sounds loaded");
@@ -2489,19 +2351,11 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
       },
       color: SovereignColors.cyan,
       backgroundColor: Colors.black,
-      child: NotificationListener<ScrollNotification>(
-        onNotification: (notification) {
-          if (notification is ScrollStartNotification) {
-             QuantumVideoCache.prePurge(); // A_280: Flush early on drag
-          }
-          return false;
-        },
-        child: PageView.builder(
+      child: PageView.builder(
         controller: _feedController,
         scrollDirection: Axis.vertical,
         onPageChanged: (index) {
           setState(() {
-            _activeFeedIndex = index; // A_121 synchronization
             // Note: We use a separate local feed index if necessary, 
             // but for A_111, we need to ensure the engine knows we are still on index 0 (Home)
             if (_currentIndex == 0) {
@@ -2554,6 +2408,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                     videoUrl: _resolveSecureUrl(customUrl),
                     uploaderName: uploader,
                     uploaderHandle: (index < sovereignMedia.length) ? sovereignMedia[index]['uploader'] : uploader,
+                    isVerified: (index < sovereignMedia.length) ? (sovereignMedia[index]['uploader_verified'] == true) : false,
                     description: description, // A_118: Pass real desc
                     onInteraction: _onInteraction,
                     adPanelHeight: _isAdSplitEnabled ? MediaQuery.of(context).size.height * 0.40 : 0,
@@ -2564,11 +2419,8 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                     sponsorFrequency: sFreq,
                     onAddMessage: _addSystemMessage,
                     userProfileImage: _profileImagePath,
-                    profilePicPulse: _profilePicPulse, // A_290 Pulse Injection
                     meshID: meshID, // A_105 ownership check
-                    currentUserName: userName, // A_295: Multi-Anchor Identification
                     mediaLedger: sovereignMedia, // Pass down for mapping
-                    isActive: index == _activeFeedIndex && _currentIndex == 0, // A_121 Tab-Aware Focus Protocol
                     onSkip: () {
                       if (_feedController.hasClients) {
                         _feedController.nextPage(
@@ -2585,9 +2437,8 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
           );
         },
       ),
-    ),
-  );
-}
+    );
+  }
 
   void _executeSearch(String query) {
     if (query.isEmpty) {
@@ -2737,7 +2588,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
               if (sovereignMedia.isEmpty) 
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Center(child: Text('Scanning mesh for trending nodes...', style: TextStyle(color: Colors.white24, fontSize: 12))),
+                  child: Center(child: Text('Scanning mesh [SSL-ENFORCED]...', style: TextStyle(color: Colors.white24, fontSize: 12))),
                 )
               else 
                 ...sovereignMedia.take(5).map((m) => _buildHashtagRow(m['desc'] ?? 'sovereign_v15', '${m['views'] ?? 0} views')),
@@ -2830,6 +2681,10 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                         '@${item['uploader_name'] ?? item['uploader'] ?? 'mesh_node'}',
                         style: const TextStyle(color: SovereignColors.cyan, fontSize: 12),
                       ),
+                      if (item['uploader_verified'] == true) ...[
+                        const SizedBox(width: 4),
+                        const Icon(Icons.verified, color: SovereignColors.cyan, size: 14),
+                      ],
                       const SizedBox(width: 8),
                       Text(
                         'ID: ${item['uploader']}',
@@ -3584,10 +3439,11 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
     if (_selectedSoundUrl != null) {
       String finalUrl = _selectedSoundUrl!;
       if (finalUrl.startsWith('/stream')) {
-        finalUrl = '/sound_engine$finalUrl';
+        final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
+        finalUrl = 'http://$host:9900$finalUrl';
       }
       _recordingAudioController?.dispose();
-      _recordingAudioController = VideoPlayerController.networkUrl(Uri.parse(finalUrl))
+      _recordingAudioController = VideoPlayerController.networkUrl(Uri.parse(_resolveSecureUrl(finalUrl)))
         ..initialize().then((_) {
           if (mounted) setState(() {});
         });
@@ -3763,27 +3619,20 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                   children: [
                     GestureDetector(
                       onTap: _pickProfilePicture,
-                    child: ValueListenableBuilder<String?>(
-                      valueListenable: _profilePicPulse,
-                      builder: (context, globalPic, _) {
-                        return CircleAvatar(
-                          radius: 48, 
-                          backgroundColor: SovereignColors.cyan, 
-                          child: CircleAvatar(
-                            radius: 46,
-                            backgroundColor: Colors.black,
-                            backgroundImage: (globalPic != null && globalPic.isNotEmpty)
-                              ? (globalPic.startsWith('http') || globalPic.startsWith('/') || globalPic.startsWith('profile')
-                                  ? NetworkImage(_resolveSecureUrl(globalPic)) 
-                                  : FileImage(File(globalPic))) as ImageProvider
-                              : null,
-                            child: (globalPic == null || globalPic.isEmpty) 
-                              ? const Icon(Icons.person, size: 50, color: Colors.white) 
-                              : null,
-                          ),
-                        );
-                      }
-                    ),
+                      child: CircleAvatar(
+                        radius: 48, 
+                        backgroundColor: SovereignColors.cyan, 
+                        child: CircleAvatar(
+                          radius: 46,
+                          backgroundColor: Colors.black,
+                          backgroundImage: serverProfilePic != null && serverProfilePic!.isNotEmpty
+                            ? NetworkImage(serverProfilePic!)
+                            : (_profileImagePath != null ? FileImage(File(_profileImagePath!)) : null) as ImageProvider?,
+                          child: (serverProfilePic == null || serverProfilePic!.isEmpty) && _profileImagePath == null 
+                            ? const Icon(Icons.person, size: 50, color: Colors.white) 
+                            : null,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 12),
                      Row(
@@ -4410,7 +4259,7 @@ class _MainNavigationState extends State<MainNavigation> with WidgetsBindingObse
                 _buildSettingsTile(Icons.verified, 'Verification [A_107]', isVerified ? 'IDENTITY VERIFIED' : 'Request Verified Badge Status', onTap: () {
                    _sovereignGuard('VERIFICATION_REQUEST', () {
                       Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SovereignVerificationView(onInteraction: _onInteraction, channel: channel, meshID: meshID)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SovereignVerificationView(onInteraction: _onInteraction, channel: channel)));
                    });
                 }),
                  // TODO: [PLAY_STORE_COMPLIANCE] Hide this entire block when building for Play Store using `kIsWeb` check
@@ -4925,13 +4774,13 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
 
   Future<void> _loadDynamicSounds() async {
     try {
-      final uri = _getMeshUri('/sound_engine/all');
-      final response = await http.get(uri);
+      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost; // Standard Emulator Fallback
+      final response = await http.get(Uri.parse(_resolveSecureUrl('http://$host:9900/all')));
       if (response.statusCode == 200) {
         final List sounds = json.decode(response.body);
         final Map<String, String> newRegistry = {};
         for (var s in sounds) {
-          newRegistry[s['title']] = '/sound_engine${s['url']}';
+          newRegistry[s['title']] = _resolveSecureUrl('http://$host:9900${s['url']}');
         }
         setState(() {
           _soundRegistry = newRegistry;
@@ -4959,7 +4808,7 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
                         checkStr.contains('.webp');
       
       if (!_isPreviewImage) {
-        _videoController = VideoPlayerController.networkUrl(Uri.parse(_mediaItems.first.path))
+        _videoController = VideoPlayerController.networkUrl(Uri.parse(_resolveSecureUrl(_mediaItems.first.path)))
           ..initialize().then((_) {
             _videoController?.setVolume(_originalVolume);
             _videoController?.setLooping(true);
@@ -4995,12 +4844,12 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
       
       if (fullUrl.startsWith('/stream') && !fullUrl.startsWith('http')) {
         // Resolve to Sound Master [A_128]
-        fullUrl = '/sound_engine$fullUrl';
+        fullUrl = 'http://$host:9900$fullUrl';
       } else if (fullUrl.contains('localhost')) {
         fullUrl = fullUrl.replaceFirst('localhost', host);
       }
       _audioController = VideoPlayerController.networkUrl(
-        Uri.parse(fullUrl),
+        Uri.parse(_resolveSecureUrl(fullUrl)),
         videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true), // A_128: Required for Web concurrency
       )
         ..initialize().then((_) {
@@ -5050,14 +4899,16 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
     
     // A_118: Sovereign Real-Time Upload [Multi-Media Orchestration]
     try {
-      final uri = _getMeshUri("/stream/upload");
+      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
+      final uri = Uri.parse(_resolveSecureUrl("http://$host:8080/upload"));
       final request = http.MultipartRequest("POST", uri);
       
       // A_118: Multi-File Injection Loop (Uplink V15 supports single-file primary + multiple markers)
       for (var file in _mediaItems) {
-        request.files.add(await http.MultipartFile.fromPath(
+        final bytes = await file.readAsBytes();
+        request.files.add(http.MultipartFile.fromBytes(
           'file', 
-          file.path,
+          bytes,
           filename: file.name
         ));
       }
@@ -5078,7 +4929,7 @@ class _QuantumPostHubState extends State<QuantumPostHub> {
       // A_128 V15: Resolve Sound URL to absolute for server-side mixing
       String resolvedSoundUrl = snapshotSoundUrl ?? "";
       if (resolvedSoundUrl.isNotEmpty && !resolvedSoundUrl.startsWith('http')) {
-        resolvedSoundUrl = '/sound_engine$resolvedSoundUrl';
+        resolvedSoundUrl = 'http://$host:9900$resolvedSoundUrl';
       }
       request.fields['sound_url'] = resolvedSoundUrl;
 
@@ -5605,46 +5456,32 @@ class _EditProfileViewState extends State<EditProfileView> {
       final XFile? video = await _picker.pickVideo(source: ImageSource.gallery);
       if (video == null) return;
 
-      widget.onInteraction('UPLOADING: ${video.name} [START]');
-      
-      final uri = _getMeshUri("/stream/upload");
+      final bytes = await video.readAsBytes();
+      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
+      final uri = Uri.parse("http://$host:8080/upload");
       final request = http.MultipartRequest("POST", uri);
       
-      // Use fromPath for efficiency and memory stability
-      request.files.add(await http.MultipartFile.fromPath(
+      request.files.add(http.MultipartFile.fromBytes(
         'file', 
-        video.path,
+        bytes,
         filename: video.name
       ));
-      
-      request.fields['uploader'] = widget.userMeshID;
-      request.fields['description'] = "Sovereign Mesh Pulse";
 
-      final streamedResponse = await request.send();
-      final response = await http.Response.fromStream(streamedResponse);
+      widget.onInteraction('UPLOADING: ${video.name}');
+      final response = await request.send();
       
       if (response.statusCode == 200) {
         widget.onInteraction('UPLOAD_SUCCESS: ${video.name}');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('✅ ${video.name} Uploaded to Sovereign Vault!'), backgroundColor: Colors.greenAccent)
+            SnackBar(content: Text('✅ ${video.name} Uploaded to Sovereign Vault!'), backgroundColor: SovereignColors.cyan)
           );
         }
       } else {
         widget.onInteraction('UPLOAD_FAILED: ${response.statusCode}');
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('❌ Upload Failed: ${response.statusCode}'), backgroundColor: Colors.redAccent)
-          );
-        }
       }
     } catch (e) {
       debugPrint("UPLOAD_ERR: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('❌ System Error: $e'), backgroundColor: Colors.redAccent)
-        );
-      }
     }
   }
 
@@ -5748,7 +5585,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                   if (_imageFile != null) {
                     try {
                       final bytes = await _imageFile!.readAsBytes();
-                      final uri = _getMeshUri("/stream/upload"); // A_295 Fix: Absolute URI
+                      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
+                      final uri = Uri.parse("http://$host:8080/upload");
                       final request = http.MultipartRequest("POST", uri);
                       request.fields['uploader'] = widget.userMeshID;
                       request.files.add(http.MultipartFile.fromBytes(
@@ -5762,7 +5600,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                         final respStr = await response.stream.bytesToString();
                         final respJson = json.decode(respStr);
                         final filename = respJson['file'];
-                        uploadedPicPath = "/stream/$filename";
+                        final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
+                        uploadedPicPath = "http://$host:8080/stream/$filename";
                       }
                     } catch (e) {
                       debugPrint("PIC_UPLOAD_ERR: $e");
@@ -5774,8 +5613,7 @@ class _EditProfileViewState extends State<EditProfileView> {
                     "action": "UPDATE_USER_PROFILE",
                     "name": _nameController.text,
                     "bio": _bioController.text,
-                    "profile_pic": uploadedPicPath, // Standardized key
-                    "profile_pic_path": uploadedPicPath, // Backend V15 legacy key
+                    "profile_pic_path": uploadedPicPath,
                     "timestamp": DateTime.now().toIso8601String()
                   }));
 
@@ -5824,9 +5662,8 @@ class _EditProfileViewState extends State<EditProfileView> {
 class SovereignVerificationView extends StatefulWidget {
   final Function(String, {String? contentId}) onInteraction;
   final WebSocketChannel channel;
-  final String meshID;
 
-  const SovereignVerificationView({super.key, required this.onInteraction, required this.channel, required this.meshID});
+  const SovereignVerificationView({super.key, required this.onInteraction, required this.channel});
 
   @override
   State<SovereignVerificationView> createState() => _SovereignVerificationViewState();
@@ -5851,49 +5688,29 @@ class _SovereignVerificationViewState extends State<SovereignVerificationView> {
     setState(() => _isSubmitting = true);
     
     try {
-      final uri = _getMeshUri('/api/v15/verify_identity');
-      final request = http.MultipartRequest("POST", uri);
-      request.fields['user_id'] = widget.meshID;
-      request.fields['doc_type'] = _docType;
+      final bytes = await _idDocument!.readAsBytes();
+      final String base64Data = "data:image/jpeg;base64,${base64.encode(bytes)}";
       
-      if (kIsWeb) {
-        request.files.add(http.MultipartFile.fromBytes(
-          'file', 
-          await _idDocument!.readAsBytes(),
-          filename: _idDocument!.name
-        ));
-      } else {
-        request.files.add(await http.MultipartFile.fromPath('file', _idDocument!.path));
-      }
+      widget.channel.sink.add(json.encode({
+        "action": "VERIFICATION_SUBMIT",
+        "document_data": base64Data,
+        "document_path": _idDocument!.name,
+        "doc_type": _docType,
+        "timestamp": DateTime.now().toIso8601String()
+      }));
 
-      final streamedResponse = await request.send();
-      final response = await http.Response.fromStream(streamedResponse);
-
-      if (response.statusCode == 200) {
-        debugPrint("A_107: ID Document Uploaded SUCCESS");
-        widget.onInteraction('VERIFICATION_SUBMITTED_FOR_AI_AUDIT');
-        
+      widget.onInteraction('VERIFICATION_SUBMITTED_FOR_AI_AUDIT');
+      
+      Future.delayed(const Duration(seconds: 2), () {
         if (mounted) {
           setState(() => _isSubmitting = false);
           Navigator.pop(context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('✅ DOCUMENT UPLOADED TO AI JUSTIFY MODULE'),
-              backgroundColor: SovereignColors.cyan,
-            )
-          );
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('DOCUMENT INJECTED INTO AI JUSTIFY MODULE')));
         }
-      } else {
-         throw Exception("Server rejected upload: ${response.statusCode}");
-      }
+      });
     } catch (e) {
-      debugPrint("A_107: Upload Failed: $e");
-      if (mounted) {
-        setState(() => _isSubmitting = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('❌ Audit Failed: $e'), backgroundColor: Colors.red)
-        );
-      }
+      if (mounted) setState(() => _isSubmitting = false);
+      debugPrint("SUBMIT_ERR: $e");
     }
   }
 
@@ -7636,159 +7453,6 @@ class _SponsoredTemplatesViewState extends State<SponsoredTemplatesView> {
   }
 }
 
-// --- Sovereign V15.8: Tri-Node Predictive Engine [A_180] ---
-class QuantumVideoCache {
-  // Rule: Only 3 neighbors allowed in RAM to maintain hardware sync
-  static final Map<String, VideoPlayerController> _cache = {};
-  static final Map<String, int> _indexMap = {}; 
-  static int _currentFocusIndex = -1;
-   static bool _isReverseGear = false;
-   static bool _isScrubbing = false;
-   static DateTime? _lastPurgeTime;
-
-  static Future<VideoPlayerController> getOrCreate(String url, int index, {String? localPath}) async {
-    if (url.isEmpty) return VideoPlayerController.networkUrl(Uri.parse(''));
-    
-    _indexMap[url] = index;
-
-    // A_270 Spartan Rule: Strictly 1 controller allowed in memory
-    if (_cache.containsKey(url)) {
-      return _cache[url]!;
-    }
-
-    // A_290 Warp-Drive: Calculate if we can skip the safety handshake
-    int elapsedSincePurge = _lastPurgeTime != null 
-        ? DateTime.now().difference(_lastPurgeTime!).inMilliseconds 
-        : 0;
-    
-    // If we purged > 300ms ago (scroll time), we only need a 50ms pulse
-    int gpuPulse = (elapsedSincePurge > 300) ? 50 : 250;
-    int hardwarePulse = (elapsedSincePurge > 300) ? 100 : 350;
-
-    if (!_isScrubbing) _cleanUp(); 
-    
-    await Future.delayed(Duration(milliseconds: gpuPulse));
-    await Future.delayed(Duration(milliseconds: hardwarePulse));
-    
-    debugPrint("A_290 Warp-Ignition: Pulse=$gpuPulse/$hardwarePulse Index $index");
-
-    // A_290: File Priming (Force OS Page Cache)
-    if (localPath != null && File(localPath).existsSync()) {
-      try {
-        final f = File(localPath);
-        final raf = await f.open();
-        await raf.read(128 * 1024); // Prime first 128KB
-        await raf.close();
-      } catch(_) {}
-    }
-
-    VideoPlayerController controller;
-    if (localPath != null && File(localPath).existsSync()) {
-       controller = VideoPlayerController.file(
-         File(localPath),
-         videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-       );
-    } else {
-       controller = VideoPlayerController.networkUrl(
-         Uri.parse(url),
-         videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true, allowBackgroundPlayback: false),
-       );
-    }
-    
-    _cache[url] = controller;
-    return controller;
-  }
-
-  static void setFocus(int index) {
-    if (_currentFocusIndex == index) return;
-    
-    // Gear System: R (Reverse) if index < current, D (Drive) if index > current
-    _isReverseGear = index < _currentFocusIndex;
-    _currentFocusIndex = index;
-    
-    debugPrint("A_210 Gear-Shift: ${_isReverseGear ? '[REVERSE R]' : '[DRIVE D]'} Focus at $index");
-    _cleanUp();
-  }
-
-  static void _cleanUp() {
-    if (_currentFocusIndex == -1) return; 
-    final List<String> urlsToRemove = [];
-    
-    _cache.forEach((url, controller) {
-      final idx = _indexMap[url];
-      if (idx == null) return;
-
-      // A_270 Spartan Logic: Out if not exactly the focus index
-      bool isOutOfWindow = (idx != _currentFocusIndex);
-      if (isOutOfWindow) urlsToRemove.add(url);
-    });
-
-    if (urlsToRemove.isEmpty) return;
-
-    for (var url in urlsToRemove) {
-       final deadController = _cache.remove(url);
-       final deadIdx = _indexMap.remove(url);
-       // A_240: Immediate Hardware Eviction
-       deadController?.pause();
-       deadController?.setVolume(0);
-       deadController?.dispose(); 
-       debugPrint("A_240 Atomic-Purge: Index $deadIdx (${url.split('/').last}) Vaporized");
-    }
-  }
-
-  // A_280: The Kinetic Spark - Clear hardware BEFORE the page fully snaps
-  static void prePurge() {
-    _isScrubbing = true;
-    _cleanUp();
-    _lastPurgeTime = DateTime.now(); // Mark the moment of vaporization
-    Future.delayed(const Duration(milliseconds: 200), () {
-      _isScrubbing = false;
-    });
-  }
-}
-
-// --- Sovereign V15: Local Fiber-Optic Cache Engine [A_140] ---
-class LocalVideoStore {
-  static final Map<String, String> _localPathCache = {};
-  static final Set<String> _downloading = {};
-
-  static Future<void> preDownload(String url) async {
-    if (url.isEmpty || !url.startsWith('http') || _downloading.contains(url)) return;
-    
-    final directory = await getTemporaryDirectory();
-    final fileName = url.split('/').last.split('?').first;
-    final file = File('${directory.path}/$fileName');
-    
-    if (await file.exists()) return;
-
-    _downloading.add(url);
-    try {
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        await file.writeAsBytes(response.bodyBytes);
-        _localPathCache[url] = file.path;
-        debugPrint("A_170 LocalStore: Raw File Cached -> $url");
-      }
-    } catch (e) {
-      debugPrint("A_170 Cache Error: $e");
-    } finally {
-      _downloading.remove(url);
-    }
-  }
-
-  static Future<String?> getLocalPath(String url) async {
-    if (_localPathCache.containsKey(url)) return _localPathCache[url];
-    final directory = await getTemporaryDirectory();
-    final fileName = url.split('/').last.split('?').first;
-    final file = File('${directory.path}/$fileName');
-    if (await file.exists()) {
-      _localPathCache[url] = file.path;
-      return file.path;
-    }
-    return null;
-  }
-}
-
 class VideoFeedItem extends StatefulWidget {
   final int index;
   final Function(String, {String? contentId}) onInteraction;
@@ -7798,13 +7462,12 @@ class VideoFeedItem extends StatefulWidget {
   final bool isHome;
   final Function(String, String, String) onAddMessage;
   final String? userProfileImage;
-  final String? currentUserName; // A_295: Name Anchor
-  final ValueNotifier<String?>? profilePicPulse; // A_290 Reactive Pulse
   final double adFrequency; // Legacy: Ads per minute
   final double sponsorFrequency; // V15: Videos per sponsor badge
   final String? videoUrl;
   final String? uploaderName;
   final String? uploaderHandle;
+  final bool isVerified;
   final String? description; // A_118: Real Metadata
   final String meshID; // A_105 Ownership Bridge
   final List<Map<String, dynamic>> mediaLedger;
@@ -7822,33 +7485,26 @@ class VideoFeedItem extends StatefulWidget {
     required this.onAddMessage,
     required this.mediaLedger,
     required this.meshID,
+    required this.uploaderHandle,
+    required this.isVerified,
+    required this.description,
     this.onSkip,
     this.userProfileImage,
-    this.currentUserName,
-    this.profilePicPulse,
     this.videoUrl,
     this.uploaderName,
-    this.uploaderHandle,
-    this.description,
     this.isHome = false,
-    this.isActive = true, // A_121 Synchronization
   });
-  
-  final bool isActive;
 
   @override
   State<VideoFeedItem> createState() => _VideoFeedItemState();
 }
 
-class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProviderStateMixin, RouteAware, WidgetsBindingObserver, AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => false; // A_270: Spartan Memory Policy - No KeepAlive
+class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProviderStateMixin, RouteAware, WidgetsBindingObserver {
   final List<Offset> _hearts = [];
   final List<String> _bannedWords = ['scam', 'spam', 'fake', 'money'];
   String? _commentError;
   bool _isPlaying = true;
-  bool _isDescExpanded = false;
-  final TextEditingController _commentController = TextEditingController();
+  final TextEditingController _commentController = new TextEditingController();
   
   // Sovereign V15: TikTok Logic State
   double _playbackSpeed = 1.0;
@@ -7864,10 +7520,6 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
   
   // V15 Reactive Comment Drawer Bridge
   StateSetter? _commentDrawerRefresher;
-  
-  // Real-Time Analytics Engine [V15: Kinetic Session Logic]
-  DateTime? _sessionStartTime;
-  bool _fullWatchReported = false;
 
   String get _currentContentId => widget.index < widget.mediaLedger.length 
       ? (widget.mediaLedger[widget.index]['file'] ?? "V15_CONTENT_${widget.index}")
@@ -7888,7 +7540,7 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
    late AnimationController _discController;
   late VideoPlayerController _videoController;
   VideoPlayerController? _audioController; // A_128: Neural Sound Controller
-  // _quantumPreloadController removed to save MediaCodec slots [A_170]
+  VideoPlayerController? _quantumPreloadController; // V15 Phase 10: Quantum Preload
   bool _isInitialized = false;
   bool _isImage = false;
 
@@ -7925,50 +7577,14 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
         try { _commentDrawerRefresher!(() {}); } catch (_) {}
       }
     }
-
-    // A_121 Pulse: Focus Isolation Bridge
-    if (widget.isActive != oldWidget.isActive) {
-      if (widget.isActive) {
-        QuantumVideoCache.setFocus(widget.index); // A_180: Tell cache we are here
-        
-        // A_250: If it was skipped in initState, ignite it now
-        if (!_isInitialized) {
-          _initializeVideo(widget.videoUrl ?? getSovereignUrl(widget.index, widget.mediaLedger));
-        }
-
-        if (_isPlaying && _isInitialized) {
-          _videoController.setVolume(1.0);
-          _videoController.play();
-          _startAnalyticsSession();
-        }
-        // A_170: Re-initialize audio if returning to active
-        if (_audioController == null) _initializeAudio();
-        _audioController?.setVolume(1.0);
-        _audioController?.play();
-        _discController.repeat();
-      } else {
-        // A_250: Aggressive Sleep when not active
-        _videoController.pause();
-        _videoController.setVolume(0);
-        _audioController?.pause();
-        _audioController = null;
-        _discController.stop();
-        _flushAnalyticsSession();
-      }
-    }
   }
 
   @override
   void didPopNext() {
     // A_117 Pulse: Returning to main circuit [Restoring Playback]
-    if (widget.isActive && _isPlaying && _isInitialized) {
-      if (!_isImage) {
-        _videoController.setVolume(1.0);
-        _videoController.play();
-        _startAnalyticsSession();
-      }
-      _audioController?.setVolume(1.0);
-      _audioController?.play();
+    if (_isPlaying && _isInitialized) {
+      if (!_isImage) _videoController.play();
+      _audioController?.play(); // RESUME AUDIO
       _discController.repeat();
     }
   }
@@ -7976,12 +7592,11 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this); // A_117: Attach Lifecycle Observer
+    WidgetsBinding.instance.addObserver(this);
     
     // A_120: Initialize Social State from Ledger
     if (widget.index < widget.mediaLedger.length) {
       final media = widget.mediaLedger[widget.index];
-      // Handled as Dynamic lists from JSON Ledger
       final List? likedBy = media['liked_by'] is List ? media['liked_by'] : null;
       final List? savedBy = media['saved_by'] is List ? media['saved_by'] : null;
       isLiked = likedBy?.any((e) => e.toString().toUpperCase() == widget.meshID.toUpperCase()) ?? false;
@@ -7990,207 +7605,99 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
 
     _discController = AnimationController(vsync: this, duration: const Duration(seconds: 5))..repeat();
     
-    // --- Sovereign V15.7: Frame-Flush Protocol [A_170] ---
-    final String url = widget.videoUrl ?? getSovereignUrl(widget.index, widget.mediaLedger);
+    // 1. Resolve Stream URLs properly
+    String url = widget.videoUrl ?? getSovereignUrl(widget.index, widget.mediaLedger);
+    if (!url.startsWith('http')) url = _resolveSecureUrl(url);
+    
     _isImage = url.toLowerCase().contains('.jpg') || 
                url.toLowerCase().contains('.jpeg') || 
                url.toLowerCase().contains('.png') || 
                url.toLowerCase().contains('.webp');
-    _initializeVideo(url);
-
-    // --- Sovereign V15.6: Liquid Buffer Sequence [A_160] ---
-    // Optimization: Trigger Bidirectional Pre-warm [Liquid Strike]
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (!mounted) return;
-      // 1. Forward Pre-warm
-      for (int i = 1; i <= 2; i++) {
-          if (widget.index + i < widget.mediaLedger.length) {
-              String nextUrl = getSovereignUrl(widget.index + i, widget.mediaLedger);
-              if (nextUrl.isNotEmpty && !nextUrl.contains('.jpg') && !nextUrl.contains('.jpeg')) {
-                  LocalVideoStore.preDownload(nextUrl);
-              }
-          }
-      }
-      // 2. Backward Pre-warm (Ulto-Scroll Success)
-      if (widget.index > 0) {
-          String prevUrl = getSovereignUrl(widget.index - 1, widget.mediaLedger);
-          if (prevUrl.isNotEmpty && !prevUrl.contains('.jpg') && !prevUrl.contains('.jpeg')) {
-              LocalVideoStore.preDownload(prevUrl);
-          }
-      }
-    });
-
-    // A_128: Neural Sound Initialization Loop [V15 Reality Patch]
-    if (widget.isActive) {
-      _initializeAudio();
-    }
-  }
-
-  void _initializeVideo(String url) {
-    if (!mounted) return;
     
-    // A_240 Single-Texture Guard: If we are not active, do not request hardware slots
-    if (!widget.isActive) {
-      _isInitialized = false;
-      return; 
+    debugPrint("Mesh Pulse: Initializing index ${widget.index} -> $url");
+    
+    _videoController = VideoPlayerController.networkUrl(
+      Uri.parse(_resolveSecureUrl(url)),
+      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+    );
+    _videoController.setLooping(true);
+    _videoController.setVolume(1.0); 
+    
+    if (!_isImage) {
+      _videoController.initialize().then((_) {
+        if (mounted) {
+          setState(() {
+            _isInitialized = true;
+            _videoController.setPlaybackSpeed(_playbackSpeed);
+            _videoController.play();
+          });
+          widget.onInteraction('VIDEO_VIEW', contentId: _currentContentId);
+        }
+      }).catchError((e) {
+        debugPrint("Video Sync ERR: $e | Source: $url");
+        if (mounted) setState(() => _isInitialized = true); // Allow fallback display
+      });
+    } else {
+      setState(() => _isInitialized = true);
+      widget.onInteraction('PHOTO_VIEW', contentId: _currentContentId);
     }
 
-    LocalVideoStore.getLocalPath(url).then((localPath) async {
-      final controller = await QuantumVideoCache.getOrCreate(url, widget.index, localPath: localPath);
-      if (mounted) {
-        setState(() {
-          _videoController = controller;
-          if (widget.isActive) QuantumVideoCache.setFocus(widget.index);
-          _videoController.setLooping(true);
-          _videoController.setVolume(1.0);
-          if (!_isImage) {
-            if (!_videoController.value.isInitialized) {
-              _videoController.initialize().then((_) {
-                if (mounted) {
-                  setState(() {
-                    _isInitialized = true;
-                    _videoController.setPlaybackSpeed(_playbackSpeed);
-                    if (widget.isActive && _isPlaying) {
-                       _videoController.play();
-                    } else {
-                       _videoController.pause();
-                    }
-                  });
-                  widget.onInteraction('VIDEO_VIEW', contentId: _currentContentId);
-                  _startAnalyticsSession();
-                  _videoController.addListener(_videoListener);
-                }
-              }).catchError((e) {
-                debugPrint("A_170 Frame-Flush Error: $e");
-              });
-            } else {
-               setState(() {
-                 _isInitialized = true;
-                 if (widget.isActive && _isPlaying) {
-                   _videoController.play();
-                 } else {
-                   _videoController.pause();
-                 }
-               });
-               _startAnalyticsSession();
-               _videoController.addListener(_videoListener);
-            }
-          } else {
-            setState(() {
-              _isInitialized = true;
-              widget.onInteraction('PHOTO_VIEW', contentId: _currentContentId);
-            });
-          }
-        });
-      }
-    });
-
-    // --- Sovereign V15.6: Liquid Buffer Sequence [A_160] ---
-    // Optimization: Trigger Bidirectional Pre-warm [Liquid Strike]
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (!mounted) return;
-      // 1. Forward Pre-warm
-      for (int i = 1; i <= 2; i++) {
-          if (widget.index + i < widget.mediaLedger.length) {
-              String nextUrl = getSovereignUrl(widget.index + i, widget.mediaLedger);
-              if (nextUrl.isNotEmpty && !nextUrl.contains('.jpg') && !nextUrl.contains('.jpeg')) {
-                  LocalVideoStore.preDownload(nextUrl);
-              }
-          }
-      }
-      // 2. Backward Pre-warm (Ulto-Scroll Success)
-      if (widget.index > 0) {
-          String prevUrl = getSovereignUrl(widget.index - 1, widget.mediaLedger);
-          if (prevUrl.isNotEmpty && !prevUrl.contains('.jpg') && !prevUrl.contains('.jpeg')) {
-              LocalVideoStore.preDownload(prevUrl);
-          }
-      }
-    });
-
-    // A_128: Neural Sound Initialization Loop [V15 Reality Patch]
-    if (widget.isActive) {
-      _initializeAudio();
-    }
-  }
-
-  void _initializeAudio() {
-    if (!mounted) return;
+    // 2. Resolve Audio Stream [A_128 DNA]
     final soundInfo = _getSoundInfo();
     final String? sUrl = soundInfo['url'];
-    if (sUrl == null || sUrl.isEmpty) return;
-
-    String resolvedUrl = sUrl;
-    final String host = globalSovereignHost;
-    final RegExp ipRegex = RegExp(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}');
-    
-    if (resolvedUrl.startsWith('/stream') && !resolvedUrl.startsWith('http')) {
-      resolvedUrl = '/stream$resolvedUrl';
-    } else {
-      resolvedUrl = resolvedUrl.replaceAll(ipRegex, host).replaceAll('localhost', host);
+    if (sUrl != null && sUrl.isNotEmpty) {
+      final String resolvedAudioUrl = _resolveSecureUrl(sUrl);
+      debugPrint("Audio Pulse: $resolvedAudioUrl");
+      
+      _audioController = VideoPlayerController.networkUrl(
+        Uri.parse(resolvedAudioUrl),
+        videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+      )..initialize().then((_) {
+        if (mounted) {
+          _audioController?.setLooping(true);
+          double vol = 1.0;
+          if (widget.index < widget.mediaLedger.length) {
+            vol = (widget.mediaLedger[widget.index]['added_sound_volume'] ?? 1.0).toDouble();
+          }
+          _audioController?.setVolume(vol);
+          if (_isPlaying) _audioController?.play();
+          setState(() {});
+        }
+      }).catchError((e) {
+        debugPrint("Audio Handshake Failed: $e");
+      });
     }
-    
-    _audioController = VideoPlayerController.networkUrl(
-      Uri.parse(resolvedUrl),
-      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-    )..initialize().then((_) {
-      if (mounted && widget.isActive) {
-        _audioController?.setLooping(true);
-        double vol = 1.0;
-        if (widget.index < widget.mediaLedger.length) {
-          vol = (widget.mediaLedger[widget.index]['added_sound_volume'] ?? 1.0).toDouble();
-        }
-        _audioController?.setVolume(vol);
-        if (_isPlaying && widget.isActive) {
-           _audioController?.play();
-           _discController.repeat();
-        }
-        setState(() {});
+
+    // --- Sovereign V15 Phase 10: Quantum Speed Pre-Caching ---
+    if (widget.index + 1 < widget.mediaLedger.length) {
+      String nextUrl = getSovereignUrl(widget.index + 1, widget.mediaLedger);
+      bool isNextImage = nextUrl.toLowerCase().contains('.jpg') || 
+                         nextUrl.toLowerCase().contains('.jpeg') || 
+                         nextUrl.toLowerCase().contains('.png') || 
+                         nextUrl.toLowerCase().contains('.webp');
+      
+      if (!isNextImage && nextUrl.isNotEmpty) {
+        _quantumPreloadController = VideoPlayerController.networkUrl(
+          Uri.parse(_resolveSecureUrl(nextUrl)),
+          videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+        )..initialize().then((_) {
+          debugPrint("A_121 Quantum Speed: Pre-cached next item -> $nextUrl");
+        }).catchError((e) {
+          debugPrint("Quantum Precache Error: $e");
+        });
       }
-    });
-  }
-
-  void _videoListener() {
-    if (_videoController.value.position >= _videoController.value.duration && !_fullWatchReported && _videoController.value.duration.inSeconds > 0) {
-      _fullWatchReported = true;
-      widget.onInteraction('ANALYTICS_RETENTION: FULL', contentId: _currentContentId);
     }
-  }
-
-  void _startAnalyticsSession() {
-    if (_sessionStartTime != null) return; // Already running
-    _sessionStartTime = DateTime.now();
-  }
-
-  void _flushAnalyticsSession() {
-    if (_sessionStartTime == null) return;
-    
-    final int seconds = DateTime.now().difference(_sessionStartTime!).inSeconds;
-    if (seconds > 0) {
-      debugPrint("ANALYTICS: Flushing session for $_currentContentId: $seconds seconds");
-      widget.onInteraction('ANALYTICS_SESSION: $seconds', contentId: _currentContentId);
-    }
-    
-    _sessionStartTime = null; // Clear session
   }
 
   @override
   void dispose() {
-    _flushAnalyticsSession();
-    try { _videoController.removeListener(_videoListener); } catch(_) {}
-    WidgetsBinding.instance.removeObserver(this); 
+    WidgetsBinding.instance.removeObserver(this); // A_117: Detach Lifecycle Observer
     routeObserver.unsubscribe(this);
     _discController.dispose();
+    _videoController.dispose();
+    _audioController?.dispose(); // DISPOSE AUDIO
+    _quantumPreloadController?.dispose(); // DISPOSE PRELOAD BUFFER
     _commentController.dispose();
-    
-    // A_270 Spartan Disposal: Kill immediately for next slot
-    _videoController.pause();
-    _videoController.setVolume(0);
-    _audioController?.pause();
-    _audioController?.dispose(); 
-    _audioController = null;
-    
-    // Explicitly do not dispose _videoController here as it's owned by Global Cache,
-    // but the cache _cleanUp will handle it.
     super.dispose();
   }
 
@@ -8335,323 +7842,205 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     // V15 Split-Screen Logic: Fully responsive to AdMob 40% requirement.
-    // If ad is active (adPanelHeight > 0), use minimal aesthetic padding.
-    // If ad is OFF, use 80px to clear the Sovereign Navigation Bar.
     final double bottomSafePadding = widget.adPanelHeight > 0 ? 12 : 80;
 
     return Container(
-      color: Colors.black, // Dark surrounding to emphasize the 9:16 frame
-      child: Center(
-        child: GestureDetector(
-          onTap: _togglePlay,
-          onDoubleTapDown: (details) => _addHeart(details.localPosition),
-          onLongPress: _showLongPressMenu,
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              // 1. Video/Content Layer (TikTok 9:16 Frame)
-              Container(
-                color: const Color(0xFF050505),
-                child: Stack(
-                  children: [
-                    // 1. Video Layer (Real Video Player)
-                    Center(
-                      child: Container(
-                        color: Colors.black, 
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            if (_isInitialized)
-                               SizedBox.expand(
-                                 child: FittedBox(
-                                   fit: BoxFit.cover, // V15: Force Fit - No Black Bars
-                                   clipBehavior: Clip.hardEdge,
-                                   child: _isImage || !widget.isActive
-                                       ? Image.network(
-                                           widget.videoUrl ?? getSovereignUrl(widget.index, widget.mediaLedger),
-                                           fit: BoxFit.cover,
-                                           loadingBuilder: (context, child, loadingProgress) {
-                                             if (loadingProgress == null) return child;
-                                             return Container(color: Colors.black);
-                                           },
-                                           errorBuilder: (context, error, stackTrace) => Container(color: Colors.black),
-                                         )
-                                       : SizedBox(
-                                           width: _videoController.value.size.width,
-                                           height: _videoController.value.size.height,
-                                           child: VideoPlayer(
-                                             _videoController,
-                                             key: ValueKey('v_${widget.index}_${_videoController.dataSource}'),
-                                           ),
-                                         ),
-                                  ),
-                                )
-                            else
-                               Container(color: Colors.black), // A_230: Deep Black Backdrop (Fix Sada Screen)
-                          ],
-                        ),
-                      )
-                    ),
-                    
-                    if (!_isPlaying)
-                      const Center(child: Icon(Icons.play_arrow_rounded, size: 80, color: Colors.white24)),
-                    
-                    // 1.5: SPONSORED AD OVERLAY (75% MOD) [A_111]
-                    if (widget.sponsorFrequency > 0 && (widget.index + 1) % widget.sponsorFrequency.toInt() == 0)
-                      _buildBadge('SPONSORED', SovereignColors.cyan, 100),
-                    
-                    // 2. AI Moderation Overlay [3-Layer V15 Guard]
-                    Positioned(
-                      top: 0, left: 0, right: 0,
-                      child: Container(
-                        height: 2,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.transparent, SovereignColors.cyan.withValues(alpha: 0.5), Colors.transparent],
-                          ),
-                        ),
-                      ),
-                    ),
-                    
-                    // Video Progress Bar [A_110]
-                    if (!_isImage)
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: VideoProgressIndicator(
-                          isPlaying: _isPlaying,
-                          controller: _videoController,
-                        ),
-                      ),
-
-                    // A_125: AI Sensory Captions Layer
-                    if (_showCaptions)
-                      Positioned(
-                        bottom: 35,
-                        left: 20,
-                        right: 20,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(color: Colors.black.withValues(alpha: 0.7), borderRadius: BorderRadius.circular(4)),
-                          child: const Text(
-                            '[A_125 Neural Analysis: Immersive Audio Pulse Detected]',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 0.5),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              
-              // 2. Heart Animation Layer
-              ..._hearts.map((offset) => Positioned(
-                left: offset.dx - 40,
-                top: offset.dy - 40,
-                child: const PulsingHeart(),
-              )),
-
-              // 3. Top Branding (Relative to Frame) - Hidden as per user request [A_120]
-              Visibility(
-                visible: false,
-                child: Positioned(
-                  top: 25,
-                  left: 15,
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 300),
-                    opacity: _isClearDisplay ? 0.0 : 1.0,
-                    child: Row(
+      color: Colors.black, // Background for desktop/wide focus
+      alignment: Alignment.center,
+      child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white.withValues(alpha: 0.05), width: 0.5),
+            ),
+            child: GestureDetector(
+              onTap: _togglePlay,
+              onDoubleTapDown: (details) => _addHeart(details.localPosition),
+              onLongPress: _showLongPressMenu,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  // 1. Video/Content Layer
+                  Container(
+                    color: Colors.black,
+                    child: Stack(
+                      fit: StackFit.expand,
                       children: [
-                        const Text('L❤️Tok', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white, shadows: [Shadow(blurRadius: 10, color: Colors.black)])),
-                        const SizedBox(width: 8),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-
-              // 4. Right Sidebar (Interactions Locked to Frame)
-              Positioned(
-                bottom: bottomSafePadding - 10, 
-                right: 10,
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 300),
-                  opacity: _isClearDisplay ? 0.0 : 1.0,
-                  child: Column(
-                      children: [
-                        _buildAvatar(),
-                        const SizedBox(height: 5), // Added 5px gap after avatar
-                        _buildSidebarItem(Icons.favorite, _getFormattedStat('likes', '0'), Colors.white, 'LIKE'),
-                        _buildSidebarItem(Icons.comment, _getFormattedStat('comments', '0'), Colors.white, 'COMMENT_OPEN'),
-                        _buildSidebarItem(Icons.bookmark, _getFormattedStat('saves', 'Save'), Colors.white, 'SAVE'),
-                        _buildSidebarItem(Icons.share, _getFormattedStat('shares', '0'), Colors.white, 'SHARE'),
-                        _buildSidebarItem(Icons.more_horiz, 'More', Colors.white, 'MORE_OPTIONS'),
-                        const SizedBox(height: 12),
-                        _buildMusicDisc(),
-                      ],
-                  ),
-                ),
-              ),
-
-              // 5. Bottom Metadata (Handle, Description Locked to Frame)
-              Positioned(
-                 bottom: bottomSafePadding,
-                 left: 15,
-                 right: 80, 
-                 child: AnimatedOpacity(
-                   duration: const Duration(milliseconds: 300),
-                   opacity: _isClearDisplay ? 0.0 : 1.0,
-                   child: Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                        onTap: () => widget.creatorProfileOpen(widget.uploaderHandle ?? widget.uploaderName ?? '@Creator_${widget.index}'),
-                        child: Text(
-                          widget.uploaderName != null 
-                            ? (widget.uploaderName!.startsWith('@') ? widget.uploaderName! : '@${widget.uploaderName}')
-                            : (widget.uploaderHandle != null ? (widget.uploaderHandle!.startsWith('@') ? widget.uploaderHandle! : '@${widget.uploaderHandle}') : '@Creator_${widget.index}'), 
-                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13.5, shadows: [Shadow(blurRadius: 10, color: Colors.black45)])
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                       Visibility(
-                         visible: false,
-                         child: Row(
-                           children: [
-                             Container(
-                               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2.5),
-                               decoration: BoxDecoration(color: Colors.black38, borderRadius: BorderRadius.circular(4), border: Border.all(color: Colors.white10)),
-                               child: const Row(
-                                 mainAxisSize: MainAxisSize.min,
-                                 children: [
-                                   Icon(Icons.flash_on, size: 10, color: Colors.yellowAccent),
-                                   SizedBox(width: 4),
-                                   Text('Sovereign V15 Effect', style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w600)),
-                                 ],
-                               ),
-                             ),
-                           ],
-                         ),
-                       ),
-                      const SizedBox(height: 4),
-                      GestureDetector(
-                        onTap: () => setState(() => _isDescExpanded = !_isDescExpanded),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.description ?? 'Sovereign Pulse V15 Content Syncing...',
-                              style: const TextStyle(color: Colors.white, fontSize: 11.5, height: 1.3, shadows: [Shadow(blurRadius: 5, color: Colors.black)]),
-                              maxLines: _isDescExpanded ? 10 : 2,
-                              overflow: TextOverflow.ellipsis,
+                        if (_isInitialized)
+                           FittedBox(
+                             fit: BoxFit.cover, 
+                             clipBehavior: Clip.hardEdge,
+                             child: _isImage
+                                 ? Image.network(
+                                     widget.videoUrl ?? getSovereignUrl(widget.index, widget.mediaLedger),
+                                     fit: BoxFit.cover,
+                                   )
+                                 : SizedBox(
+                                     width: _videoController.value.size.width,
+                                     height: _videoController.value.size.height,
+                                     child: VideoPlayer(_videoController),
+                                   ),
+                            )
+                        else
+                           const Center(child: CircularProgressIndicator(color: SovereignColors.cyan)),
+                        
+                        if (!_isPlaying)
+                          const Center(child: Icon(Icons.play_arrow_rounded, size: 80, color: Colors.white24)),
+                        
+                        if (widget.sponsorFrequency > 0 && (widget.index + 1) % widget.sponsorFrequency.toInt() == 0)
+                          _buildBadge('SPONSORED', SovereignColors.cyan, 100),
+                        
+                        // Video Progress Bar
+                        if (!_isImage)
+                          Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: VideoProgressIndicator(
+                              isPlaying: _isPlaying,
+                              controller: _videoController,
                             ),
-                            if (widget.description != null && widget.description!.length > 40 && !_isDescExpanded)
-                              const Padding(
-                                padding: EdgeInsets.only(top: 4),
-                                child: Text('more', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
-                              ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  
+                  // 2. Heart Animation Layer
+                  ..._hearts.map((offset) => Positioned(
+                    left: offset.dx - 40,
+                    top: offset.dy - 40,
+                    child: const PulsingHeart(),
+                  )),
+
+                  // 3. Right Sidebar
+                  Positioned(
+                    bottom: bottomSafePadding - 10, 
+                    right: 8, 
+                    child: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 300),
+                      opacity: _isClearDisplay ? 0.0 : 1.0,
+                      child: Column(
+                          children: [
+                            _buildAvatar(),
+                            const SizedBox(height: 5),
+                            _buildSidebarItem(Icons.favorite, _getFormattedStat('likes', '0'), Colors.white, 'LIKE'),
+                            _buildSidebarItem(Icons.comment, _getFormattedStat('comments', '0'), Colors.white, 'COMMENT_OPEN'),
+                            _buildSidebarItem(Icons.bookmark, _getFormattedStat('saves', 'Save'), Colors.white, 'SAVE'),
+                            _buildSidebarItem(Icons.share, _getFormattedStat('shares', '0'), Colors.white, 'SHARE'),
+                            const SizedBox(height: 12),
+                            _buildMusicDisc(),
                           ],
-                        ),
                       ),
-                      const SizedBox(height: 4),
-                      Row(
+                    ),
+                  ),
+
+                  // 4. Bottom Metadata
+                  Positioned(
+                     bottom: bottomSafePadding,
+                     left: 12,
+                     right: 70, 
+                     child: AnimatedOpacity(
+                       duration: const Duration(milliseconds: 300),
+                       opacity: _isClearDisplay ? 0.0 : 1.0,
+                       child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.music_note, size: 11, color: Colors.white),
-                          const SizedBox(width: 5),
-                          GestureDetector(
-                            onTap: () => widget.soundDetailOpen(_getSoundInfo()['name']!),
-                            child: SizedBox(
-                              width: 140,
-                              child: MarqueeText(text: _getSoundInfo()['name']!),
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                widget.uploaderName != null 
+                                  ? (widget.uploaderName!.startsWith('@') ? widget.uploaderName! : '@${widget.uploaderName}')
+                                  : '@Creator_${widget.index}', 
+                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13, shadows: [Shadow(blurRadius: 10, color: Colors.black45)])
+                              ),
+                              if (widget.isVerified) ...[
+                                const SizedBox(width: 4),
+                                const Icon(Icons.verified, color: SovereignColors.cyan, size: 14),
+                              ],
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            widget.description ?? 'Sovereign Content Sync...',
+                            style: const TextStyle(color: Colors.white, fontSize: 11, height: 1.3, shadows: [Shadow(blurRadius: 5, color: Colors.black)]),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 6),
+                          Row(
+                            children: [
+                              const Icon(Icons.music_note, size: 10, color: Colors.white),
+                              const SizedBox(width: 4),
+                              SizedBox(
+                                width: 120,
+                                child: MarqueeText(text: _getSoundInfo()['name']!),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
     );
   }
 
   Widget _buildMusicDisc() {
     final String soundName = _getSoundInfo()['name']!;
-    
-    // A_295 Multi-Anchor Normalizer: Identification by MeshID OR DisplayName
-    final String myId = widget.meshID.toUpperCase().replaceAll('@', '').trim();
-    final String myName = (widget.currentUserName ?? "").toUpperCase().trim();
-    final String uploaderH = (widget.uploaderHandle ?? "").toUpperCase().replaceAll('@', '').trim();
-    final String uploaderN = (widget.uploaderName ?? "").toUpperCase().trim();
-    
-    final bool isMe = (myId.isNotEmpty && (uploaderH == myId || uploaderH.contains(myId))) ||
-                     (myName.isNotEmpty && (uploaderH == myName || uploaderN == myName || uploaderN.contains(myName)));
+    final String? uploaderPic = widget.index < widget.mediaLedger.length 
+        ? widget.mediaLedger[widget.index]['uploader_pic'] 
+        : null;
 
     return GestureDetector(
       onTap: () => widget.soundDetailOpen(soundName),
       child: RotationTransition(
         turns: _discController,
-        child: ValueListenableBuilder<String?>(
-          valueListenable: widget.profilePicPulse ?? ValueNotifier(null),
-          builder: (context, globalPic, _) {
-            final String? uploaderPic = isMe ? globalPic : (widget.index < widget.mediaLedger.length 
-                ? widget.mediaLedger[widget.index]['uploader_pic'] 
-                : null);
-
-            return Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  height: 44,
-                  width: 44,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: SweepGradient(
-                      colors: [
-                        Colors.black,
-                        Colors.grey.shade800,
-                        Colors.black,
-                      ],
-                      stops: const [0.0, 0.5, 1.0],
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: SovereignColors.cyan.withValues(alpha: 0.3),
-                        blurRadius: 10,
-                        spreadRadius: 1,
-                      )
-                    ],
-                    border: Border.all(color: Colors.white.withValues(alpha: 0.1), width: 1),
-                  ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: 44,
+              width: 44,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: SweepGradient(
+                  colors: [
+                    Colors.black,
+                    Colors.grey.shade800,
+                    Colors.black,
+                  ],
+                  stops: const [0.0, 0.5, 1.0],
                 ),
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                    image: (uploaderPic != null && uploaderPic.isNotEmpty)
-                        ? (uploaderPic.startsWith('http') || uploaderPic.startsWith('/') || uploaderPic.startsWith('profile')
-                            ? DecorationImage(image: NetworkImage(_resolveSecureUrl(uploaderPic)), fit: BoxFit.cover)
-                            : DecorationImage(image: FileImage(File(uploaderPic)), fit: BoxFit.cover))
-                        : null,
-                    border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1),
-                  ),
-                  child: (uploaderPic == null || uploaderPic.isEmpty)
-                      ? const Center(
-                          child: Icon(Icons.music_note, color: Colors.white, size: 16),
-                        )
-                      : null,
-                ),
-              ],
-            );
-          }
+                boxShadow: [
+                  BoxShadow(
+                    color: SovereignColors.cyan.withValues(alpha: 0.3),
+                    blurRadius: 10,
+                    spreadRadius: 1,
+                  )
+                ],
+                border: Border.all(color: Colors.white.withValues(alpha: 0.1), width: 1),
+              ),
+            ),
+            Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.black,
+                image: (uploaderPic != null && uploaderPic.isNotEmpty)
+                    ? DecorationImage(image: NetworkImage(uploaderPic), fit: BoxFit.cover)
+                    : null,
+                border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1),
+              ),
+              child: (uploaderPic == null || uploaderPic.isEmpty)
+                  ? const Center(
+                      child: Icon(Icons.music_note, color: Colors.white, size: 16),
+                    )
+                  : null,
+            ),
+          ],
         ),
       ),
     );
@@ -8660,15 +8049,6 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
 
   Widget _buildAvatar() {
     String displayHandle = widget.uploaderHandle ?? widget.uploaderName ?? '@Creator_${widget.index}';
-    
-    // A_295 Multi-Anchor Normalizer: Identification by MeshID OR DisplayName
-    final String myId = widget.meshID.toUpperCase().replaceAll('@', '').trim();
-    final String myName = (widget.currentUserName ?? "").toUpperCase().trim();
-    final String uploaderH = (widget.uploaderHandle ?? "").toUpperCase().replaceAll('@', '').trim();
-    final String uploaderN = (widget.uploaderName ?? "").toUpperCase().trim();
-    
-    final bool isMe = (myId.isNotEmpty && (uploaderH == myId || uploaderH.contains(myId))) ||
-                     (myName.isNotEmpty && (uploaderH == myName || uploaderN == myName || uploaderN.contains(myName)));
 
     return GestureDetector(
       onTap: () => widget.creatorProfileOpen(displayHandle),
@@ -8683,27 +8063,22 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.white, width: 1),
               ),
-              child: ValueListenableBuilder<String?>(
-                valueListenable: widget.profilePicPulse ?? ValueNotifier(null),
-                builder: (context, globalPic, _) {
-                  final String? uploaderPic = isMe ? globalPic : (widget.index < widget.mediaLedger.length 
-                      ? widget.mediaLedger[widget.index]['uploader_pic'] 
-                      : null);
-                  
-                  return CircleAvatar(
-                    radius: 17, 
-                    backgroundColor: Colors.black, 
-                    backgroundImage: (uploaderPic != null && uploaderPic.isNotEmpty)
-                        ? (uploaderPic.startsWith('http') || uploaderPic.startsWith('/stream')
-                            ? NetworkImage(_resolveSecureUrl(uploaderPic))
-                            : FileImage(File(uploaderPic))) as ImageProvider
-                        : null,
-                    child: (uploaderPic == null || uploaderPic.isEmpty) 
-                        ? const Icon(Icons.person, color: SovereignColors.cyan) 
-                        : null,
-                  );
-                }
-              ),
+              child: () {
+                final String? uploaderPic = widget.index < widget.mediaLedger.length 
+                    ? widget.mediaLedger[widget.index]['uploader_pic'] 
+                    : null;
+                
+                return CircleAvatar(
+                  radius: 17, 
+                  backgroundColor: Colors.black, 
+                  backgroundImage: (uploaderPic != null && uploaderPic.isNotEmpty)
+                      ? NetworkImage(uploaderPic)
+                      : null,
+                  child: (uploaderPic == null || uploaderPic.isEmpty) 
+                      ? const Icon(Icons.person, color: SovereignColors.cyan) 
+                      : null,
+                );
+              }(),
             ),
             if (!isFollowing)
               Positioned(
@@ -9266,10 +8641,7 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
                   }),
                   _buildShareBtn(Icons.download, 'Save Video', Colors.grey),
                   _buildShareBtn(Icons.playlist_add, 'Add to Collections', Colors.grey),
-                  _buildShareBtn(Icons.flag, 'Report', Colors.redAccent, onTap: () {
-                    Navigator.pop(context);
-                    _showReportDialog();
-                  }),
+                  _buildShareBtn(Icons.flag, 'Report', Colors.redAccent),
                 ],
               ),
             ),
@@ -9339,8 +8711,8 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
                     widget.onSkip?.call();
                 }),
                 _buildLongMenuItem(Icons.flag_outlined, 'Report', color: Colors.redAccent, onTap: () {
+                    widget.onInteraction('LONG_PRESS_REPORT: PENDING');
                     Navigator.pop(context);
-                    _showReportDialog();
                 }),
                 _buildLongMenuItem(Icons.people_outline, 'Duet', onTap: () {
                     widget.onInteraction('LONG_PRESS_DUET: OPEN');
@@ -9700,22 +9072,6 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
   void _showSimulatedAnalytics() {
     widget.onInteraction('OPTIONS_ANALYTICS_OPENED');
     Navigator.pop(context); // Close main hub
-    
-    // V15 OMNI-SYNC: Pull real data from the authoritative ledger
-    Map<String, dynamic> ana = {};
-    if (widget.index < widget.mediaLedger.length) {
-      ana = widget.mediaLedger[widget.index]['analytics'] ?? {};
-    }
-    
-    final totalViews = (widget.mediaLedger[widget.index]['views'] ?? 0).toString();
-    final watchTime = ana['watch_time_total'] ?? 0;
-    final fullWatchesCount = ana['full_watches'] ?? 0;
-    final Map territories = ana['territories'] ?? {"United States": 45, "United Kingdom": 20, "Mesh Network": 15};
-
-    // Calculate dynamic percentages
-    int totalT = territories.values.fold(0, (prev, element) => prev + (element as int));
-    if (totalT == 0) totalT = 1;
-
     showModalBottomSheet(
       context: context,
       backgroundColor: const Color(0xFF161616),
@@ -9740,18 +9096,20 @@ class _VideoFeedItemState extends State<VideoFeedItem> with SingleTickerProvider
               decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.05), borderRadius: BorderRadius.circular(16)),
               child: Column(
                 children: [
-                  _buildStatRow('Total Views', totalViews, Icons.visibility),
+                  _buildStatRow('Total Views', '${12.4 + widget.index}K', Icons.visibility),
                   const Divider(color: Colors.white10, height: 24),
-                  _buildStatRow('Total Watch Time', '${(watchTime / 60).toStringAsFixed(1)}m', Icons.timer),
+                  _buildStatRow('Average Watch Time', '00:${Random().nextInt(30) + 15}s', Icons.timer),
                   const Divider(color: Colors.white10, height: 24),
-                  _buildStatRow('Full Completions', '$fullWatchesCount', Icons.check_circle),
+                  _buildStatRow('Full Video Watched', '${40 + Random().nextInt(20)}%', Icons.check_circle),
                 ],
               ),
             ),
             const SizedBox(height: 24),
             const Text('Audience Territories', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
-            ...territories.entries.map((e) => _buildTerritoryRow(e.key, ((e.value as int) * 100 / totalT).round())),
+            _buildTerritoryRow('United States', 45),
+            _buildTerritoryRow('United Kingdom', 20),
+            _buildTerritoryRow('Mesh Network', 15),
             const Spacer(),
             SizedBox(
               width: double.infinity,
@@ -9948,10 +9306,11 @@ class _SovereignSoundDetailState extends State<SovereignSoundDetail> with Single
     if (widget.soundUrl != null && widget.soundUrl!.isNotEmpty) {
       String fullUrl = widget.soundUrl!;
       if (fullUrl.startsWith('/stream')) {
-        fullUrl = '/sound_engine$fullUrl';
+        final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
+        fullUrl = 'http://$host:9900$fullUrl';
       }
       
-      _previewController = VideoPlayerController.networkUrl(Uri.parse(fullUrl))
+      _previewController = VideoPlayerController.networkUrl(Uri.parse(_resolveSecureUrl(fullUrl)))
         ..initialize().then((_) {
           if (mounted) setState(() {});
         });
@@ -11005,8 +10364,8 @@ class QuantumWalletView extends StatelessWidget {
     // Sovereign V15: High-Precision Profile Pre-fetch
     Future<void> prefillBank() async {
       try {
-        final uri = _getMeshUri('/api/v15/finance/bank/get?user_id=$meshID');
-        final resp = await http.get(uri);
+        final String currentHost = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
+        final resp = await http.get(Uri.parse(_resolveSecureUrl('http://$currentHost:5000/api/v15/finance/bank/get?user_id=$meshID')));
         if (resp.statusCode == 200) {
            final data = json.decode(resp.body);
            if (data['status'] == 'SUCCESS' && data['profile'] != null) {
@@ -11388,7 +10747,7 @@ class QuantumWalletView extends StatelessWidget {
                     setDialogState(() => loadingBridge = true);
                     try {
                       final String currentHost = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
-                      final resp = await http.get(Uri.parse('http://$currentHost/api/v15/finance/bridge/config'));
+                      final resp = await http.get(Uri.parse(_resolveSecureUrl('http://$currentHost:5000/api/v15/finance/bridge/config')));
                       if (resp.statusCode == 200) {
                         bridgeConfigsListenable.value = json.decode(resp.body);
                       }
@@ -11417,9 +10776,9 @@ class QuantumWalletView extends StatelessWidget {
 
                   try {
                     // V15 GAP FIX 4: Use dynamic globalSovereignHost instead of hardcoded IP
-                    final uri = _getMeshUri('/api/v15/finance/deposit/verify_tx');
+                    final String currentHost = globalSovereignHost;
                     final response = await http.post(
-                      uri,
+                      Uri.parse('http://$currentHost:5000/api/v15/finance/deposit/verify_tx'),
                       headers: {'Content-Type': 'application/json'},
                       body: json.encode({
                         "user_id": meshID,
@@ -11631,8 +10990,8 @@ class QuantumWalletView extends StatelessWidget {
     // Load existing profile
     Future<void> loadProfile() async {
       try {
-        final uri = _getMeshUri('/api/v15/finance/bank/get?user_id=$meshID');
-        final resp = await http.get(uri);
+        final String currentHost = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
+        final resp = await http.get(Uri.parse('http://$currentHost:5000/api/v15/finance/bank/get?user_id=$meshID'));
         if (resp.statusCode == 200) {
            final data = json.decode(resp.body);
            if (data['status'] == 'SUCCESS' && data['profile'] != null) {
@@ -11690,9 +11049,9 @@ class QuantumWalletView extends StatelessWidget {
                 return;
               }
               
-              final uri = _getMeshUri('/api/v15/finance/bank/update');
+              final String currentHost = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : globalSovereignHost;
               final resp = await http.post(
-                uri,
+                Uri.parse('http://$currentHost:5000/api/v15/finance/bank/update'),
                 headers: {'Content-Type': 'application/json'},
                 body: json.encode({
                   "user_id": meshID,
@@ -11981,8 +11340,7 @@ class _SovereignDMViewState extends State<SovereignDMView> {
       });
       // Sync to Sovereign Mesh Interaction Engine
       final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
-      final String interactionProtocol = Uri.base.scheme == 'https' ? 'wss' : 'ws';
-      WebSocketChannel.connect(Uri.parse('$interactionProtocol://$host/ws/interaction')).sink.add(json.encode({
+      WebSocketChannel.connect(Uri.parse(_resolveSecureUrl('ws://$host:5000/ws/interaction'))).sink.add(json.encode({
         "action": "DM_MESSAGE_SENT",
         "recipient": widget.user,
         "message": text,
@@ -12138,8 +11496,8 @@ class _SovereignSoundHubState extends State<SovereignSoundHub> {
     
     setState(() => _isSearchLoading = true);
     try {
-      final uri = _getMeshUri('/sound_engine/search?query=$query');
-      final res = await http.get(uri);
+      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
+      final res = await http.get(Uri.parse(_resolveSecureUrl('http://$host:9900/search?query=$query')));
       if (res.statusCode == 200) {
         setState(() => _searchResults = json.decode(res.body));
       }
@@ -12586,10 +11944,7 @@ class _SovereignVideoDetailFeedState extends State<SovereignVideoDetailFeed> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: widget.initialIndex);
-    _activeDetailIndex = widget.initialIndex; // A_121 Initialization
   }
-
-  int _activeDetailIndex = 0;
 
   @override
   void dispose() {
@@ -12612,7 +11967,6 @@ class _SovereignVideoDetailFeedState extends State<SovereignVideoDetailFeed> {
       ),
       body: PageView.builder(
         scrollDirection: Axis.vertical,
-        onPageChanged: (i) => setState(() => _activeDetailIndex = i),
         controller: _pageController,
         itemCount: widget.totalCount,
         itemBuilder: (context, index) {
@@ -12640,8 +11994,9 @@ class _SovereignVideoDetailFeedState extends State<SovereignVideoDetailFeed> {
             mediaLedger: widget.mediaLedger, // Fix Detail View Access
             videoUrl: customUrl,
             uploaderName: uploader,
+            uploaderHandle: uploader,
+            isVerified: (videoIdx < widget.mediaLedger.length) ? (widget.mediaLedger[videoIdx]['uploader_verified'] == true) : false,
             description: description,
-            isActive: index == _activeDetailIndex, // A_121 Focus Protocol
           );
         },
       ),
@@ -12769,8 +12124,8 @@ class _SovereignSoundLibraryState extends State<SovereignSoundLibrary> {
 
   Future<void> _fetchCategories() async {
     try {
-      final uri = _getMeshUri('/sound_engine/categories');
-      final res = await http.get(uri);
+      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost;
+      final res = await http.get(Uri.parse(_resolveSecureUrl('http://$host:9900/categories')));
       if (res.statusCode == 200) {
         setState(() => categories = List<String>.from(json.decode(res.body)));
       }
@@ -12781,8 +12136,8 @@ class _SovereignSoundLibraryState extends State<SovereignSoundLibrary> {
     if (!mounted) return;
     setState(() => isLoading = true);
     try {
-      final uri = _getMeshUri('/sound_engine/explore/$selectedCategory');
-      final res = await http.get(uri);
+      final String host = globalSovereignHost;
+      final res = await http.get(Uri.parse(_resolveSecureUrl('http://$host:9900/explore/$selectedCategory')));
       if (res.statusCode == 200) {
         if (mounted) setState(() => sounds = json.decode(res.body));
       }
@@ -12959,7 +12314,7 @@ class _AdTargetTemplatesViewState extends State<AdTargetTemplatesView> {
                       final m = userMedia[index];
                       final String? thumbName = m['thumbnail'];
                       final String thumbUrl = thumbName != null && thumbName.isNotEmpty
-                          ? 'http://${kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost}/vault/$thumbName' 
+                          ? 'http://${kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : globalSovereignHost) : globalSovereignHost}:5000/vault/$thumbName' 
                           : "";
 
                       return GestureDetector(
@@ -13078,7 +12433,7 @@ class _AdTargetTemplatesViewState extends State<AdTargetTemplatesView> {
                         border: Border.all(color: Colors.white10),
                         image: _selectedVideo != null && _selectedVideo!['thumbnail'] != null
                           ? DecorationImage(
-                              image: NetworkImage('http://${kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : "localhost") : globalSovereignHost}/vault/${_selectedVideo!['thumbnail']}'),
+                              image: NetworkImage('http://${kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : "localhost") : globalSovereignHost}:5000/vault/${_selectedVideo!['thumbnail']}'),
                               fit: BoxFit.cover
                             )
                           : null

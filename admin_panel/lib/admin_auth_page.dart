@@ -61,7 +61,8 @@ class _AdminAuthPageState extends State<AdminAuthPage> with TickerProviderStateM
     setState(() => _isLoading = true);
 
     try {
-      final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
       final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       final response = await http.post(
         Uri.parse('$protocol://$host/admin_auth_init'),
@@ -100,7 +101,8 @@ class _AdminAuthPageState extends State<AdminAuthPage> with TickerProviderStateM
     setState(() => _isLoading = true);
 
     try {
-      final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
       final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       final response = await http.post(
         Uri.parse('$protocol://$host/admin_auth_verify'),

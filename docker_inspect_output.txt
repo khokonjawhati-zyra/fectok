@@ -1,0 +1,34 @@
+﻿=== Docker inspect - Mounts ===
+Binds: ['/var/lib/sovereign/auth:/app/auth_data:rw']
+
+
+=== /app/vault/data inside container ===
+ls: cannot access '/app/vault/data/': No such file or directory
+
+
+=== /var/www/html/media/videos (host) ===
+total 206289
+drwxr-xr-x 1 root root        0 Mar 12 20:28 .
+drwxr-xr-x 3 root root     4096 Mar 10 18:12 ..
+-rwxr-xr-x 1 root root       96 Mar 14 07:16 LAST_UPLOAD.txt
+drwxr-xr-x 1 root root        0 Mar 13 20:02 REC881578334156003920_1773432138
+-rw-r--r-- 1 root root    77217 Mar 13 20:02 REC881578334156003920_1773432138.jpg
+-rw-r--r-- 1 root root 11218827 Mar 13 20:02 REC881578334156003920_1773432138.mp4
+drwxr-xr-x 1 root root        0 Mar 12 20:47 grok_video_2026-02-22-15-06-12_1773314149
+-rwxr-xr-x 1 root root   159691 Mar 12 11:15 grok_video_2026-02-22-15-06-12_1773314149.jpg
+-rwxr-xr-x 1 root root  6887404 Mar 12 11:15 grok_video_2026-02-22-15-06-12_1773314149.mp4
+-rwxr-xr-x 1 root root  6651628 Mar 12 11:16 grok_video_2026-02-22-15-06-12_1773314149_000.ts
+-rwxr-xr-x 1 root root      155 Mar 12 11:16 grok_video_2026-02-22-15-06-12_1773314149_master.m3u8
+drwxr-xr-x 1 root root        0 Mar 13 15:30 grok_video_2026-02-22-15-07-33_1773415811
+-rw-r--r-- 1 root root    47467 Mar 13 15:30 grok_video_2026-02-22-15-07-33_1773415811.jpg
+-rw-r--r-- 1 root root  1797129 Mar 13 15:30 grok_video_2026-02-22-15-07-33_1773415811.mp4
+drwxr-xr-x 1 root root        0 Mar 12 23:13 grok_video_2026-02-22-15-17-37_1773357182
+-rw-r--r-- 1 root root    53549 Mar 12 23:13 grok_video_2026-02-22-15-17-37_1773357182.jpg
+-rw-r--r-- 1 root root  3483094 Mar 12 23:13 grok_video_2026-02-22-15-17-37_1773357182.mp4
+drwxr-xr-x 1 root root        0 Mar 12 20:47 grok_video_2026-02-22-15-20-05_1773341542
+-rwxr-xr-x 1 root root    87321 Mar 12 18:52 grok_video_2026-02-22-15-20-05_1773341542.jpg
+
+
+=== Docker compose or run command ===
+["/var/lib/sovereign/auth:/app/auth_data:rw"]
+

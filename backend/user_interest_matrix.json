@@ -13,7 +13,7 @@
         "GENERAL": 0
     },
     "SOV_36044": {
-        "GENERAL": 9
+        "GENERAL": 22
     },
     "SOV_99550": {
         "GENERAL": 3
@@ -50,5 +50,11 @@
     },
     "SOV_66152": {
         "GENERAL": 9
+    },
+    "SOV_89173": {
+        "GENERAL": 0
+    },
+    "SOV_10385": {
+        "GENERAL": 3
     }
 }

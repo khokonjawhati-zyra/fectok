@@ -35,7 +35,8 @@ class _SovereignAdminAppState extends State<SovereignAdminApp> {
     if (token != null) {
       // Verify token against backend before trusting it
       try {
-        final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+        String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+        if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
         final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
         final response = await http.post(
           Uri.parse('$protocol://$host/verify_token'),
@@ -105,6 +106,13 @@ class _AdminScaffoldState extends State<AdminScaffold> {
   bool _isAdSplitEnabled = true;
   bool _isAIInjectorEnabled = true;
   bool _isAdRandomizerEnabled = false;
+
+  String _healUrl(String url) {
+    if (url == null || url.isEmpty) return url;
+    final String currentHost = html.window.location.hostname ?? 'localhost';
+    final RegExp ipRegex = RegExp(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}');
+    return url.replaceAll(ipRegex, currentHost).replaceAll('localhost', currentHost);
+  }
   final Map<String, String> _networkApiKeys = {
     'ADM': 'ADM_LIVE_X99',
     'UNT': 'UNT_LIVE_X77',
@@ -139,7 +147,8 @@ class _AdminScaffoldState extends State<AdminScaffold> {
 
   Future<void> _fetchBridgeConfig() async {
     try {
-      final String host = Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost';
+      String host = Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost';
+      if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
       final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       final resp = await http.get(Uri.parse('$protocol://$host/api/v15/finance/bridge/config'));
       if (resp.statusCode == 200) {
@@ -227,7 +236,8 @@ class _AdminScaffoldState extends State<AdminScaffold> {
   void initState() {
     super.initState();
     _fetchBridgeConfig(); // V15: High-Fidelity Bridge State Sync
-    final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+    String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+    if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
     final String wsProtocol = Uri.base.scheme == 'https' ? 'wss' : 'ws';
     channel = WebSocketChannel.connect(
       Uri.parse('$wsProtocol://$host/ws/admin?token=${widget.token}'),
@@ -625,7 +635,8 @@ class _AdminScaffoldState extends State<AdminScaffold> {
       _shareWeight = s;
     });
     try {
-      final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
       final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       await http.post(
         Uri.parse('$protocol://$host/api/v15/finance/impression/update_weights?l=${l.toInt()}&c=${c.toInt()}&s=${s.toInt()}'),
@@ -738,7 +749,8 @@ class _AdminScaffoldState extends State<AdminScaffold> {
       _soundRecLimit = limit;
     });
     try {
-      final String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      String host = Uri.base.host.isNotEmpty ? Uri.base.host : '127.0.0.1';
+      if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
       final String protocol = Uri.base.scheme == 'https' ? 'https' : 'http';
       await http.post(
         Uri.parse('$protocol://$host/api/v15/sound/admin_logic?viral_boost=${boost.toInt()}&rec_limit=${limit.toInt()}'),
@@ -1247,6 +1259,14 @@ class _AdminScaffoldState extends State<AdminScaffold> {
                       Text('USER: ${req['user_id']}', style: const TextStyle(color: Color(0xFF00FFFF), fontSize: 10, fontWeight: FontWeight.bold)),
                       Row(
                         children: [
+                          IconButton(
+                            icon: const Icon(Icons.visibility, color: Colors.blueAccent, size: 20),
+                            onPressed: () {
+                               if (req['doc_url'] != null) {
+                                  html.window.open(_healUrl(req['doc_url']), '_blank');
+                               }
+                            },
+                          ),
                           IconButton(
                             icon: const Icon(Icons.check_circle, color: Colors.greenAccent, size: 20),
                             onPressed: () => _verificationDecision(req['user_id'], 'APPROVED'),

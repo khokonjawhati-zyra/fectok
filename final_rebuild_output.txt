@@ -1,0 +1,68 @@
+﻿=== STEP 1: Listing ALL MP4 files in uplink vault ===
+Found 23 MP4 files:
+  /app/vault/data/REC881578334156003920_1773432138.mp4
+  /app/vault/data/grok_video_2026-02-22-15-06-12_1773314149.mp4
+  /app/vault/data/grok_video_2026-02-22-15-07-33_1773415811.mp4
+  /app/vault/data/grok_video_2026-02-22-15-17-37_1773357182.mp4
+  /app/vault/data/grok_video_2026-02-22-15-20-05_1773341542.mp4
+  /app/vault/data/grok_video_2026-02-22-15-23-36_1773333787.mp4
+  /app/vault/data/grok_video_2026-02-22-15-30-53_1773425494.mp4
+  /app/vault/data/grok_video_2026-02-22-15-37-42_1773415367.mp4
+  /app/vault/data/grok_video_2026-02-22-15-37-51_1773472573.mp4
+  /app/vault/data/grok_video_2026-02-22-15-41-20_1773324844.mp4
+  /app/vault/data/grok_video_2026-02-22-15-41-20_1773324895.mp4
+  /app/vault/data/grok_video_2026-02-22-15-41-20_1773324897.mp4
+  /app/vault/data/grok_video_2026-02-22-15-44-35_1773411833.mp4
+  /app/vault/data/grok_video_2026-02-22-15-44-42_1773393239.mp4
+  /app/vault/data/grok_video_2026-02-22-15-47-15_1773349415.mp4
+  /app/vault/data/grok_video_2026-02-22-15-47-27_1773327693.mp4
+  /app/vault/data/grok_video_2026-02-22-15-47-40_1773340683.mp4
+  /app/vault/data/grok_video_2026-02-22-15-48-38_1773349530.mp4
+  /app/vault/data/grok_video_2026-02-22-15-48-38_1773350748.mp4
+  /app/vault/data/grok_video_2026-02-22-15-51-39_1773333314.mp4
+  /app/vault/data/grok_video_2026-02-22-15-51-58_1773431840.mp4
+  /app/vault/data/grok_video_2026-02-22-15-52-09_1773323035.mp4
+  /app/vault/data/grok_video_2026-02-22-15-52-40_1773300374.mp4
+
+=== STEP 2: Reading existing media_vault.json ===
+Vault has 22 entries
+
+=== STEP 3: Rebuilding vault with correct URLs ===
+MP4 map keys: ['REC881578334156003920_1773432138', 'grok_video_2026-02-22-15-06-12_1773314149', 'grok_video_2026-02-22-15-07-33_1773415811', 'grok_video_2026-02-22-15-17-37_1773357182', 'grok_video_2026-02-22-15-20-05_1773341542']
+Fixed: grok_video_2026-02-22-15-52-40_1773300374.mp4 | HLS: EXISTS
+NO MATCH: profile_SOV_54383_1773300471
+Fixed: grok_video_2026-02-22-15-06-12_1773314149.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-52-09_1773323035.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-47-27_1773327693.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-51-39_1773333314.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-23-36_1773333787.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-47-40_1773340683.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-20-05_1773341542.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-48-38_1773350748.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-17-37_1773357182.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-44-42_1773393239.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-44-35_1773411833.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-37-42_1773415367.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-07-33_1773415811.mp4 | HLS: EXISTS
+NO MATCH: profile_SOV_54383_1773416064
+Fixed: grok_video_2026-02-22-15-30-53_1773425494.mp4 | HLS: EXISTS
+Fixed: grok_video_2026-02-22-15-51-58_1773431840.mp4 | HLS: EXISTS
+NO MATCH: profile_SOV_96879_1773435726
+NO MATCH: profile_SOV_96879_1773435728
+NO MATCH: profile_SOV_54383_1773472414
+Fixed: grok_video_2026-02-22-15-37-51_1773472573.mp4 | HLS: EXISTS
+
+Total fixed: 17/22
+
+=== STEP 4: Writing fixed vault to backend ===
+
+
+
+=== STEP 5: Restarting backend ===
+sovereign_v15_backend
+
+
+=== STEP 6: Verify API returns correct URLs ===
+
+
+Γ£à Vault rebuild COMPLETE!

@@ -66,5 +66,13 @@
     "SOV_66152": {
         "mood": "UPBEAT",
         "intensity": 1.0
+    },
+    "SOV_89173": {
+        "mood": "RELAXED",
+        "intensity": 0.0
+    },
+    "SOV_10385": {
+        "mood": "UPBEAT",
+        "intensity": 1.0
     }
 }

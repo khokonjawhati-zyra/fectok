@@ -1,0 +1,31 @@
+﻿=== STEP 1: Get current container run config ===
+sovereign-backend_node {"5000/tcp":[{"HostIp":"","HostPort":"5000"}]}
+
+Image: sovereign-backend_node
+Env: ["PILLAR=ADMIN_ABSOLUTE_TRUTH","SYSTEM_MODE=PRODUCTION","MODE=SCALABLE_PRODUCTION","PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin","LANG=C.UTF-8","GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305","PYTHON_VERSION=3.12.13","PYTHON_SHA256=c08bc65a81971c1dd5783182826503369466c7e67374d1646519adf05207b684"]
+Ports: {"5000/tcp":[{"HostIp":"","HostPort":"5000"}]}
+
+=== STEP 2: Stop & Remove old container ===
+sovereign_v15_backend
+
+sovereign_v15_backend
+
+
+
+
+=== STEP 3: Re-run with new media volume mount ===
+Running: docker run -d             --name sovereign_v15_backend             --restart unless-stopped             -p 5000:5000             -p 8080:8080             -v /var/lib/sovereign/auth:/app/auth_data:rw             -v /var/www/html/media/videos:/app/vault/data:rw             -e SOVEREIGN_HOST=167.71.193.34             -e SOVEREIGN_ZONE=GLOBAL             -e SOUND_LOOP_HOST=127.0.0.1             sovereign-backend_node
+OUT: 5d364db44d2e6beebdc3d36943d14bce9a2b0b1afa7528a8372c5963e026bcd3
+
+ERR: docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint sovereign_v15_backend (f16ee1f669d430e7f9c11f52ba331593f5e8b005b50df306e9342ac253faf014): Bind for 0.0.0.0:8080 failed: port is already allocated
+
+Run 'docker run --help' for more information
+
+
+=== STEP 4: Verify container is running ===
+
+
+=== STEP 5: Check /app/vault/data inside new container ===
+
+
+Γ£à Docker volume fix COMPLETE!

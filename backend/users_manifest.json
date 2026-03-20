@@ -12,7 +12,8 @@
         "status": "ACTIVE",
         "last_login": "2026-02-20T14:15:06.429506",
         "bio": "Transforming Reality within the Mesh.",
-        "profile_pic": "http://10.39.27.252:8080/stream/profile_SOV_89173_1771529457.jpg"
+        "profile_pic": "http://10.95.219.252:8080/stream/profile_SOV_89173_1771529457.jpg",
+        "is_verified": true
     },
     "SOV_45561": {
         "sov_id": "SOV_45561",
@@ -20,7 +21,7 @@
         "status": "ACTIVE",
         "signup_timestamp": "2026-02-16T13:10:10.732645",
         "bio": "ami vazo , sudkhor",
-        "profile_pic": "http://10.39.27.252:8080/stream/profile_SOV_45561_1771225809.jpg"
+        "profile_pic": "http://10.95.219.252:8080/stream/profile_SOV_45561_1771225809.jpg"
     },
     "SOV_22841": {
         "sov_id": "SOV_22841",
@@ -43,9 +44,10 @@
         "status": "ACTIVE",
         "last_login": "2026-02-27T21:23:18.482230",
         "bio": "Transforming Reality within the Mesh.",
-        "profile_pic": "http://10.39.27.252:8080/stream/profile_SOV_36044_1772205813.jpg",
+        "profile_pic": "http://10.95.219.252:8080/stream/profile_SOV_36044_1772205813.jpg",
         "payout_account": "01711906920",
-        "binding_verified": true
+        "binding_verified": true,
+        "is_verified": true
     },
     "SOV_93558": {
         "sov_id": "SOV_93558",
@@ -73,7 +75,7 @@
         "status": "ACTIVE",
         "last_login": "2026-02-18T23:34:14.364297",
         "bio": "Ami ekta Fatra Lok ",
-        "profile_pic": "http://10.39.27.252:8080/stream/profile_SOV_14748_1771436039.jpg"
+        "profile_pic": "http://10.95.219.252:8080/stream/profile_SOV_14748_1771436039.jpg"
     },
     "SOV_68007": {
         "sov_id": "SOV_68007",
@@ -85,7 +87,7 @@
         "status": "ACTIVE",
         "last_login": "2026-03-10T02:36:20.063015",
         "bio": "Transforming Reality within the Mesh.",
-        "profile_pic": "http://10.39.27.252:8080/stream/profile_SOV_68007_1772986638.jpg",
+        "profile_pic": "http://10.95.219.252:8080/stream/profile_SOV_68007_1772986638.jpg",
         "payout_account": "5038901006769",
         "binding_verified": true
     },
@@ -98,7 +100,7 @@
         "signup_timestamp": "2026-02-21T17:09:07.934859",
         "status": "ACTIVE",
         "bio": "Transforming Reality within the Mesh.",
-        "profile_pic": "http://10.39.27.252:8080/stream/profile_SOV_48593_1773090839.jpg",
+        "profile_pic": "http://10.95.219.252:8080/stream/profile_SOV_48593_1773090839.jpg",
         "last_login": "2026-03-10T21:26:14.412196",
         "payout_account": "01795887980",
         "binding_verified": true
@@ -112,7 +114,7 @@
         "signup_timestamp": "2026-02-23T20:47:50.755601",
         "status": "ACTIVE",
         "bio": "Transforming Reality within the Mesh.",
-        "profile_pic": "http://10.39.27.252:8080/stream/profile_SOV_35866_1771858362.jpg",
+        "profile_pic": "http://10.95.219.252:8080/stream/profile_SOV_35866_1771858362.jpg",
         "last_login": "2026-02-23T21:05:58.612948"
     }
 }

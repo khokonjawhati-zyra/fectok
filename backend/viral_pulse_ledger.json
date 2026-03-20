@@ -184,7 +184,7 @@
         "last_pulse": "2026-02-27T21:14:48.728738"
     },
     "grok_video_2026-02-22-15-05-45_1772205340.mp4": {
-        "likes": 0,
+        "likes": 3,
         "shares": 0,
         "views": 0,
         "pulse_score": 0.0,
@@ -414,5 +414,13 @@
         "pulse_score": 0.0,
         "status": "NORMAL",
         "last_pulse": "2026-03-10T12:24:20.507657"
+    },
+    "grok_video_2026-02-22-15-06-06_1772192420.mp4": {
+        "likes": 1,
+        "shares": 0,
+        "views": 0,
+        "pulse_score": 0.0,
+        "status": "NORMAL",
+        "last_pulse": "2026-03-20T04:36:17.656736"
     }
 }

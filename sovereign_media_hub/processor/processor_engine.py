@@ -304,7 +304,7 @@ def process_video(file_path, vault_path):
         try:
             # We assume backend is reachable via sovereign_v15_backend:5000 in Docker
             # or localhost:5000 in local dev
-            backend_target = "http://sovereign_v15_backend:5000" if IS_DOCKER else "http://localhost:5000"
+            backend_target = "http://sovereign_v15_backend:80" if IS_DOCKER else "http://localhost:80"
             notify_url = f"{backend_target}/api/v15/media/hls_ready"
             payload = json.dumps({"file": os.path.basename(file_path)}).encode('utf-8')
             req = urllib.request.Request(notify_url, data=payload, headers={'Content-Type': 'application/json'})
@@ -363,7 +363,7 @@ if __name__ == "__main__":
                          # Trigger backend pulse just in case it missed it before restart
                          try:
                              backend_ip = "backend_node" if IS_DOCKER else "127.0.0.1"
-                             requests.post(f"http://{backend_ip}:5000/api/v15/media/hls_ready", json={"file": f}, timeout=5)
+                             requests.post(f"http://{backend_ip}:80/api/v15/media/hls_ready", json={"file": f}, timeout=5)
                          except: pass
                          continue
 

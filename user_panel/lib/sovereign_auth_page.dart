@@ -101,8 +101,9 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
 
   Future<void> _checkReferrerPulse() async {
     try {
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : 'fectok.com';
-      final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.')) ? 'http' : 'https';
+      String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : 'fectok.com';
+      if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
+      final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.') || host.contains(':5000')) ? 'http' : 'https';
       final response = await http.post(Uri.parse("$protocol://$host/check_referral"), headers: {"Content-Type": "application/json"}, body: jsonEncode({"referral_id": _referralController.text}));
       final result = jsonDecode(response.body);
       if (!mounted) return;
@@ -129,8 +130,9 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
     final token = prefs.getString('auth_token');
     if (token != null) {
       try {
-        final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : 'fectok.com';
-        final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.')) ? 'http' : 'https';
+        String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : 'fectok.com';
+        if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
+        final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.') || host.contains(':5000')) ? 'http' : 'https';
         final response = await http.post(Uri.parse("$protocol://$host/verify_token"), headers: {"Content-Type": "application/json"}, body: jsonEncode({"token": token}));
         final result = jsonDecode(response.body);
         if (!mounted) return;
@@ -234,7 +236,8 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
     setState(() => _isLoading = true);
 
     try {
-      final String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : 'fectok.com';
+      String host = kIsWeb ? (Uri.base.host.isNotEmpty ? Uri.base.host : 'localhost') : 'fectok.com';
+      if (host == 'localhost' || host == '127.0.0.1') host = '$host:5000';
       String endpoint = isLogin ? '/login' : '/register';
       Map<String, dynamic> body = {};
 
@@ -255,7 +258,7 @@ class _SovereignAuthPageState extends State<SovereignAuthPage> with SingleTicker
           : {"name": _nameController.text, "profession": _professionController.text, "email_phone": normalizedEmail, "dob": _selectedDOB!.toIso8601String(), "password": _passwordController.text, "pin": _pinController.text, "referral_id": _referralController.text, "legal_consent": _termsAccepted};
       }
 
-      final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.')) ? 'http' : 'https';
+      final String protocol = (host == 'localhost' || host == '127.0.0.1' || host.startsWith('10.') || host.contains(':5000')) ? 'http' : 'https';
       final response = await http.post(Uri.parse("$protocol://$host$endpoint"), headers: {"Content-Type": "application/json"}, body: jsonEncode(body));
       final result = jsonDecode(response.body);
 

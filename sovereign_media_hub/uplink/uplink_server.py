@@ -345,7 +345,7 @@ def upload_video():
         print(f"[A_125 Guard] AI Neural Scan INITIATED: {filename}")
         try:
             scan_res = requests.post(
-                f"http://{backend_ip}:5000/api/ai/scan",
+                f"http://{backend_ip}:80/api/ai/scan",
                 json={"file_path": save_path, "user_id": uploader},
                 timeout=10
             )
@@ -365,7 +365,7 @@ def upload_video():
 
         try:
             requests.post(
-                f"http://{backend_ip}:5000/api/v15/register_media",
+                f"http://{backend_ip}:80/api/v15/register_media",
                 json={
                     "file": filename,
                     "uploader": uploader,

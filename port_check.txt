@@ -1,0 +1,26 @@
+﻿=== What is using port 8080? ===
+sovereign_v15_processor 
+sovereign_v15_uplink 0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+sovereign_v15_gateway 0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
+sovereign_v15_redis 0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp
+sovereign_sound_loop-sound_engine_redis-1 0.0.0.0:6381->6379/tcp, [::]:6381->6379/tcp
+sovereign_sound_loop-admin-1 0.0.0.0:8088->80/tcp, [::]:8088->80/tcp
+sovereign_sound_loop-sound_engine_api-1 0.0.0.0:9900->8000/tcp, [::]:9900->8000/tcp
+
+
+=== Uplink server container ===
+COMMAND      PID USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+docker-pr 239529 root    8u  IPv4 1463727      0t0  TCP *:http-alt (LISTEN)
+docker-pr 239534 root    8u  IPv6 1463728      0t0  TCP *:http-alt (LISTEN)
+
+
+=== docker ps -a ===
+sovereign_v15_backend  Created
+sovereign_v15_processor  Up 45 hours
+sovereign_v15_uplink 0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp Up 46 hours
+sovereign_v15_gateway 0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp Up 3 hours
+sovereign_v15_redis 0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp Up 2 days
+sovereign_sound_loop-sound_engine_redis-1 0.0.0.0:6381->6379/tcp, [::]:6381->6379/tcp Up 2 days
+sovereign_sound_loop-admin-1 0.0.0.0:8088->80/tcp, [::]:8088->80/tcp Up 2 days
+sovereign_sound_loop-sound_engine_api-1 0.0.0.0:9900->8000/tcp, [::]:9900->8000/tcp Up 2 days
+
